@@ -165,7 +165,10 @@ public class FXMLclinicDBController implements Initializable {
         datePatient.disableProperty().bind(Bindings.isEmpty(TabPaciente.getSelectionModel().getSelectedItems()));
         deletePatient.setOnAction(e -> {
             //ELIMINAR PACIENTE BOTON, A TERMINAR
-
+            Patient aEliminar = TabPaciente.getSelectionModel().getSelectedItem();
+            listPatients.remove(aEliminar); //falta añadir alerta si no se elimin
+            TabPaciente.getItems().remove(aEliminar);
+            TabPaciente.getSelectionModel().select(null);
         });
 
         verPatient.disableProperty().bind(Bindings.isEmpty(TabPaciente.getSelectionModel().getSelectedItems()));
@@ -207,7 +210,9 @@ public class FXMLclinicDBController implements Initializable {
             //ELIMINAR MEDICO BOTON, A TERMINAR
             Doctor aEliminar = TabMedico.getSelectionModel().getSelectedItem();
             listDoctors.remove(aEliminar); // falta añadir alerta si no se elimina
-            
+            //eliminar de la tabla
+            TabMedico.getItems().remove(aEliminar);
+            TabMedico.getSelectionModel().setSelectionMode(null);
         });
 
 // ----------------------------------------------------------------------//
@@ -230,7 +235,10 @@ public class FXMLclinicDBController implements Initializable {
             //AÑADIR BOTON ACEPTAR, A TERMINAR
         switch (choice.getValue().toString()) {
             case("Paciente"):
-                Patient patient = new Patient(
+                Patient patient = null;
+                boolean aux = existe(listPatients, id.getText());
+                if(!aux){
+                patient = new Patient(
                         id.getText(),
                         name.getText(),
                         surname.getText(),
@@ -238,6 +246,7 @@ public class FXMLclinicDBController implements Initializable {
                         null);
                 listPatients.add(patient);
                 TabPaciente.setItems(listPatients); // Refresh
+                }
                 break;
             case("Médico"):
                 Doctor doctor = new Doctor(
@@ -257,6 +266,14 @@ public class FXMLclinicDBController implements Initializable {
                 break;
         }
         }
+     public boolean existe(ObservableList<Patient> list, String id){
+         Boolean res = false;
+         for(int i = 0; i < list.size(); i ++){
+             if(list.get(i).getIdentifier().compareTo(id) == 0) return true;
+         }
+         return res;
+     }
+
     @FXML
     public void exitApplication() { // Guarda en la base de datos.
         try {

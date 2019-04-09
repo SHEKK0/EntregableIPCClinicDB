@@ -8,6 +8,7 @@ package clinicdb;
 
 import DBAccess.ClinicDBAccess;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -20,18 +21,22 @@ import javafx.stage.WindowEvent;
  * @author javiD
  */
 public class ClinicDB extends Application {
-    
+
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLclinicDB.fxml"));
-        
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLclinicDB.fxml"));
+        Parent root = (Parent)loader.load();
+        FXMLclinicDBController controller = loader.getController(); // Importante para que pueda cerrar.
+        // Lo mismo que cerrar, si no se cambia y ya.
+        stage.setOnHidden(event -> controller.exitApplication());
         Scene scene = new Scene(root);
-        
+
         stage.setScene(scene);
         stage.setMinHeight(450);
         stage.setMinWidth(600);
+
         stage.show();
-        
+
     }
 
     /**
@@ -40,5 +45,5 @@ public class ClinicDB extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }

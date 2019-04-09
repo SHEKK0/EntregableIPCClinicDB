@@ -38,6 +38,8 @@ import model.Appointment;
 import model.Doctor;
 import model.Patient;
 import clinicdb.FXMLWatchPatientController;
+import javafx.application.Platform;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -113,15 +115,26 @@ public class FXMLclinicDBController implements Initializable {
     @FXML
     private Button verPatient;
     
+    private ObservableList<Patient> listPatients;
+    private ObservableList<Doctor> listDoctors;
+    private ObservableList<Appointment> listCitas;
+    private ClinicDBAccess clinic;
+    @FXML
+    private Button datePatient;
+    @FXML
+    private Button seeMedic;
+    @FXML
+    private Button dateMedic;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // Añadimos la clinica al iniciar
-        ClinicDBAccess clinic = ClinicDBAccess.getSingletonClinicDBAccess();
+        clinic = ClinicDBAccess.getSingletonClinicDBAccess();
         //listas de pacientes , doctores y citas
-        ArrayList<Patient> listPatients = clinic.getPatients();
-        ArrayList<Doctor> listDoctors = clinic.getDoctors();
-        ArrayList<Appointment> listCitas = clinic.getAppointments();
-            
+        listPatients = FXCollections.observableList(clinic.getPatients());
+        listDoctors = FXCollections.observableList(clinic.getDoctors());
+        listCitas = FXCollections.observableList(clinic.getAppointments());
+
 //-----------------------------------------------------------------------//
         // Añadir pacientes a la lista de pacientes desde el archivo        
         TabPaciente.getItems().addAll(listPatients);
@@ -149,15 +162,12 @@ public class FXMLclinicDBController implements Initializable {
             choice.setValue("Paciente");
         });
         deletePatient.disableProperty().bind(Bindings.isEmpty(TabPaciente.getSelectionModel().getSelectedItems()));
-        
+        datePatient.disableProperty().bind(Bindings.isEmpty(TabPaciente.getSelectionModel().getSelectedItems()));
         deletePatient.setOnAction(e -> {
             //ELIMINAR PACIENTE BOTON, A TERMINAR
-            Patient aEliminar = TabPaciente.getSelectionModel().getSelectedItem();
-            listPatients.remove(aEliminar); //falta añadir alerta si no se elimin
-            TabPaciente.getItems().remove(aEliminar);
-            TabPaciente.getSelectionModel().select(null);
+
         });
-        
+
         verPatient.disableProperty().bind(Bindings.isEmpty(TabPaciente.getSelectionModel().getSelectedItems()));
         verPatient.setOnAction(e -> {
             Patient patient = TabPaciente.getSelectionModel().getSelectedItem();
@@ -183,13 +193,16 @@ public class FXMLclinicDBController implements Initializable {
         // TABLEVIEW MEDICO //
         NMedico.setCellValueFactory(new PropertyValueFactory<>("name")); // Asegurarse que el nombre es el mismo que el de la clase. Asi puede recuperar el valor.
         AMedico.setCellValueFactory(new PropertyValueFactory<>("surname"));
-        IdMedico.setCellValueFactory(new PropertyValueFactory<>("id"));
-        TelMedico.setCellValueFactory(new PropertyValueFactory<>("tel"));
+        IdMedico.setCellValueFactory(new PropertyValueFactory<>("identifier"));
+        TelMedico.setCellValueFactory(new PropertyValueFactory<>("telephon"));
         newMedicoButton.setOnAction( e -> {
             //NUEVO MÉDICO, A TERMINAR
             tabPane.getSelectionModel().select(3);
             choice.setValue("Médico");
         });
+        deleteMedic.disableProperty().bind(Bindings.isEmpty(TabMedico.getSelectionModel().getSelectedItems()));
+        seeMedic.disableProperty().bind(Bindings.isEmpty(TabMedico.getSelectionModel().getSelectedItems()));
+        dateMedic.disableProperty().bind(Bindings.isEmpty(TabMedico.getSelectionModel().getSelectedItems()));
         deleteMedic.setOnAction(e -> {
             //ELIMINAR MEDICO BOTON, A TERMINAR
             Doctor aEliminar = TabMedico.getSelectionModel().getSelectedItem();
@@ -213,9 +226,49 @@ public class FXMLclinicDBController implements Initializable {
 
     }
     @FXML
-    private void accept() {
+     private void accept() {
             //AÑADIR BOTON ACEPTAR, A TERMINAR
+        switch (choice.getValue().toString()) {
+            case("Paciente"):
+                Patient patient = new Patient(
+                        id.getText(),
+                        name.getText(),
+                        surname.getText(),
+                        tel.getText(),
+                        null);
+                listPatients.add(patient);
+                TabPaciente.setItems(listPatients); // Refresh
+                break;
+            case("Médico"):
+                Doctor doctor = new Doctor(
+                        null,
+                        null,
+                        null,
+                        null,
+                        id.getText(),
+                        name.getText(),
+                        surname.getText(),
+                        tel.getText(),
+                        null);
+                listDoctors.add(doctor);
+                TabMedico.setItems(listDoctors);
+                break;
+            default:
+                break;
         }
+        }
+    @FXML
+    public void exitApplication() { // Guarda en la base de datos.
+        try {
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle(clinic.getClinicName());
+            alert.setHeaderText("Saving data in DB");
+            alert.setContentText("The application is saving the changes in the data into the database. This action can expend some minutes.");
+            alert.showAndWait();
+            clinic.saveDB();
+            Platform.exit();
+        }catch(Exception e) {}
+    }
 
     @FXML
     private void verPaciente(ActionEvent event) {

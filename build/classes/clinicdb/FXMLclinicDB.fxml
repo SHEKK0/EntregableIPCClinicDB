@@ -51,10 +51,9 @@
                             <TableView fx:id="TabPaciente" prefHeight="315.0" prefWidth="466.0">
                               <columns>
                                 <TableColumn prefWidth="75.0" text="Nombre" fx:id="NPatient" />
-                                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="90.0" text="Apellidos" fx:id="APatient" />
-                                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="118.0" text="Identificación" fx:id="IdPatient" />
-                                <TableColumn prefWidth="75.0" text="Teléfono" fx:id="TelPatient" />
-                                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="90.0" text="Email" fx:id="EmailPatient" />
+                                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="177.0" text="Apellidos" fx:id="APatient" />
+                                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="89.0" text="Identificación" fx:id="IdPatient" />
+                                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="87.0" text="Teléfono" fx:id="TelPatient" />
                               </columns>
                             </TableView>
                             <VBox alignment="CENTER" minWidth="134.0" prefHeight="300.0" prefWidth="137.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">

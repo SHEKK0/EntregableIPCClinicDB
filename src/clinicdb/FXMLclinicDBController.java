@@ -25,9 +25,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import model.Appointment;
 import model.Doctor;
 import model.Patient;
@@ -100,7 +103,6 @@ public class FXMLclinicDBController implements Initializable {
     private TextField tel1;
     @FXML
     private Button acceptButton;
-    @FXML
     private TableColumn<?, ?> EmailPatient;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -131,13 +133,14 @@ public class FXMLclinicDBController implements Initializable {
         APatient.setCellValueFactory(new PropertyValueFactory<>("surname"));
         IdPatient.setCellValueFactory(new PropertyValueFactory<>("identifier"));
         TelPatient.setCellValueFactory(new PropertyValueFactory<>("telephon"));
-        EmailPatient.setCellValueFactory(new PropertyValueFactory<>("email"));
+ 
         newPacienteButton.setOnAction( e -> {
             //NUEVO PACIENTE BOTON, A TERMINAR
         });
         
         deletePatient.setOnAction(e -> {
             //ELIMINAR PACIENTE BOTON, A TERMINAR
+            
         });
 
 //---------------------------------------------------------------------------//
@@ -165,6 +168,17 @@ public class FXMLclinicDBController implements Initializable {
                    // System.out.println(addPane.getChildren()); // Null Pointer
 
             }
+        });
+        
+        
+// ----------------------------------------------------------------------//        
+        stage.setOnCloseRequest((WindowEvent event) ->{
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle(clinic.getClinicName());
+            alert.setHeaderText("Saving data in DB");
+            alert.setContentText("The application is saving the changes in the data into the database. This action can expend some minutes."); 
+            alert.show();
+            clinic.saveDB();
         });
     }
     @FXML

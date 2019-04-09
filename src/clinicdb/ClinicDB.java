@@ -6,11 +6,14 @@ package clinicdb;
  */
 
 
+import DBAccess.ClinicDBAccess;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 /**
  *
@@ -28,6 +31,7 @@ public class ClinicDB extends Application {
         stage.setMinHeight(450);
         stage.setMinWidth(600);
         stage.show();
+        
     }
 
     /**

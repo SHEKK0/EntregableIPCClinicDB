@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleStringProperty;
@@ -28,12 +30,14 @@ import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import model.Appointment;
 import model.Doctor;
 import model.Patient;
+import clinicdb.FXMLWatchPatientController;
 
 /**
  *
@@ -104,6 +108,11 @@ public class FXMLclinicDBController implements Initializable {
     @FXML
     private Button acceptButton;
     private TableColumn<?, ?> EmailPatient;
+    @FXML
+    private StackPane stackRootPane;
+    @FXML
+    private Button verPatient;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // Añadimos la clinica al iniciar
@@ -136,13 +145,40 @@ public class FXMLclinicDBController implements Initializable {
  
         newPacienteButton.setOnAction( e -> {
             //NUEVO PACIENTE BOTON, A TERMINAR
+            tabPane.getSelectionModel().select(3);
+            choice.setValue("Paciente");
         });
+        deletePatient.disableProperty().bind(Bindings.isEmpty(TabPaciente.getSelectionModel().getSelectedItems()));
         
         deletePatient.setOnAction(e -> {
             //ELIMINAR PACIENTE BOTON, A TERMINAR
-            
+            Patient aEliminar = TabPaciente.getSelectionModel().getSelectedItem();
+            listPatients.remove(aEliminar); //falta añadir alerta si no se elimin
+            TabPaciente.getItems().remove(aEliminar);
+            TabPaciente.getSelectionModel().select(null);
         });
-
+        
+        verPatient.disableProperty().bind(Bindings.isEmpty(TabPaciente.getSelectionModel().getSelectedItems()));
+        verPatient.setOnAction(e -> {
+            Patient patient = TabPaciente.getSelectionModel().getSelectedItem();
+             try {
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("FXMLWatchPatient.fxml"));
+                loader.load();
+                Parent p = loader.getRoot();
+                Stage stage = new Stage();
+                stage.setScene(new Scene(p));
+                FXMLWatchPatientController controller = loader.getController();
+                controller.setName(patient.getName() + ", " + patient.getSurname());
+                controller.setImage(patient.getPhoto());
+                controller.setTelf(patient.getTelephon());
+                controller.setTable(clinic.getPatientAppointments(patient.getIdentifier()));
+                controller.setId(patient.getIdentifier());
+                stage.show();
+            }catch(IOException er){
+                System.out.println("adkñlsjf");
+            }
+        });
 //---------------------------------------------------------------------------//
         // TABLEVIEW MEDICO //
         NMedico.setCellValueFactory(new PropertyValueFactory<>("name")); // Asegurarse que el nombre es el mismo que el de la clase. Asi puede recuperar el valor.
@@ -156,7 +192,9 @@ public class FXMLclinicDBController implements Initializable {
         });
         deleteMedic.setOnAction(e -> {
             //ELIMINAR MEDICO BOTON, A TERMINAR
-           // para que no se seleccione el otro y se puedan borrar muchos de golpe hay que tener cuidao, es eso o un dialogo de confirmacion ya leere el pdf a ver que piden
+            Doctor aEliminar = TabMedico.getSelectionModel().getSelectedItem();
+            listDoctors.remove(aEliminar); // falta añadir alerta si no se elimina
+            
         });
 
 // ----------------------------------------------------------------------//
@@ -171,19 +209,18 @@ public class FXMLclinicDBController implements Initializable {
         });
         
         
-// ----------------------------------------------------------------------//        
-        stage.setOnCloseRequest((WindowEvent event) ->{
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle(clinic.getClinicName());
-            alert.setHeaderText("Saving data in DB");
-            alert.setContentText("The application is saving the changes in the data into the database. This action can expend some minutes."); 
-            alert.show();
-            clinic.saveDB();
-        });
+// ----------------------------------------------------------------------// 
+
     }
     @FXML
     private void accept() {
             //AÑADIR BOTON ACEPTAR, A TERMINAR
         }
+
+    @FXML
+    private void verPaciente(ActionEvent event) {
+    }
+
+
 }
 

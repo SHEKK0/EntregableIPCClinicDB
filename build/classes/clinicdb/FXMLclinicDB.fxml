@@ -29,7 +29,7 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="clinicdb.FXMLclinicDBController">
+<StackPane fx:id="stackRootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="clinicdb.FXMLclinicDBController">
   <children>
     <BorderPane prefHeight="200.0" prefWidth="200.0">
       <center>
@@ -71,7 +71,7 @@
                                     <Insets bottom="20.0" left="10.0" />
                                   </VBox.margin>
                                 </Button>
-                                <Button alignment="CENTER" contentDisplay="CENTER" font="$x1" minWidth="-Infinity" mnemonicParsing="false" text="Ver Paciente">
+                                <Button fx:id="verPatient" alignment="CENTER" contentDisplay="CENTER" font="$x1" minWidth="-Infinity" mnemonicParsing="false" onAction="#verPaciente" text="Ver Paciente">
                                   <VBox.margin>
                                     <Insets bottom="20.0" left="10.0" />
                                   </VBox.margin>

@@ -39,7 +39,6 @@ public class FXMLWatchPatientController implements Initializable {
     private TextField textNombre;
     @FXML
     private Font x1;
-    @FXML
     private ImageView imagePersona;
     @FXML
     private TextField textTel;
@@ -53,6 +52,8 @@ public class FXMLWatchPatientController implements Initializable {
     private TextField textId;
     @FXML
     private Button closeButton;
+    @FXML
+    private ImageView imgPatient;
 
     /**
      * Initializes the controller class.
@@ -90,6 +91,10 @@ public class FXMLWatchPatientController implements Initializable {
     private void closeButton(ActionEvent event) {
         Stage stage = (Stage) closeButton.getScene().getWindow();
          stage.close();
+    }
+
+    @FXML
+    private void cargarImagen(ActionEvent event) {
     }
     
 }

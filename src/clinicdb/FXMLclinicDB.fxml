@@ -41,7 +41,7 @@
                   <children>
                     <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                       <children>
-                        <TextField minHeight="35.0" promptText="Buscar paciente">
+                        <TextField fx:id="searchPatient" minHeight="35.0" onKeyPressed="#buscarPaciente" promptText="Buscar paciente" text="">
                           <VBox.margin>
                             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                           </VBox.margin>
@@ -231,8 +231,8 @@
                             <ChoiceBox fx:id="ID" prefHeight="26.0" prefWidth="54.0" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
                             <TextField fx:id="surname" prefHeight="26.0" prefWidth="258.0" promptText="Apellidos" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                             <TextField fx:id="tel" prefHeight="26.0" prefWidth="220.0" promptText="Teléfono" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                            <Button fx:id="addImageButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="154.0" text="Cargar" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
-                            <ImageView fitHeight="87.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                            <Button fx:id="addImageButton" mnemonicParsing="false" onAction="#cargarImagen" prefHeight="26.0" prefWidth="154.0" text="Cargar" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
+                            <ImageView fx:id="imagePatient" fitHeight="87.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="5">
                               <image>
                                 <Image url="@../images/default.png" />
                               </image>

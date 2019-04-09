@@ -38,8 +38,15 @@ import model.Appointment;
 import model.Doctor;
 import model.Patient;
 import clinicdb.FXMLWatchPatientController;
+import java.awt.image.BufferedImage;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.Node;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
+import javafx.stage.FileChooser;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -125,6 +132,10 @@ public class FXMLclinicDBController implements Initializable {
     private Button seeMedic;
     @FXML
     private Button dateMedic;
+    @FXML
+    private ImageView imagePatient;
+    @FXML
+    private TextField searchPatient;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -170,7 +181,7 @@ public class FXMLclinicDBController implements Initializable {
             TabPaciente.getItems().remove(aEliminar);
             TabPaciente.getSelectionModel().select(null);
         });
-
+        // TODO LO NECESARIO PARA VER AL PACIENTE COMPLETO FALTA (NO SE VE EL NOMBRE DEL DOCTOR)
         verPatient.disableProperty().bind(Bindings.isEmpty(TabPaciente.getSelectionModel().getSelectedItems()));
         verPatient.setOnAction(e -> {
             Patient patient = TabPaciente.getSelectionModel().getSelectedItem();
@@ -236,7 +247,7 @@ public class FXMLclinicDBController implements Initializable {
         switch (choice.getValue().toString()) {
             case("Paciente"):
                 Patient patient = null;
-                boolean aux = existe(listPatients, id.getText());
+                boolean aux = existePaciente(listPatients, id.getText());
                 if(!aux){
                 patient = new Patient(
                         id.getText(),
@@ -249,7 +260,9 @@ public class FXMLclinicDBController implements Initializable {
                 }
                 break;
             case("Médico"):
-                Doctor doctor = new Doctor(
+                Doctor doctor =null;
+                if(!existeMedico(listDoctors, id.getText())){
+                doctor = new Doctor(
                         null,
                         null,
                         null,
@@ -261,19 +274,39 @@ public class FXMLclinicDBController implements Initializable {
                         null);
                 listDoctors.add(doctor);
                 TabMedico.setItems(listDoctors);
+        }
                 break;
             default:
                 break;
         }
         }
-     public boolean existe(ObservableList<Patient> list, String id){
+     
+     /**
+      * 
+      * @param list
+      * @param id
+      * @return booleano de si existe o no ese paciente ya
+      */
+     public boolean existePaciente(ObservableList<Patient> list, String id){
          Boolean res = false;
          for(int i = 0; i < list.size(); i ++){
              if(list.get(i).getIdentifier().compareTo(id) == 0) return true;
          }
          return res;
      }
-
+      /**
+      * 
+      * @param list
+      * @param id
+      * @return booleano de si existe o no ese médico ya
+      */
+      public boolean existeMedico(ObservableList<Doctor> list, String id){
+         Boolean res = false;
+         for(int i = 0; i < list.size(); i ++){
+             if(list.get(i).getIdentifier().compareTo(id) == 0) return true;
+         }
+         return res;
+     }
     @FXML
     public void exitApplication() { // Guarda en la base de datos.
         try {
@@ -286,11 +319,42 @@ public class FXMLclinicDBController implements Initializable {
             Platform.exit();
         }catch(Exception e) {}
     }
-
     @FXML
     private void verPaciente(ActionEvent event) {
     }
+    @FXML
+     private void cargarImagen(ActionEvent event) throws IOException {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Cargar imagen");
+        fileChooser.getExtensionFilters().addAll(
+                    new FileChooser.ExtensionFilter("Imágenes", "*.png", "*.jpg", "*.gif"),
+                    new FileChooser.ExtensionFilter("Todos", "*.^*")
+        );
+        
+        File selectedFile = fileChooser.showOpenDialog(((Node)event.getSource()).getScene().getWindow());
+        if(selectedFile != null){
+            //Falta completar, no se como transformar de file a image
+            BufferedImage Bufferedimage = ImageIO.read(selectedFile);
+            javafx.scene.image.Image image = SwingFXUtils.toFXImage(Bufferedimage, null);
+            imagePatient.setImage(image);
+        }
+     }
 
-
+     /**
+     *   METODO PARA BUSCAR EN LA LISTA DE PACIENTES, NULL POINTER EXCEPTION CUANDO BUSCAS LA PRIMERA LETRA
+     */
+    @FXML
+    private void buscarPaciente(KeyEvent event) {
+        for(int i = 0; i <= listPatients.size(); i++ ){
+            Patient p = TabPaciente.getItems().get(i);
+            boolean esParteDelNombre = p.getName().contains(searchPatient.getText());
+            boolean esParteDelApellido = p.getSurname().contains(searchPatient.getText());
+            boolean esParteDelId = p.getIdentifier().contains(searchPatient.getText());
+            boolean esParteDelTel = p.getTelephon().contains(searchPatient.getText());
+            if(!esParteDelApellido && !esParteDelNombre && !esParteDelId && !esParteDelTel){
+                TabPaciente.getItems().remove(listPatients.get(i));
+            }
+        }
+    }
 }
 

@@ -158,7 +158,7 @@
                   <children>
                     <VBox prefHeight="369.0" prefWidth="600.0">
                       <children>
-                        <TextField minHeight="35.0" promptText="Buscar cita">
+                        <TextField fx:id="searchDate" minHeight="35.0" promptText="Buscar cita">
                           <VBox.margin>
                             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                           </VBox.margin>

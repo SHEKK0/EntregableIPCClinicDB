@@ -33,6 +33,7 @@ import model.Appointment;
 import model.Days;
 import model.Doctor;
 import model.Patient;
+import javafx.beans.property.ReadOnlyStringWrapper;
 
 /**
  * FXML Controller class
@@ -84,13 +85,14 @@ public class FXMLWatchPatientController implements Initializable {
         textId.setDisable(true);
     }
     
-    public void setTable(ArrayList<Appointment> list){
+    public void setTable(ArrayList<Appointment> list) {
         tabCitas.getItems().addAll(list);
-        
-        colDate.setCellValueFactory(new PropertyValueFactory<>("appointmentDateTime"));
-        colMed.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getDoctor().getName()+ " " + cellData.getValue().getDoctor().getSurname()));   
-    }
 
+        colDate.setCellValueFactory(new PropertyValueFactory<>("appointmentDateTime"));
+
+
+        colMed.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getDoctor().getName()+ " " + cellData.getValue().getDoctor().getSurname()));
+    }
     @FXML
     private void closeButton(ActionEvent event) {
         Stage stage = (Stage) closeButton.getScene().getWindow();

@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Menu?>
@@ -14,10 +11,8 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.*?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -26,10 +21,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.text.Font?>
 
-<StackPane fx:id="stackRootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="clinicdb.FXMLclinicDBController">
+<StackPane fx:id="stackRootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.202" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clinicdb.FXMLclinicDBController">
   <children>
     <BorderPane prefHeight="200.0" prefWidth="200.0">
       <center>
@@ -50,10 +44,10 @@
                           <children>
                             <TableView fx:id="TabPaciente" prefHeight="315.0" prefWidth="466.0">
                               <columns>
-                                <TableColumn prefWidth="75.0" text="Nombre" fx:id="NPatient" />
-                                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="177.0" text="Apellidos" fx:id="APatient" />
-                                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="89.0" text="Identificación" fx:id="IdPatient" />
-                                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="87.0" text="Teléfono" fx:id="TelPatient" />
+                                <TableColumn fx:id="NPatient" prefWidth="75.0" text="Nombre" />
+                                <TableColumn fx:id="APatient" maxWidth="5000.0" minWidth="10.0" prefWidth="177.0" text="Apellidos" />
+                                <TableColumn fx:id="IdPatient" maxWidth="5000.0" minWidth="10.0" prefWidth="89.0" text="Identificación" />
+                                <TableColumn fx:id="TelPatient" maxWidth="5000.0" minWidth="10.0" prefWidth="87.0" text="Teléfono" />
                               </columns>
                             </TableView>
                             <VBox alignment="CENTER" minWidth="134.0" prefHeight="300.0" prefWidth="137.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
@@ -113,10 +107,10 @@
                           <children>
                             <TableView id="TabMeidco" fx:id="TabMedico" prefHeight="300.0" prefWidth="430.0">
                               <columns>
-                                <TableColumn prefWidth="75.0" text="Nombre" fx:id="NMedico" />
-                                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="150.0" text="Apellidos" fx:id="AMedico" />
-                                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="130.0" text="Identificación" fx:id="IdMedico" />
-                                <TableColumn prefWidth="75.0" text="Teléfono" fx:id="TelMedico" />
+                                <TableColumn fx:id="NMedico" prefWidth="75.0" text="Nombre" />
+                                <TableColumn fx:id="AMedico" maxWidth="5000.0" minWidth="10.0" prefWidth="150.0" text="Apellidos" />
+                                <TableColumn fx:id="IdMedico" maxWidth="5000.0" minWidth="10.0" prefWidth="130.0" text="Identificación" />
+                                <TableColumn fx:id="TelMedico" prefWidth="75.0" text="Teléfono" />
                               </columns>
                             </TableView>
                             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
@@ -173,33 +167,38 @@
                           <children>
                             <TableView fx:id="TabAppointment" prefHeight="315.0" prefWidth="466.0">
                               <columns>
-                                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="179.0" text="Paciente" fx:id="colPatient" />
-                                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="135.0" text="Medico" fx:id="colMedico" />
-                                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="116.0" text="Fecha" fx:id="colFecha" />
+                                <TableColumn fx:id="colPatient" maxWidth="5000.0" minWidth="10.0" prefWidth="179.0" text="Paciente" />
+                                <TableColumn fx:id="colMedico" maxWidth="5000.0" minWidth="10.0" prefWidth="135.0" text="Medico" />
+                                <TableColumn fx:id="colFecha" maxWidth="5000.0" minWidth="10.0" prefWidth="116.0" text="Fecha" />
                               </columns>
                             </TableView>
                             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                               <children>
-                                <Button fx:id="newPacienteButton2" alignment="CENTER" font="$x1" minWidth="-Infinity" mnemonicParsing="false" prefWidth="130.0" text="Añadir Paciente">
+                                <Button fx:id="addDate" alignment="CENTER" font="$x1" minWidth="-Infinity" mnemonicParsing="false" prefWidth="130.0" text="Añadir cita">
                                   <VBox.margin>
                                     <Insets bottom="20.0" left="10.0" />
                                   </VBox.margin>
                                 </Button>
-                                <Button alignment="CENTER" font="$x1" minWidth="-Infinity" mnemonicParsing="false" text="Eliminar Paciente">
+                                <Button fx:id="deleteDate" alignment="CENTER" font="$x1" minWidth="-Infinity" mnemonicParsing="false" text="Eliminar cita">
                                   <VBox.margin>
                                     <Insets bottom="20.0" left="10.0" />
                                   </VBox.margin>
                                 </Button>
-                                <Button alignment="CENTER" contentDisplay="CENTER" font="$x1" minWidth="-Infinity" mnemonicParsing="false" text="Ver Paciente">
+                                <Button fx:id="seePatientDate" alignment="CENTER" contentDisplay="CENTER" font="$x1" minWidth="-Infinity" mnemonicParsing="false" text="Ver paciente">
                                   <VBox.margin>
                                     <Insets bottom="20.0" left="10.0" />
                                   </VBox.margin>
                                 </Button>
-                                <Button font="$x1" minWidth="-Infinity" mnemonicParsing="false" text="Nueva Cita">
+                                <Button fx:id="seeMedicDate" font="$x1" minWidth="-Infinity" mnemonicParsing="false" text="Ver medico">
                                   <VBox.margin>
                                     <Insets bottom="20.0" left="10.0" />
                                   </VBox.margin>
                                 </Button>
+                                                <Button fx:id="seeDate" layoutX="58.0" layoutY="211.0" minWidth="-Infinity" mnemonicParsing="false" text="Ver cita">
+                                                   <font>
+                                                      <Font size="12.0" fx:id="x11" />
+                                                   </font>
+                                                </Button>
                               </children>
                             </VBox>
                           </children>
@@ -232,7 +231,7 @@
                             <TextField fx:id="surname" prefHeight="26.0" prefWidth="258.0" promptText="Apellidos" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                             <TextField fx:id="tel" prefHeight="26.0" prefWidth="220.0" promptText="Teléfono" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                             <Button fx:id="addImageButton" mnemonicParsing="false" onAction="#cargarImagen" prefHeight="26.0" prefWidth="154.0" text="Cargar" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
-                            <ImageView fx:id="imagePatient" fitHeight="87.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                            <ImageView fx:id="imageAdd" fitHeight="87.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="5">
                               <image>
                                 <Image url="@../images/default.png" />
                               </image>

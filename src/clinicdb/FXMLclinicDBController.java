@@ -203,7 +203,6 @@ public class FXMLclinicDBController implements Initializable {
 
 
         //Añadir medicos a la lista de medicos desde el archivo
-        //TabMedico.getItems().addAll(listDoctors);
 
 
 
@@ -237,6 +236,8 @@ public class FXMLclinicDBController implements Initializable {
         sortedDataDoctor.comparatorProperty().bind(TabMedico.comparatorProperty());
 
         // 5. Add sorted (and filtered) data to the table.
+        TabMedico.setItems(sortedDataDoctor);
+
         //Añadir citas a la lista
         // 1. Wrap the ObservableList in a FilteredList (initially display all data).
 

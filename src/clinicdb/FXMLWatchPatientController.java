@@ -11,6 +11,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -50,7 +51,7 @@ public class FXMLWatchPatientController implements Initializable {
     @FXML
     private TableColumn<Appointment, Days> colDate;
     @FXML
-    private TableColumn<Appointment, Doctor> colMed;
+    private TableColumn<Appointment, String> colMed;
     @FXML
     private TextField textId;
     @FXML
@@ -87,7 +88,7 @@ public class FXMLWatchPatientController implements Initializable {
         tabCitas.getItems().addAll(list);
         
         colDate.setCellValueFactory(new PropertyValueFactory<>("appointmentDateTime"));
-        colMed.setCellValueFactory(new PropertyValueFactory<>("doctor"));
+        colMed.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getDoctor().getName()+ " " + cellData.getValue().getDoctor().getSurname()));   
     }
 
     @FXML

@@ -7,7 +7,6 @@ package clinicdb;
 
 
 import DBAccess.ClinicDBAccess;
-import java.awt.Image;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -39,10 +38,12 @@ import model.Doctor;
 import model.Patient;
 import clinicdb.FXMLWatchPatientController;
 import java.awt.image.BufferedImage;
+import java.io.FileNotFoundException;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Node;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
@@ -194,7 +195,14 @@ public class FXMLclinicDBController implements Initializable {
                 stage.setScene(new Scene(p));
                 FXMLWatchPatientController controller = loader.getController();
                 controller.setName(patient.getName() + ", " + patient.getSurname());
-                controller.setImage(patient.getPhoto());
+                
+                try{
+                    Image photo = patient.getPhoto();
+                    controller.setImage(photo);
+                }catch(Exception err){
+                    System.out.println(err.toString());
+                }
+                
                 controller.setTelf(patient.getTelephon());
                 controller.setTable(clinic.getPatientAppointments(patient.getIdentifier()));
                 controller.setId(patient.getIdentifier());
@@ -253,8 +261,9 @@ public class FXMLclinicDBController implements Initializable {
                         id.getText(),
                         name.getText(),
                         surname.getText(),
-                        tel.getText(),
-                        null);
+                        tel.getText(),null
+                );
+                patient.setPhoto(imagePatient.getImage());
                 listPatients.add(patient);
                 TabPaciente.setItems(listPatients); // Refresh
                 }
@@ -327,13 +336,14 @@ public class FXMLclinicDBController implements Initializable {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Cargar imagen");
         fileChooser.getExtensionFilters().addAll(
-                    new FileChooser.ExtensionFilter("Imágenes", "*.png", "*.jpg", "*.gif"),
-                    new FileChooser.ExtensionFilter("Todos", "*.^*")
+                    new FileChooser.ExtensionFilter("Imágenes", "*.png", "*.jpg", "*.gif","*.PNG"),
+                    new FileChooser.ExtensionFilter("Todos", "*.*")
         );
         
         File selectedFile = fileChooser.showOpenDialog(((Node)event.getSource()).getScene().getWindow());
         if(selectedFile != null){
             //Falta completar, no se como transformar de file a image
+            String path = selectedFile.getPath();
             BufferedImage Bufferedimage = ImageIO.read(selectedFile);
             javafx.scene.image.Image image = SwingFXUtils.toFXImage(Bufferedimage, null);
             imagePatient.setImage(image);
@@ -345,16 +355,8 @@ public class FXMLclinicDBController implements Initializable {
      */
     @FXML
     private void buscarPaciente(KeyEvent event) {
-        for(int i = 0; i <= listPatients.size(); i++ ){
-            Patient p = TabPaciente.getItems().get(i);
-            boolean esParteDelNombre = p.getName().contains(searchPatient.getText());
-            boolean esParteDelApellido = p.getSurname().contains(searchPatient.getText());
-            boolean esParteDelId = p.getIdentifier().contains(searchPatient.getText());
-            boolean esParteDelTel = p.getTelephon().contains(searchPatient.getText());
-            if(!esParteDelApellido && !esParteDelNombre && !esParteDelId && !esParteDelTel){
-                TabPaciente.getItems().remove(listPatients.get(i));
-            }
-        }
+        
     }
-}
+    }
+
 

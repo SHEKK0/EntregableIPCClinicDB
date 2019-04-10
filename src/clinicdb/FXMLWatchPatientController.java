@@ -5,6 +5,8 @@
  */
 package clinicdb;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -22,8 +24,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import static javafx.scene.input.KeyCode.C;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javax.imageio.ImageIO;
 import model.Appointment;
 import model.Days;
 import model.Doctor;
@@ -39,7 +43,6 @@ public class FXMLWatchPatientController implements Initializable {
     private TextField textNombre;
     @FXML
     private Font x1;
-    private ImageView imagePersona;
     @FXML
     private TextField textTel;
     @FXML
@@ -53,7 +56,7 @@ public class FXMLWatchPatientController implements Initializable {
     @FXML
     private Button closeButton;
     @FXML
-    private ImageView imgPatient;
+    private ImageView imagePersona;
 
     /**
      * Initializes the controller class.
@@ -72,9 +75,9 @@ public class FXMLWatchPatientController implements Initializable {
         textTel.setText(tel);
         textTel.setDisable(true);
     }
-    public void setImage(Image image){
-        imagePersona.setImage(image);
-    }
+    public void setImage(Image image) throws FileNotFoundException{
+            imagePersona.setImage(image);
+        }
     public void setId(String Id){
         textId.setText(Id);
         textId.setDisable(true);
@@ -93,8 +96,5 @@ public class FXMLWatchPatientController implements Initializable {
          stage.close();
     }
 
-    @FXML
-    private void cargarImagen(ActionEvent event) {
-    }
     
 }

@@ -26,6 +26,8 @@ import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -41,10 +43,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.converter.LocalDateTimeStringConverter;
-import model.Appointment;
-import model.DateTimeAdapter;
-import model.Doctor;
-import model.Patient;
+import model.*;
 import clinicdb.FXMLWatchPatientController;
 import java.awt.image.BufferedImage;
 import javafx.application.Platform;
@@ -76,6 +75,8 @@ public class FXMLclinicDBController implements Initializable {
     private TableColumn<Patient,String> TelPatient;
     @FXML
     private TableView<Doctor> TabMedico;
+    @FXML
+    private TextField searchDoctor;
     @FXML
     private TableColumn<Doctor,String> NMedico;
     @FXML
@@ -165,10 +166,74 @@ public class FXMLclinicDBController implements Initializable {
         listCitas = FXCollections.observableList(clinic.getAppointments());
 
 //-----------------------------------------------------------------------//
-        // Añadir pacientes a la lista de pacientes desde el archivo        
-        TabPaciente.getItems().addAll(listPatients);
+        // Añadir pacientes a la lista de pacientes desde el archivo
+        // 1. Wrap the ObservableList in a FilteredList (initially display all data).
+        FilteredList<Patient> filteredData = new FilteredList<>(listPatients, p -> true);
+
+        // 2. Set the filter Predicate whenever the filter changes.
+        searchPatient.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(patient -> {
+                // If filter text is empty, display all persons.
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                // Compare first name and last name of every person with filter text.
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (patient.getName().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Filter matches first name.
+                } else if (patient.getName().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Filter matches last name.
+                }
+                return false; // Does not match.
+            });
+        });
+
+        // 3. Wrap the FilteredList in a SortedList.
+        SortedList<Patient> sortedData = new SortedList<>(filteredData);
+
+        // 4. Bind the SortedList comparator to the TableView comparator.
+        sortedData.comparatorProperty().bind(TabPaciente.comparatorProperty());
+
+        // 5. Add sorted (and filtered) data to the table.
+        TabPaciente.setItems(sortedData);
+
+
         //Añadir medicos a la lista de medicos desde el archivo
         TabMedico.getItems().addAll(listDoctors);
+
+        // 1. Wrap the ObservableList in a FilteredList (initially display all data).
+        FilteredList<Doctor> filteredDataDoctor = new FilteredList<>(listDoctors, p -> true);
+
+        // 2. Set the filter Predicate whenever the filter changes.
+        searchDoctor.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredDataDoctor.setPredicate(doctor -> {
+                // If filter text is empty, display all persons.
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                // Compare first name and last name of every person with filter text.
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (doctor.getName().toLowerCase().startsWith(lowerCaseFilter)) {
+                    return true; // Filter matches first name.
+                } else if (doctor.getName().toLowerCase().startsWith(lowerCaseFilter)) {
+                    return true; // Filter matches last name.
+                }
+                return false; // Does not match.
+            });
+        });
+
+        // 3. Wrap the FilteredList in a SortedList.
+        SortedList<Doctor> sortedDataDoctor = new SortedList<>(filteredDataDoctor);
+
+        // 4. Bind the SortedList comparator to the TableView comparator.
+        sortedDataDoctor.comparatorProperty().bind(TabMedico.comparatorProperty());
+
+        // 5. Add sorted (and filtered) data to the table.
+        TabMedico.setItems(sortedDataDoctor);
         //Añadir citas a la lista
         TabAppointment.getItems().addAll(listCitas);
  //---------------------------------------------------------------------------//       
@@ -180,6 +245,8 @@ public class FXMLclinicDBController implements Initializable {
 
 //---------------------------------------------------------------------------//
         // TABLE VIEW PACIENTE //
+
+
         NPatient.setCellValueFactory(new PropertyValueFactory<>("name")); // Asegurarse que el nombre es el mismo que el de la clase. Asi puede recuperar el valor.
         APatient.setCellValueFactory(new PropertyValueFactory<>("surname"));
         IdPatient.setCellValueFactory(new PropertyValueFactory<>("identifier"));
@@ -210,6 +277,10 @@ public class FXMLclinicDBController implements Initializable {
         // TODO LO NECESARIO PARA VER AL PACIENTE COMPLETO FALTA (NO SE VE EL NOMBRE DEL DOCTOR)
         verPatient.disableProperty().bind(Bindings.isEmpty(TabPaciente.getSelectionModel().getSelectedItems()));
         verPatient.setOnAction(e -> seePatient(TabPaciente.getSelectionModel().getSelectedItem()));
+
+
+
+
 //---------------------------------------------------------------------------//
         // TABLEVIEW MEDICO //
         NMedico.setCellValueFactory(new PropertyValueFactory<>("name")); // Asegurarse que el nombre es el mismo que el de la clase. Asi puede recuperar el valor.
@@ -406,18 +477,5 @@ public class FXMLclinicDBController implements Initializable {
      /**
      *   METODO PARA BUSCAR EN LA LISTA DE PACIENTES, NULL POINTER EXCEPTION CUANDO BUSCAS LA PRIMERA LETRA
      */
-    @FXML
-    private void buscarPaciente(KeyEvent event) {
-        for(int i = 0; i <= listPatients.size(); i++ ){
-            Patient p = TabPaciente.getItems().get(i);
-            boolean esParteDelNombre = p.getName().contains(searchPatient.getText());
-            boolean esParteDelApellido = p.getSurname().contains(searchPatient.getText());
-            boolean esParteDelId = p.getIdentifier().contains(searchPatient.getText());
-            boolean esParteDelTel = p.getTelephon().contains(searchPatient.getText());
-            if(!esParteDelApellido && !esParteDelNombre && !esParteDelId && !esParteDelTel){
-                TabPaciente.getItems().remove(listPatients.get(i));
-            }
-        }
-    }
 }
 

@@ -38,8 +38,10 @@ import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.converter.LocalDateTimeStringConverter;
@@ -136,8 +138,9 @@ public class FXMLclinicDBController implements Initializable {
     @FXML
     private TextField tel1;
     @FXML
+    private GridPane gridAdd;
+    @FXML
     private Button acceptButton;
-    private TableColumn<?, ?> EmailPatient;
     @FXML
     private StackPane stackRootPane;
     @FXML
@@ -293,31 +296,39 @@ public class FXMLclinicDBController implements Initializable {
         APatient.setCellValueFactory(new PropertyValueFactory<>("surname"));
         IdPatient.setCellValueFactory(new PropertyValueFactory<>("identifier"));
         TelPatient.setCellValueFactory(new PropertyValueFactory<>("telephon"));
- 
+
+        deletePatient.disableProperty().bind(Bindings.isEmpty(TabPaciente.getSelectionModel().getSelectedItems()));
+        datePatient.disableProperty().bind(Bindings.isEmpty(TabPaciente.getSelectionModel().getSelectedItems()));
+        verPatient.disableProperty().bind(Bindings.isEmpty(TabPaciente.getSelectionModel().getSelectedItems()));
+
         newPacienteButton.setOnAction( e -> {
-            //NUEVO PACIENTE BOTON, A TERMINAR
             tabPane.getSelectionModel().select(3);
             choice.setValue("Paciente");
         });
-        deletePatient.disableProperty().bind(Bindings.isEmpty(TabPaciente.getSelectionModel().getSelectedItems()));
 
-
-        datePatient.disableProperty().bind(Bindings.isEmpty(TabPaciente.getSelectionModel().getSelectedItems()));
         datePatient.setOnAction(e -> {
             tabPane.getSelectionModel().select(3);
             choice.setValue("Cita");
         });
+
         deletePatient.setOnAction(e -> {
             if(confirm(" paciente.")) {
-                //ELIMINAR PACIENTE BOTON, A TERMINAR
                 Patient aEliminar = TabPaciente.getSelectionModel().getSelectedItem();
-                listPatients.remove(aEliminar); //falta añadir alerta si no se elimin
-                TabPaciente.getItems().remove(aEliminar);
-                TabPaciente.getSelectionModel().select(null);
+                if (!clinic.hasAppointments(aEliminar)) {
+                    listPatients.remove(aEliminar); //falta añadir alerta si no se elimin
+                    TabPaciente.getItems().remove(aEliminar);
+                    TabPaciente.getSelectionModel().select(null);
+                } else {
+                    Alert alert = new Alert(AlertType.ERROR);
+                    alert.setTitle(clinic.getClinicName());
+                    alert.setHeaderText("¡No se puede eliminar!");
+                    alert.setContentText("El paciente tiene citas pendientes.");
+
+                    alert.showAndWait();
+                }
             }
         });
-        // TODO LO NECESARIO PARA VER AL PACIENTE COMPLETO FALTA (NO SE VE EL NOMBRE DEL DOCTOR)
-        verPatient.disableProperty().bind(Bindings.isEmpty(TabPaciente.getSelectionModel().getSelectedItems()));
+
         verPatient.setOnAction(e -> seePatient(TabPaciente.getSelectionModel().getSelectedItem()));
 
 
@@ -339,13 +350,21 @@ public class FXMLclinicDBController implements Initializable {
         seeMedic.disableProperty().bind(Bindings.isEmpty(TabMedico.getSelectionModel().getSelectedItems()));
         dateMedic.disableProperty().bind(Bindings.isEmpty(TabMedico.getSelectionModel().getSelectedItems()));
         deleteMedic.setOnAction(e -> {
-            //ELIMINAR MEDICO BOTON, A TERMINAR
             if(confirm("médico.")) {
                 Doctor aEliminar = TabMedico.getSelectionModel().getSelectedItem();
-                listDoctors.remove(aEliminar); // falta añadir alerta si no se elimina
-                //eliminar de la tabla
-                TabMedico.getItems().remove(aEliminar);
-                TabMedico.getSelectionModel().setSelectionMode(null);
+                if (!clinic.hasAppointments(aEliminar)) {
+                    listDoctors.remove(aEliminar); // falta añadir alerta si no se elimina
+                    //eliminar de la tabla
+                    TabMedico.getItems().remove(aEliminar);
+                    TabMedico.getSelectionModel().setSelectionMode(null);
+                } else {
+                    Alert alert = new Alert(AlertType.ERROR);
+                    alert.setTitle(clinic.getClinicName());
+                    alert.setHeaderText("¡No se puede eliminar!");
+                    alert.setContentText("El médico tiene citas pendientes.");
+
+                    alert.showAndWait();
+                }
             }
         });
         //-----------------------------------//
@@ -419,8 +438,10 @@ public class FXMLclinicDBController implements Initializable {
                         tel.getText(),
                         imageAdd.getImage());
                 listPatients.add(patient);
+                acceptAlert("Paciente");
+                newInput();
                 TabPaciente.setItems(listPatients); // Refresh
-                }
+                } else {duplicate();}
                 break;
             case("Médico"):
                 Doctor doctor =null;
@@ -436,14 +457,35 @@ public class FXMLclinicDBController implements Initializable {
                         tel.getText(),
                         imageAdd.getImage());
                 listDoctors.add(doctor);
+                acceptAlert("Médico");
+                newInput();
                 TabMedico.setItems(listDoctors);
-        }
+        } else {duplicate();}
                 break;
             default:
                 break;
         }
         }
-     
+
+private void newInput(){
+        for(Node node: gridAdd.getChildren()) {
+            if(node instanceof TextField) node.setText("");
+        }
+}
+        private void duplicate() {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle(clinic.getClinicName());
+            alert.setHeaderText("¡Identificación duplicada!");
+
+            alert.showAndWait();
+        }
+     private void acceptAlert(String string) {
+         Alert alert = new Alert(AlertType.INFORMATION);
+         alert.setTitle(clinic.getClinicName());
+         alert.setHeaderText("¡"+string+" añadido!");
+
+         alert.showAndWait();
+     }
      /**
       * 
       * @param list

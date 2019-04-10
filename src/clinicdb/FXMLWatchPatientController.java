@@ -28,6 +28,7 @@ import model.Appointment;
 import model.Days;
 import model.Doctor;
 import model.Patient;
+import javafx.beans.property.ReadOnlyStringWrapper;
 
 /**
  * FXML Controller class
@@ -47,7 +48,7 @@ public class FXMLWatchPatientController implements Initializable {
     @FXML
     private TableColumn<Appointment, Days> colDate;
     @FXML
-    private TableColumn<Appointment, Doctor> colMed;
+    private TableColumn<Appointment, String> colMed;
     @FXML
     private TextField textId;
     @FXML
@@ -80,13 +81,13 @@ public class FXMLWatchPatientController implements Initializable {
         textId.setDisable(true);
     }
     
-    public void setTable(ArrayList<Appointment> list){
+    public void setTable(ArrayList<Appointment> list) {
         tabCitas.getItems().addAll(list);
-        
-        colDate.setCellValueFactory(new PropertyValueFactory<>("appointmentDateTime"));
-        colMed.setCellValueFactory(new PropertyValueFactory<>("doctor"));
-    }
 
+        colDate.setCellValueFactory(new PropertyValueFactory<>("appointmentDateTime"));
+
+        colMed.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getDoctor().getName()+ " " + cellData.getValue().getDoctor().getSurname()));
+    }
     @FXML
     private void closeButton(ActionEvent event) {
         Stage stage = (Stage) closeButton.getScene().getWindow();

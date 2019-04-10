@@ -12,13 +12,19 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javafx.beans.InvalidationListener;
 import javafx.beans.binding.Bindings;
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -34,7 +40,9 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import javafx.util.converter.LocalDateTimeStringConverter;
 import model.Appointment;
+import model.DateTimeAdapter;
 import model.Doctor;
 import model.Patient;
 import clinicdb.FXMLWatchPatientController;
@@ -47,7 +55,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
 import javax.imageio.ImageIO;
-
+import java.util.Optional;
 /**
  *
  * @author javiD
@@ -103,6 +111,16 @@ public class FXMLclinicDBController implements Initializable {
     @FXML
     private TableView<Appointment> TabAppointment;
     @FXML
+    private Button deleteDate;
+    @FXML
+    private Button addDate;
+    @FXML
+    private Button seePatientDate;
+    @FXML
+    private Button seeMedicDate;
+    @FXML
+    private Button seeDate;
+    @FXML
     private TableColumn<Appointment, String> colPatient;
     @FXML
     private TableColumn<Appointment, String> colMedico;
@@ -133,7 +151,7 @@ public class FXMLclinicDBController implements Initializable {
     @FXML
     private Button dateMedic;
     @FXML
-    private ImageView imagePatient;
+    private ImageView imageAdd;
     @FXML
     private TextField searchPatient;
 
@@ -173,36 +191,25 @@ public class FXMLclinicDBController implements Initializable {
             choice.setValue("Paciente");
         });
         deletePatient.disableProperty().bind(Bindings.isEmpty(TabPaciente.getSelectionModel().getSelectedItems()));
+
+
         datePatient.disableProperty().bind(Bindings.isEmpty(TabPaciente.getSelectionModel().getSelectedItems()));
+        datePatient.setOnAction(e -> {
+            tabPane.getSelectionModel().select(3);
+            choice.setValue("Cita");
+        });
         deletePatient.setOnAction(e -> {
-            //ELIMINAR PACIENTE BOTON, A TERMINAR
-            Patient aEliminar = TabPaciente.getSelectionModel().getSelectedItem();
-            listPatients.remove(aEliminar); //falta añadir alerta si no se elimin
-            TabPaciente.getItems().remove(aEliminar);
-            TabPaciente.getSelectionModel().select(null);
+            if(confirm(" paciente.")) {
+                //ELIMINAR PACIENTE BOTON, A TERMINAR
+                Patient aEliminar = TabPaciente.getSelectionModel().getSelectedItem();
+                listPatients.remove(aEliminar); //falta añadir alerta si no se elimin
+                TabPaciente.getItems().remove(aEliminar);
+                TabPaciente.getSelectionModel().select(null);
+            }
         });
         // TODO LO NECESARIO PARA VER AL PACIENTE COMPLETO FALTA (NO SE VE EL NOMBRE DEL DOCTOR)
         verPatient.disableProperty().bind(Bindings.isEmpty(TabPaciente.getSelectionModel().getSelectedItems()));
-        verPatient.setOnAction(e -> {
-            Patient patient = TabPaciente.getSelectionModel().getSelectedItem();
-             try {
-                FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(getClass().getResource("FXMLWatchPatient.fxml"));
-                loader.load();
-                Parent p = loader.getRoot();
-                Stage stage = new Stage();
-                stage.setScene(new Scene(p));
-                FXMLWatchPatientController controller = loader.getController();
-                controller.setName(patient.getName() + ", " + patient.getSurname());
-                controller.setImage(patient.getPhoto());
-                controller.setTelf(patient.getTelephon());
-                controller.setTable(clinic.getPatientAppointments(patient.getIdentifier()));
-                controller.setId(patient.getIdentifier());
-                stage.show();
-            }catch(IOException er){
-                System.out.println("adkñlsjf");
-            }
-        });
+        verPatient.setOnAction(e -> seePatient(TabPaciente.getSelectionModel().getSelectedItem()));
 //---------------------------------------------------------------------------//
         // TABLEVIEW MEDICO //
         NMedico.setCellValueFactory(new PropertyValueFactory<>("name")); // Asegurarse que el nombre es el mismo que el de la clase. Asi puede recuperar el valor.
@@ -214,19 +221,40 @@ public class FXMLclinicDBController implements Initializable {
             tabPane.getSelectionModel().select(3);
             choice.setValue("Médico");
         });
+
         deleteMedic.disableProperty().bind(Bindings.isEmpty(TabMedico.getSelectionModel().getSelectedItems()));
         seeMedic.disableProperty().bind(Bindings.isEmpty(TabMedico.getSelectionModel().getSelectedItems()));
         dateMedic.disableProperty().bind(Bindings.isEmpty(TabMedico.getSelectionModel().getSelectedItems()));
         deleteMedic.setOnAction(e -> {
             //ELIMINAR MEDICO BOTON, A TERMINAR
-            Doctor aEliminar = TabMedico.getSelectionModel().getSelectedItem();
-            listDoctors.remove(aEliminar); // falta añadir alerta si no se elimina
-            //eliminar de la tabla
-            TabMedico.getItems().remove(aEliminar);
-            TabMedico.getSelectionModel().setSelectionMode(null);
+            if(confirm("médico.")) {
+                Doctor aEliminar = TabMedico.getSelectionModel().getSelectedItem();
+                listDoctors.remove(aEliminar); // falta añadir alerta si no se elimina
+                //eliminar de la tabla
+                TabMedico.getItems().remove(aEliminar);
+                TabMedico.getSelectionModel().setSelectionMode(null);
+            }
         });
+        //-----------------------------------//
+        // ----------- Citas --------------- //
+        seeMedicDate.disableProperty().bind(Bindings.isEmpty(TabAppointment.getSelectionModel().getSelectedItems()));
+        seePatientDate.disableProperty().bind(Bindings.isEmpty(TabAppointment.getSelectionModel().getSelectedItems()));
+        deleteDate.disableProperty().bind(Bindings.isEmpty(TabAppointment.getSelectionModel().getSelectedItems()));
 
-// ----------------------------------------------------------------------//
+        seePatientDate.setOnAction(e -> seePatient(TabAppointment.getSelectionModel().getSelectedItem().getPatient()));
+
+        colPatient.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(
+                             cellData.getValue().getPatient().getName()+
+                                   " " + cellData.getValue().getPatient().getSurname()));
+
+        colMedico.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(
+                              cellData.getValue().getDoctor().getName()+
+                               " " + cellData.getValue().getDoctor().getSurname()));
+        colFecha.setCellValueFactory(cellData -> new ReadOnlyStringWrapper((cellData.getValue().getAppointmentDateTime().toString())));
+
+
+
+        // ----------------------------------------------------------------------//
         // AnchorPane add //
         choice.getSelectionModel().selectedIndexProperty().addListener((observable,oldValue,newValue) -> { // Para cambiar los textfield al decir paciente medico tal 
             switch (newValue.intValue()) {
@@ -238,9 +266,31 @@ public class FXMLclinicDBController implements Initializable {
         });
         
         
-// ----------------------------------------------------------------------// 
+// ----------------------------------------------------------------------//
+
 
     }
+    private void seePatient(Patient patient) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("FXMLWatchPatient.fxml"));
+            loader.load();
+            Parent p = loader.getRoot();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(p));
+            FXMLWatchPatientController controller = loader.getController();
+            controller.setName(patient.getName() + ", " + patient.getSurname());
+            //controller.setImage(patient.getPhoto()); //a mi me da null
+            controller.setTelf(patient.getTelephon());
+            controller.setTable(clinic.getPatientAppointments(patient.getIdentifier()));
+            controller.setId(patient.getIdentifier());
+            stage.show();
+        }catch(IOException er){
+            System.out.println("adkñlsjf");
+        }
+    }
+
+
     @FXML
      private void accept() {
             //AÑADIR BOTON ACEPTAR, A TERMINAR
@@ -254,7 +304,7 @@ public class FXMLclinicDBController implements Initializable {
                         name.getText(),
                         surname.getText(),
                         tel.getText(),
-                        null);
+                        imageAdd.getImage());
                 listPatients.add(patient);
                 TabPaciente.setItems(listPatients); // Refresh
                 }
@@ -271,7 +321,7 @@ public class FXMLclinicDBController implements Initializable {
                         name.getText(),
                         surname.getText(),
                         tel.getText(),
-                        null);
+                        imageAdd.getImage());
                 listDoctors.add(doctor);
                 TabMedico.setItems(listDoctors);
         }
@@ -314,10 +364,23 @@ public class FXMLclinicDBController implements Initializable {
             alert.setTitle(clinic.getClinicName());
             alert.setHeaderText("Saving data in DB");
             alert.setContentText("The application is saving the changes in the data into the database. This action can expend some minutes.");
-            alert.showAndWait();
+            alert.show();
             clinic.saveDB();
             Platform.exit();
         }catch(Exception e) {}
+    }
+    private boolean confirm(String title) {
+          Alert alert = new Alert(AlertType.CONFIRMATION);
+          alert.setTitle("Borrar "+ title);
+          alert.setContentText("¿Confirmar acción?");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+            // ... user chose OK
+            return true;
+        } else {
+            // ... user chose CANCEL or closed the dialog
+            return false;
+        }
     }
     @FXML
     private void verPaciente(ActionEvent event) {
@@ -327,8 +390,8 @@ public class FXMLclinicDBController implements Initializable {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Cargar imagen");
         fileChooser.getExtensionFilters().addAll(
-                    new FileChooser.ExtensionFilter("Imágenes", "*.png", "*.jpg", "*.gif"),
-                    new FileChooser.ExtensionFilter("Todos", "*.^*")
+                    new FileChooser.ExtensionFilter("Imágenes", "*.png", "*.jpg", "*.gif","*.PNG"),
+                    new FileChooser.ExtensionFilter("Todos", "*.*")
         );
         
         File selectedFile = fileChooser.showOpenDialog(((Node)event.getSource()).getScene().getWindow());
@@ -336,7 +399,7 @@ public class FXMLclinicDBController implements Initializable {
             //Falta completar, no se como transformar de file a image
             BufferedImage Bufferedimage = ImageIO.read(selectedFile);
             javafx.scene.image.Image image = SwingFXUtils.toFXImage(Bufferedimage, null);
-            imagePatient.setImage(image);
+            imageAdd.setImage(image);
         }
      }
 

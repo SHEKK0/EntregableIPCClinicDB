@@ -59,7 +59,7 @@ import javax.imageio.ImageIO;
 import java.util.Optional;
 /**
  *
- * @author javiD
+ * @author Carsengi, Jadomen
  */
 public class FXMLclinicDBController implements Initializable {
     @FXML
@@ -141,6 +141,8 @@ public class FXMLclinicDBController implements Initializable {
     private GridPane gridAdd;
     @FXML
     private Button acceptButton;
+    @FXML
+    private Button clearFields;
     @FXML
     private StackPane stackRootPane;
     @FXML
@@ -399,7 +401,7 @@ public class FXMLclinicDBController implements Initializable {
         
         
 // ----------------------------------------------------------------------//
-
+        clearFields.setOnAction(e -> newInput());
 
     }
     private void seePatient(Patient patient) {
@@ -468,9 +470,11 @@ public class FXMLclinicDBController implements Initializable {
         }
 
 private void newInput(){
-        for(Node node: gridAdd.getChildren()) {
-            if(node instanceof TextField) node.setText("");
-        }
+        id.setText("");
+        name.setText("");
+        surname.setText("");
+        tel.setText("");
+        imageAdd.setImage(null);
 }
         private void duplicate() {
             Alert alert = new Alert(AlertType.ERROR);

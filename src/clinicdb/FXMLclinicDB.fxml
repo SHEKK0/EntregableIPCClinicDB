@@ -258,7 +258,7 @@
                                 <Insets right="20.0" />
                               </HBox.margin>
                             </Button>
-                            <Button mnemonicParsing="false" text="Borrar">
+                            <Button fx:id="clearFields" mnemonicParsing="false" text="Borrar">
                               <HBox.margin>
                                 <Insets left="20.0" />
                               </HBox.margin>

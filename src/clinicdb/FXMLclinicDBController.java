@@ -39,8 +39,11 @@ import model.Patient;
 import clinicdb.FXMLWatchPatientController;
 import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
+import java.util.Optional;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
@@ -114,8 +117,6 @@ public class FXMLclinicDBController implements Initializable {
     @FXML
     private Button addImageButton;
     @FXML
-    private TextField tel1;
-    @FXML
     private Button acceptButton;
     private TableColumn<?, ?> EmailPatient;
     @FXML
@@ -137,6 +138,10 @@ public class FXMLclinicDBController implements Initializable {
     private ImageView imagePatient;
     @FXML
     private TextField searchPatient;
+    @FXML
+    private TextField searchDoctor;
+    @FXML
+    private TextField searchDate;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -436,6 +441,27 @@ public class FXMLclinicDBController implements Initializable {
         }
         }
      
+      private void seePatient(Patient patient) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("FXMLWatchPatient.fxml"));
+            loader.load();
+            Parent p = loader.getRoot();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(p));
+            FXMLWatchPatientController controller = loader.getController();
+            controller.setName(patient.getName() + ", " + patient.getSurname());
+            //controller.setImage(patient.getPhoto()); //a mi me da null
+            controller.setTelf(patient.getTelephon());
+            controller.setTable(clinic.getPatientAppointments(patient.getIdentifier()));
+            controller.setId(patient.getIdentifier());
+            stage.show();
+        }catch(IOException er){
+            System.out.println("adkñlsjf");
+        }
+    }
+     
+     
      /**
       * 
       * @param list
@@ -503,6 +529,22 @@ public class FXMLclinicDBController implements Initializable {
     private void buscarPaciente(KeyEvent event) {
         
     }
+    
+    
+    private boolean confirm(String title) {
+          Alert alert = new Alert(AlertType.CONFIRMATION);
+          alert.setTitle("Borrar "+ title);
+          alert.setContentText("¿Confirmar acción?");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+            // ... user chose OK
+            return true;
+        } else {
+            // ... user chose CANCEL or closed the dialog
+            return false;
+        }
     }
+    
+}
 
 

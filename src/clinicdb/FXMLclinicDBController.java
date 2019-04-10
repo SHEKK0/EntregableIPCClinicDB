@@ -148,12 +148,158 @@ public class FXMLclinicDBController implements Initializable {
         listCitas = FXCollections.observableList(clinic.getAppointments());
 
 //-----------------------------------------------------------------------//
-        // Añadir pacientes a la lista de pacientes desde el archivo        
-        TabPaciente.getItems().addAll(listPatients);
+        // Añadir pacientes a la lista de pacientes desde el archivo
+        // 1. Wrap the ObservableList in a FilteredList (initially display all data).
+        FilteredList<Patient> filteredData = new FilteredList<>(listPatients, p -> true);
+
+        // 2. Set the filter Predicate whenever the filter changes.
+        searchPatient.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(patient -> {
+                // If filter text is empty, display all persons.
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                // Compare first name and last name of every person with filter text.
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (patient.getName().toLowerCase().startsWith(lowerCaseFilter)) {
+                    return true; // Filter matches first name.
+                } else if (patient.getSurname().toLowerCase().startsWith(lowerCaseFilter)) {
+                    return true; // Filter matches last name.
+                }
+                return false; // Does not match.
+            });
+        });
+
+        // 3. Wrap the FilteredList in a SortedList.
+        SortedList<Patient> sortedData = new SortedList<>(filteredData);
+
+        // 4. Bind the SortedList comparator to the TableView comparator.
+        sortedData.comparatorProperty().bind(TabPaciente.comparatorProperty());
+
+        // 5. Add sorted (and filtered) data to the table.
+        TabPaciente.setItems(sortedData);
+
+
         //Añadir medicos a la lista de medicos desde el archivo
-        TabMedico.getItems().addAll(listDoctors);
+
+
+
+        // 1. Wrap the ObservableList in a FilteredList (initially display all data).
+        FilteredList<Doctor> filteredDataDoctor = new FilteredList<>(listDoctors, p -> true);
+
+        // 2. Set the filter Predicate whenever the filter changes.
+        searchDoctor.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredDataDoctor.setPredicate(doctor -> {
+                // If filter text is empty, display all persons.
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                // Compare first name and last name of every person with filter text.
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (doctor.getName().toLowerCase().startsWith(lowerCaseFilter)) {
+                    return true; // Filter matches first name.
+                } else if (doctor.getName().toLowerCase().startsWith(lowerCaseFilter)) {
+                    return true; // Filter matches last name.
+                }
+                return false; // Does not match.
+            });
+        });
+
+        // 3. Wrap the FilteredList in a SortedList.
+        SortedList<Doctor> sortedDataDoctor = new SortedList<>(filteredDataDoctor);
+
+        // 4. Bind the SortedList comparator to the TableView comparator.
+        sortedDataDoctor.comparatorProperty().bind(TabMedico.comparatorProperty());
+
+        // 5. Add sorted (and filtered) data to the table.
+        TabMedico.setItems(sortedDataDoctor);
+
         //Añadir citas a la lista
-        TabAppointment.getItems().addAll(listCitas);
+        // 1. Wrap the ObservableList in a FilteredList (initially display all data).
+
+
+
+        FilteredList<Appointment> filteredDataAppointment = new FilteredList<>(listCitas, p -> true);
+
+        // 2. Set the filter Predicate whenever the filter changes.
+        searchDate.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredDataAppointment.setPredicate(appointment -> {
+                // If filter text is empty, display all persons.
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                // Compare first name and last name of every person with filter text.
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (appointment.getPatient().getName().toLowerCase().startsWith(lowerCaseFilter)) {
+                    return true; // Filter matches first name.
+                } else if (appointment.getPatient().getSurname().toLowerCase().startsWith(lowerCaseFilter)) {
+                    return true; // Filter matches last name.
+                } else if (appointment.getDoctor().getName().toLowerCase().startsWith(lowerCaseFilter)) {
+                    return true; // Filter matches first name.
+                } else if (appointment.getDoctor().getSurname().toLowerCase().startsWith(lowerCaseFilter)) {
+                    return true; // Filter matches last name.
+                }
+                return false; // Does not match.
+            });
+        });
+
+        // 3. Wrap the FilteredList in a SortedList.
+        SortedList<Appointment> sortedDataAppointment= new SortedList<>(filteredDataAppointment);
+
+        // 4. Bind the SortedList comparator to the TableView comparator.
+        sortedDataAppointment.comparatorProperty().bind(TabAppointment.comparatorProperty());
+
+        // 5. Add sorted (and filtered) data to the table.
+        TabAppointment.setItems(sortedDataAppointment);
+
+ //---------------------------------------------------------------------------//       
+        
+        choice.getItems().addAll("Paciente", "Médico", "Cita");
+        choice.setValue("Paciente");
+        ID.getItems().addAll("DNI","NIF","SS");
+        ID.setValue("DNI");
+
+//---------------------------------------------------------------------------//
+        // TABLE VIEW PACIENTE //
+
+
+        NPatient.setCellValueFactory(new PropertyValueFactory<>("name")); // Asegurarse que el nombre es el mismo que el de la clase. Asi puede recuperar el valor.
+        APatient.setCellValueFactory(new PropertyValueFactory<>("surname"));
+        IdPatient.setCellValueFactory(new PropertyValueFactory<>("identifier"));
+        TelPatient.setCellValueFactory(new PropertyValueFactory<>("telephon"));
+ 
+        newPacienteButton.setOnAction( e -> {
+            //NUEVO PACIENTE BOTON, A TERMINAR
+            tabPane.getSelectionModel().select(3);
+            choice.setValue("Paciente");
+        });
+        deletePatient.disableProperty().bind(Bindings.isEmpty(TabPaciente.getSelectionModel().getSelectedItems()));
+
+
+        datePatient.disableProperty().bind(Bindings.isEmpty(TabPaciente.getSelectionModel().getSelectedItems()));
+        datePatient.setOnAction(e -> {
+            tabPane.getSelectionModel().select(3);
+            choice.setValue("Cita");
+        });
+        deletePatient.setOnAction(e -> {
+            if(confirm(" paciente.")) {
+                //ELIMINAR PACIENTE BOTON, A TERMINAR
+                Patient aEliminar = TabPaciente.getSelectionModel().getSelectedItem();
+                listPatients.remove(aEliminar); //falta añadir alerta si no se elimin
+                TabPaciente.getItems().remove(aEliminar);
+                TabPaciente.getSelectionModel().select(null);
+            }
+        });
+        // TODO LO NECESARIO PARA VER AL PACIENTE COMPLETO FALTA (NO SE VE EL NOMBRE DEL DOCTOR)
+        verPatient.disableProperty().bind(Bindings.isEmpty(TabPaciente.getSelectionModel().getSelectedItems()));
+        verPatient.setOnAction(e -> seePatient(TabPaciente.getSelectionModel().getSelectedItem()));
+
  //---------------------------------------------------------------------------//       
         
         choice.getItems().addAll("Paciente", "Médico", "Cita");

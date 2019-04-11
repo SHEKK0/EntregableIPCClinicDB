@@ -121,6 +121,9 @@ public class FXMLWatchPatientController implements Initializable {
     public void setImage(Image image) throws FileNotFoundException{
             imagePersona.setImage(image);
         }
+    public void setClinic(ClinicDBAccess clinic) {
+        this.clinic = clinic;
+    }
     public void setId(String Id){
         textId.setText(Id);
         textId.setDisable(true);
@@ -134,7 +137,6 @@ public class FXMLWatchPatientController implements Initializable {
         colDate.setCellValueFactory(new PropertyValueFactory<>("appointmentDateTime"));
         colMed.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getDoctor().getName()+ " " + cellData.getValue().getDoctor().getSurname()));
     }
-
     public ArrayList<Appointment> getTable() {
         return list;
     }

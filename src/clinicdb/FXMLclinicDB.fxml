@@ -29,7 +29,7 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.text.Font?>
 
-<StackPane fx:id="stackRootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="clinicdb.FXMLclinicDBController">
+<StackPane id="stackRootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="clinicdb.FXMLclinicDBController">
   <children>
     <BorderPane prefHeight="200.0" prefWidth="200.0">
       <center>
@@ -37,11 +37,11 @@
           <tabs>
             <Tab text="Pacientes">
               <content>
-                <AnchorPane fx:id="inicioPane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                <AnchorPane id="inicioPane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                   <children>
                     <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                       <children>
-                        <TextField fx:id="searchPatient" minHeight="35.0" onKeyPressed="#buscarPaciente" promptText="Buscar paciente" text="">
+                        <TextField fx:id="searchPatient" minHeight="35.0" promptText="Buscar paciente" text="">
                           <VBox.margin>
                             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                           </VBox.margin>
@@ -66,7 +66,7 @@
                                     <Insets bottom="20.0" left="10.0" />
                                   </VBox.margin>
                                 </Button>
-                                <Button fx:id="deletePatient" alignment="CENTER" font="$x1" minWidth="-Infinity" mnemonicParsing="false" text="Eliminar Paciente">
+                                <Button fx:id="datePatient" font="$x1" minWidth="-Infinity" mnemonicParsing="false" text="Nueva Cita">
                                   <VBox.margin>
                                     <Insets bottom="20.0" left="10.0" />
                                   </VBox.margin>
@@ -76,7 +76,7 @@
                                     <Insets bottom="20.0" left="10.0" />
                                   </VBox.margin>
                                 </Button>
-                                <Button fx:id="datePatient" font="$x1" minWidth="-Infinity" mnemonicParsing="false" text="Nueva Cita">
+                                <Button fx:id="deletePatient" alignment="CENTER" font="$x1" minWidth="-Infinity" mnemonicParsing="false" text="Eliminar Paciente">
                                   <VBox.margin>
                                     <Insets bottom="20.0" left="10.0" />
                                   </VBox.margin>
@@ -111,7 +111,7 @@
                         </TextField>
                         <GridPane>
                           <children>
-                            <TableView id="TabMeidco" fx:id="TabMedico" prefHeight="300.0" prefWidth="430.0">
+                            <TableView fx:id="TabMedico" prefHeight="300.0" prefWidth="430.0">
                               <columns>
                                 <TableColumn prefWidth="75.0" text="Nombre" fx:id="NMedico" />
                                 <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="150.0" text="Apellidos" fx:id="AMedico" />
@@ -126,7 +126,7 @@
                                     <Insets bottom="20.0" left="10.0" />
                                   </VBox.margin>
                                 </Button>
-                                <Button fx:id="deleteMedic" alignment="CENTER" font="$x1" minWidth="-Infinity" mnemonicParsing="false" text="Eliminar médico">
+                                <Button id="dateDoctor" fx:id="dateMedic" font="$x1" minWidth="-Infinity" mnemonicParsing="false" text="Nueva Cita">
                                   <VBox.margin>
                                     <Insets bottom="20.0" left="10.0" />
                                   </VBox.margin>
@@ -136,7 +136,7 @@
                                     <Insets bottom="20.0" left="10.0" />
                                   </VBox.margin>
                                 </Button>
-                                <Button id="dateDoctor" fx:id="dateMedic" font="$x1" minWidth="-Infinity" mnemonicParsing="false" text="Nueva Cita">
+                                <Button fx:id="deleteMedic" alignment="CENTER" font="$x1" minWidth="-Infinity" mnemonicParsing="false" text="Eliminar médico">
                                   <VBox.margin>
                                     <Insets bottom="20.0" left="10.0" />
                                   </VBox.margin>
@@ -164,7 +164,7 @@
                   <children>
                     <VBox prefHeight="369.0" prefWidth="600.0">
                       <children>
-                        <TextField id="searchCitas" fx:id="searchDate" minHeight="35.0" promptText="Buscar cita">
+                        <TextField fx:id="searchDate" minHeight="35.0" promptText="Buscar cita">
                           <VBox.margin>
                             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                           </VBox.margin>
@@ -180,22 +180,27 @@
                             </TableView>
                             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                               <children>
-                                <Button fx:id="newPacienteButton2" alignment="CENTER" font="$x1" minWidth="-Infinity" mnemonicParsing="false" prefWidth="130.0" text="Añadir Paciente">
+                                <Button id="seeDate" fx:id="newDate" alignment="CENTER" contentDisplay="CENTER" font="$x1" minWidth="-Infinity" mnemonicParsing="false" text="Nueva Cita">
                                   <VBox.margin>
                                     <Insets bottom="20.0" left="10.0" />
                                   </VBox.margin>
                                 </Button>
-                                <Button alignment="CENTER" font="$x1" minWidth="-Infinity" mnemonicParsing="false" text="Eliminar Paciente">
+                                <Button id="newPacienteButton2" fx:id="seePatientDate" alignment="CENTER" font="$x1" minWidth="-Infinity" mnemonicParsing="false" prefWidth="130.0" text="Ver Paciente">
                                   <VBox.margin>
                                     <Insets bottom="20.0" left="10.0" />
                                   </VBox.margin>
                                 </Button>
-                                <Button alignment="CENTER" contentDisplay="CENTER" font="$x1" minWidth="-Infinity" mnemonicParsing="false" text="Ver Paciente">
+                                <Button fx:id="seeMedicDate" alignment="CENTER" font="$x1" minWidth="-Infinity" mnemonicParsing="false" text="Ver medico">
                                   <VBox.margin>
                                     <Insets bottom="20.0" left="10.0" />
                                   </VBox.margin>
                                 </Button>
-                                <Button font="$x1" minWidth="-Infinity" mnemonicParsing="false" text="Nueva Cita">
+                                <Button fx:id="seeDate" alignment="CENTER" contentDisplay="CENTER" font="$x1" minWidth="-Infinity" mnemonicParsing="false" text="Ver Cita">
+                                  <VBox.margin>
+                                    <Insets bottom="20.0" left="10.0" />
+                                  </VBox.margin>
+                                </Button>
+                                <Button fx:id="deleteDate" font="$x1" minWidth="-Infinity" mnemonicParsing="false" text="Borrar Cita">
                                   <VBox.margin>
                                     <Insets bottom="20.0" left="10.0" />
                                   </VBox.margin>
@@ -223,7 +228,7 @@
                   <children>
                     <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                       <children>
-                        <GridPane VBox.vgrow="ALWAYS">
+                        <GridPane fx:id="gridAdd" VBox.vgrow="ALWAYS">
                           <children>
                             <ChoiceBox fx:id="choice" prefWidth="150.0" GridPane.halignment="RIGHT" />
                             <TextField fx:id="name" prefHeight="26.0" prefWidth="134.0" promptText="Nombre" GridPane.rowIndex="1" />
@@ -231,8 +236,8 @@
                             <ChoiceBox fx:id="ID" prefHeight="26.0" prefWidth="54.0" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
                             <TextField fx:id="surname" prefHeight="26.0" prefWidth="258.0" promptText="Apellidos" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                             <TextField fx:id="tel" prefHeight="26.0" prefWidth="220.0" promptText="Teléfono" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                            <Button fx:id="addImageButton" mnemonicParsing="false" onAction="#cargarImagen" prefHeight="26.0" prefWidth="154.0" text="Cargar" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
-                            <ImageView fx:id="imagePatient" fitHeight="87.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                            <Button id="addImageButton" mnemonicParsing="false" onAction="#cargarImagen" prefHeight="26.0" prefWidth="154.0" text="Cargar" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
+                            <ImageView id="imagePatient" fx:id="imageAdd" fitHeight="87.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="5">
                               <image>
                                 <Image url="@../images/default.png" />
                               </image>
@@ -253,12 +258,12 @@
                         </GridPane>
                         <HBox alignment="CENTER" prefHeight="71.0" prefWidth="600.0">
                           <children>
-                            <Button fx:id="acceptButton" mnemonicParsing="false" onMouseClicked="#accept" text="Aceptar">
+                            <Button id="acceptButton" mnemonicParsing="false" onMouseClicked="#accept" text="Aceptar">
                               <HBox.margin>
                                 <Insets right="20.0" />
                               </HBox.margin>
                             </Button>
-                            <Button mnemonicParsing="false" text="Borrar">
+                            <Button id="clearFields" mnemonicParsing="false" onAction="#newInput" text="Borrar">
                               <HBox.margin>
                                 <Insets left="20.0" />
                               </HBox.margin>

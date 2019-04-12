@@ -139,12 +139,21 @@ public class FXMLclinicDBController implements Initializable {
     private ImageView imageAdd;
     @FXML
     private Font x1;
+    @FXML
+    private TextField examinationRoom;
+    @FXML
+    private TextField availableDays;
+    @FXML
+    private TextField iniDay;
+    @FXML
+    private TextField fiDay;
     
+        
     private ClinicDBAccess clinic;
     private ObservableList<Patient> listPatients;
     private ObservableList<Doctor> listDoctors;
     private ObservableList<Appointment> listCitas;
-    
+    private TextField salaText;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -281,6 +290,12 @@ public class FXMLclinicDBController implements Initializable {
         ID.getItems().addAll("DNI","NIF","SS");
         ID.setValue("DNI");
 
+        examinationRoom.setVisible(false);
+        availableDays.setVisible(false);
+        iniDay.setVisible(false);
+        fiDay.setVisible(false);
+
+        
 //---------------------------------------------------------------------------//
         // TABLE VIEW PACIENTE //
 
@@ -351,7 +366,7 @@ public class FXMLclinicDBController implements Initializable {
         });
          
          //VER MÉDICO, A CREAR
-         
+         seeMedic.setOnAction(e -> seeMedic(TabMedico.getSelectionModel().getSelectedItem()));    
          
    //_------------------------------------------//
         //----------- CITAS ----------------//
@@ -404,16 +419,25 @@ public class FXMLclinicDBController implements Initializable {
         choice.getSelectionModel().selectedIndexProperty().addListener((observable,oldValue,newValue) -> { // Para cambiar los textfield al decir paciente medico tal 
             TextField examination = new TextField(); // En algún momento habrá que montar esto como global.
             switch (newValue.intValue()) {
-                case 0: 
-                    try {
-                    gridAdd.getChildren().remove(0,5);
-                    } catch (Exception e) {System.out.println("esto va?"); 
-                    }
+                case 0:
+                    examinationRoom.setVisible(false);
+                    availableDays.setVisible(false);
+                    iniDay.setVisible(false);
+                    fiDay.setVisible(false);
                 case 1:
-                    
-                    examination.setPromptText("Sala");
-                   gridAdd.add(examination,0,5);
+                    examinationRoom.setVisible(true);
+                    availableDays.setVisible(true);
+                    iniDay.setVisible(true);
+                    fiDay.setVisible(true);
 
+                    break;
+                case 2: 
+                    examinationRoom.setVisible(false);
+                    availableDays.setVisible(false);
+                    iniDay.setVisible(false);
+                    fiDay.setVisible(false);
+
+                    break;
             }
         });
         
@@ -428,7 +452,7 @@ public class FXMLclinicDBController implements Initializable {
         switch (choice.getValue().toString()) {
             case ("Paciente"):
                 Patient patient = null;
-                if (!checkInputs()) {somethingEmpty();break;}
+                if (!checkInputsPatient()) {somethingEmpty();break;}
                 boolean aux = existePaciente(listPatients, id.getText());
                 if (!aux) {
                     patient = new Patient(
@@ -450,7 +474,7 @@ public class FXMLclinicDBController implements Initializable {
                 break;
             case ("Médico"):
                 Doctor doctor = null;
-                if(!checkInputs()) {somethingEmpty();break;}
+                if(!checkInputsPatient()) {somethingEmpty();break;}
                 if (!existeMedico(listDoctors, id.getText())) {
                     doctor = new Doctor(
                             null,
@@ -473,7 +497,7 @@ public class FXMLclinicDBController implements Initializable {
                 break;
             case ("Cita"):
                 Appointment cita = null;
-                if(!checkInputs()) {somethingEmpty();break;}
+                if(!checkInputsDoctor()) {somethingEmpty();break;}
                 //cita = new Appointment(LocalDateTime.MIN, doctorField.getText(), patientField.getText());
                 if (!existeCita(listCitas,cita)) { // FIX ME !existeCita(listCitas)
                     listCitas.add(cita);
@@ -486,12 +510,22 @@ public class FXMLclinicDBController implements Initializable {
                 break;
         }
     }
-     private boolean checkInputs() { // Comprueba que los campos no estén vacíos. Un poco la doble negación rara.
+     private boolean checkInputsPatient() { // Comprueba que los campos no estén vacíos. Un poco la doble negación rara.
         return !(id.getText().equals("")
                 || name.getText().equals("")
                 || surname.getText().equals("")
                 || tel.getText().equals(""));
     }
+     
+     //Esto esta bien?
+    private boolean checkInputsDoctor(){
+        return !(id.getText().equals("")
+                || name.getText().equals("")
+                || surname.getText().equals("")
+                || tel.getText().equals("")
+                || (salaText.visibleProperty().getValue() && salaText.getText().equals("")));
+    } 
+     
     @FXML
     private void newInput() {
         id.setText("");
@@ -651,10 +685,31 @@ public class FXMLclinicDBController implements Initializable {
         alert.showAndWait();
     }
 
-    
-    
-    
-    //merged
+
+    private void seeMedic(Doctor doctor) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("FXMLWatchDoctor.fxml"));
+            loader.load();
+            Parent p = loader.getRoot();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(p));
+            FXMLWatchDoctorController controller = loader.getController();
+            controller.setName(doctor.getName() + ", " + doctor.getSurname());
+            controller.setImage(doctor.getPhoto()); 
+            controller.setTelf(doctor.getTelephon());
+            controller.setTable(clinic.getDoctorAppointments(doctor.getIdentifier()));
+            controller.setClinic(clinic);
+            controller.setSala(doctor.getExaminationRoom());
+            controller.setId(doctor.getIdentifier());
+            controller.setTableDays(doctor.getVisitDays());
+            stage.show();
+            controller.getTable();
+            listCitas = FXCollections.observableList(controller.getTable());
+        } catch (IOException er) {
+            System.out.println("adkñlsjf");
+        }
+    }
     
 }
 

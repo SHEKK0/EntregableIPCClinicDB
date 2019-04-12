@@ -29,7 +29,7 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.text.Font?>
 
-<StackPane id="stackRootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="clinicdb.FXMLclinicDBController">
+<StackPane id="stackRootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="425.0" prefWidth="624.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="clinicdb.FXMLclinicDBController">
   <children>
     <BorderPane prefHeight="200.0" prefWidth="200.0">
       <center>
@@ -224,7 +224,7 @@
             </Tab>
             <Tab text="Añadir">
               <content>
-                <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="603.0">
+                <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="370.0" prefWidth="624.0">
                   <children>
                     <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                       <children>
@@ -245,6 +245,10 @@
                             <TextField fx:id="id" prefHeight="26.0" prefWidth="153.0" promptText="Identificación" GridPane.columnIndex="0" GridPane.rowIndex="3" />
                             <TextField fx:id="tel" prefHeight="24.9998779296875" prefWidth="302.0" promptText="Teléfono" GridPane.columnIndex="0" GridPane.rowIndex="4" />
                             <ChoiceBox fx:id="ID" prefHeight="26.0" prefWidth="54.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3" />
+                            <TextField id="tel" fx:id="examinationRoom" prefHeight="24.9998779296875" prefWidth="302.0" promptText="Sala" text="" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                            <TextField fx:id="availableDays" prefWidth="200.0" promptText="Días disponible" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+                            <TextField fx:id="iniDay" maxWidth="-Infinity" minWidth="-Infinity" prefColumnCount="100" prefWidth="143.0" promptText="Hora inicio" GridPane.columnIndex="0" GridPane.rowIndex="7" />
+                            <TextField fx:id="fiDay" maxWidth="-Infinity" minWidth="-Infinity" prefColumnCount="100" prefWidth="146.0" promptText="Hora final" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="7" />
                           </children>
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -254,17 +258,17 @@
                             <Insets left="5.0" right="5.0" />
                           </padding>
                           <rowConstraints>
-                            <RowConstraints maxHeight="47.0" minHeight="10.0" prefHeight="47.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="47.0" minHeight="10.0" prefHeight="47.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="47.0" minHeight="10.0" prefHeight="47.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="47.0" minHeight="10.0" prefHeight="47.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="46.0" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="46.0" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="44.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="76.0" minHeight="10.0" prefHeight="72.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="47.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="47.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="47.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="47.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="46.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="46.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="44.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="76.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                         </GridPane>
-                        <HBox alignment="CENTER" prefHeight="71.0" prefWidth="600.0">
+                        <HBox alignment="CENTER" prefHeight="49.0" prefWidth="603.0">
                           <children>
                             <Button id="acceptButton" mnemonicParsing="false" onMouseClicked="#accept" text="Aceptar">
                               <HBox.margin>

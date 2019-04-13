@@ -30,7 +30,7 @@ public class ClinicDB extends Application {
         // Lo mismo que cerrar, si no se cambia y ya.
         stage.setOnHidden(event -> controller.exitApplication());
         Scene scene = new Scene(root);
-
+        stage.setTitle("IPC MEDICAL SERVICES CLINIC");
         stage.setScene(scene);
         stage.setMinHeight(450);
         stage.setMinWidth(600);

@@ -180,12 +180,12 @@ public class FXMLclinicDBController implements Initializable {
     @FXML
     private VBox vBoxAddCita;
     @FXML
-    private ListView<Patient> listViewPaciente;
+    private ChoiceBox<?> choice1;
     @FXML
-    private ListView<Doctor> listViewDoctor;
+    private ListView<?> listViewPaciente;
     @FXML
-    private ChoiceBox choice1;
-
+    private ListView<?> listViewDoctor;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // Añadimos la clinica al iniciar
@@ -325,8 +325,6 @@ public class FXMLclinicDBController implements Initializable {
         // Añadir //
         choice.getItems().addAll("Paciente", "Médico", "Cita");
         choice.setValue("Paciente");
-        choice1.getItems().addAll("Paciente", "Médico", "Cita");
-        choice1.setValue("Paciente");
         ID.getItems().addAll("DNI","NIF","SS");
         ID.setValue("DNI");
 
@@ -457,7 +455,8 @@ public class FXMLclinicDBController implements Initializable {
         deleteDate.disableProperty().bind(Bindings.isEmpty(TabAppointment.getSelectionModel().getSelectedItems()));
 
         seePatientDate.setOnAction(e -> seePatient(TabAppointment.getSelectionModel().getSelectedItem().getPatient()));
-
+        seeMedicDate.setOnAction(e -> seeMedic(TabAppointment.getSelectionModel().getSelectedItem().getDoctor()));
+        
         colPatient.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(
                 cellData.getValue().getPatient().getName() + " "
                 + cellData.getValue().getPatient().getSurname()
@@ -496,70 +495,73 @@ public class FXMLclinicDBController implements Initializable {
          
 
 // ----------------------------------------------------------------------//
-        // AnchorPane add // COMPLETAR
-        choice.getSelectionModel().selectedIndexProperty().addListener((observable,oldValue,newValue) -> { // Para cambiar los textfield al decir paciente medico tal 
-            switch (newValue.intValue()) {
-                case 0:
-                    vBoxAddPac.setVisible(true);
-                    vBoxAddCita.setVisible(false);
-                    vBoxAddCita.setDisable(true);
-                    vBoxAddPac.setDisable(false);
-                    examinationRoom.setVisible(false);
-                    availableDays.setVisible(false);
-                    iniDay.setVisible(false);
-                    fiDay.setVisible(false);
-                    break;
-                case 1:
-                    vBoxAddPac.setVisible(true);
-                    vBoxAddCita.setVisible(false);
-                    vBoxAddCita.setDisable(true);
-                    vBoxAddPac.setDisable(false);
-                    examinationRoom.setVisible(true);
-                    availableDays.setVisible(true);
-                    iniDay.setVisible(true);
-                    fiDay.setVisible(true);
-                    break;
-                case 2:
-                    vBoxAddPac.setVisible(false);
-                    vBoxAddCita.setVisible(true);
-                    vBoxAddCita.setDisable(false);
-                    vBoxAddPac.setDisable(true);
-            }
-        });
-        choice1.getSelectionModel().selectedIndexProperty().addListener((observable,oldValue,newValue) -> { // Para cambiar los textfield al decir paciente medico tal 
-            switch (newValue.intValue()) {
-                case 0:
-                    vBoxAddPac.setVisible(true);
-                    vBoxAddCita.setVisible(false);
-                    vBoxAddCita.setDisable(true);
-                    vBoxAddPac.setDisable(false);
-                    examinationRoom.setVisible(false);
-                    availableDays.setVisible(false);
-                    iniDay.setVisible(false);
-                    fiDay.setVisible(false);
-                    break;
-                case 1:
-                    vBoxAddPac.setVisible(true);
-                    vBoxAddCita.setVisible(false);
-                    vBoxAddCita.setDisable(true);
-                    vBoxAddPac.setDisable(false);
-                    examinationRoom.setVisible(true);
-                    availableDays.setVisible(true);
-                    iniDay.setVisible(true);
-                    fiDay.setVisible(true);
-                    break;
-                case 2:
-                    vBoxAddPac.setVisible(false);
-                    vBoxAddCita.setVisible(true);
-                    vBoxAddCita.setDisable(false);
-                    vBoxAddPac.setDisable(true);
-            }
-        });
+choice.getSelectionModel().selectedIndexProperty().addListener((observable,oldValue,newValue) -> { // Para cambiar los textfield al decir paciente medico tal 
+    switch (newValue.intValue()) {
+        case 0:
+            vBoxAddPac.setVisible(true);
+            vBoxAddCita.setVisible(false);
+            vBoxAddCita.setDisable(true);
+            vBoxAddPac.setDisable(false);
+            examinationRoom.setVisible(false);
+            availableDays.setVisible(false);
+            iniDay.setVisible(false);
+            fiDay.setVisible(false);
+            break;
+        case 1:
+            vBoxAddPac.setVisible(true);
+            vBoxAddCita.setVisible(false);
+            vBoxAddCita.setDisable(true);
+            vBoxAddPac.setDisable(false);
+            examinationRoom.setVisible(true);
+            availableDays.setVisible(true);
+            iniDay.setVisible(true);
+            fiDay.setVisible(true);
+            break;
+        case 2:
+            vBoxAddPac.setVisible(false);
+            vBoxAddCita.setVisible(true);
+            vBoxAddCita.setDisable(false);
+            vBoxAddPac.setDisable(true);
+            break;
+    }
+});
+choice1.getSelectionModel().selectedIndexProperty().addListener((observable,oldValue,newValue) -> { // Para cambiar los textfield al decir paciente medico tal 
+    switch (newValue.intValue()) {
+        case 0:
+            vBoxAddPac.setVisible(true);
+            vBoxAddCita.setVisible(false);
+            vBoxAddCita.setDisable(true);
+            vBoxAddPac.setDisable(false);
+            examinationRoom.setVisible(false);
+            availableDays.setVisible(false);
+            iniDay.setVisible(false);
+            fiDay.setVisible(false);
+            break;
+        case 1:
+            vBoxAddPac.setVisible(true);
+            vBoxAddCita.setVisible(false);
+            vBoxAddCita.setDisable(true);
+            vBoxAddPac.setDisable(false);
+            examinationRoom.setVisible(true);
+            availableDays.setVisible(true);
+            iniDay.setVisible(true);
+            fiDay.setVisible(true);
+            break;
+        case 2:
+            vBoxAddPac.setVisible(false);
+            vBoxAddCita.setVisible(true);
+            vBoxAddCita.setDisable(false);
+            vBoxAddPac.setDisable(true);
+            break;
+    }
+});
+
+        
         
 // ----------------------------------------------------------------------// 
 
     }
- 
+   
     @FXML
     private void accept() {
         //AÑADIR BOTON ACEPTAR, A TERMINAR
@@ -567,6 +569,7 @@ public class FXMLclinicDBController implements Initializable {
             case ("Paciente"):
                 Patient patient = null;
                 if (!checkInputsPatient()) {errorAlert("Rellena los campos obligatorios!");break;}
+                if(tel.getText().length()!=9) {errorAlert("El número de teléfono no es correcto!");break;}
                 boolean aux = existePaciente(listPatients, id.getText().toUpperCase());
                 if (aux) {errorAlert("Identificación duplicada!");break;}
                     patient = new Patient(
@@ -587,6 +590,7 @@ public class FXMLclinicDBController implements Initializable {
                 if (!checkInputsDoctor()) {errorAlert("Rellena los campos obligatorios!");break;}
                 if (existeMedico(listDoctors, id.getText().toUpperCase())) { errorAlert("Identifiación duplicada!");break;}
                 if (!salaInBounds(Integer.parseInt(examinationRoom.getText()))) { errorAlert("Número de sala incorrecto!"); break;}
+                if(tel.getText().length()!=9) {errorAlert("El número de teléfono no es correcto!");break;}
                 if(iniDay.getValue().compareTo(fiDay.getValue())<0) {errorAlert("Hora de inicio mayor que de final!");break;}
                 doctor = new Doctor(
                         listSalas.get(Integer.parseInt(examinationRoom.getText())),
@@ -730,6 +734,7 @@ public class FXMLclinicDBController implements Initializable {
             loader.load();
             Parent p = loader.getRoot();
             Stage stage = new Stage();
+            stage.setTitle(clinic.getClinicName());
             stage.setScene(new Scene(p));
             FXMLWatchPatientController controller = loader.getController();
             controller.setName(patient.getName() + ", " + patient.getSurname());
@@ -799,6 +804,7 @@ public class FXMLclinicDBController implements Initializable {
             loader.load();
             Parent p = loader.getRoot();
             Stage stage = new Stage();
+            stage.setTitle(clinic.getClinicName());
             stage.setScene(new Scene(p));
             FXMLWatchDoctorController controller = loader.getController();
             controller.setName(doctor.getName() + ", " + doctor.getSurname());
@@ -848,5 +854,4 @@ public class FXMLclinicDBController implements Initializable {
         else return false;
     }
 }
-
 

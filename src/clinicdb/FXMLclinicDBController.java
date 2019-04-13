@@ -32,6 +32,7 @@ import java.awt.image.BufferedImage;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -46,6 +47,7 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import static javafx.scene.input.KeyCode.E;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
@@ -144,9 +146,9 @@ public class FXMLclinicDBController implements Initializable {
     @FXML
     private HBox availableDays;
     @FXML
-    private ComboBox<?> iniDay;
+    private ComboBox<LocalTime> iniDay;
     @FXML
-    private ComboBox<?> fiDay;
+    private ComboBox<LocalTime> fiDay;
     
         
     private ClinicDBAccess clinic;
@@ -154,7 +156,7 @@ public class FXMLclinicDBController implements Initializable {
     private ObservableList<Doctor> listDoctors;
     private ObservableList<Appointment> listCitas;
     private ObservableList<ExaminationRoom> listSalas;
-    private ArrayList<LocalTime> listHours;
+    private ObservableList<LocalTime> listHours;
     private ArrayList<Days> listDays;
     private TextField salaText;
     @FXML
@@ -181,7 +183,7 @@ public class FXMLclinicDBController implements Initializable {
         listSalas = FXCollections.observableList(clinic.getExaminationRooms());
         listDays = new ArrayList<>();
         try {
-            listHours = createList();
+            listHours= FXCollections.observableList(createList());
         } catch (Exception ex) {
             Logger.getLogger(FXMLclinicDBController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -326,6 +328,21 @@ public class FXMLclinicDBController implements Initializable {
                 }
             }
         });
+        examinationRoom.textProperty().addListener(new ChangeListener<String>() { // Para que solo se añadan numeros 
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                    String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    tel.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
+        iniDay.getItems().removeAll();
+        iniDay.setItems(listHours);
+        iniDay.setValue(listHours.get(0));
+        fiDay.getItems().removeAll();
+        fiDay.setItems(listHours);
+        fiDay.setValue(listHours.get(listHours.size()-1));
 //---------------------------------------------------------------------------//
         // TABLE VIEW PACIENTE //
 
@@ -507,9 +524,9 @@ public class FXMLclinicDBController implements Initializable {
                     
                     doctor = new Doctor(
                             listSalas.get(Integer.parseInt(examinationRoom.getText())),
-                            null,//availableDays.getText(),
-                            LocalTime.now(),//iniDay.getText(),
-                            LocalTime.NOON,//fiDay.getText(),
+                            null,//abajo lo creamos tranqui
+                            iniDay.getValue(),//iniDay.getText(),
+                            fiDay.getValue(),//fiDay.getText(),
                             id.getText(),
                             name.getText(),
                             surname.getText(),

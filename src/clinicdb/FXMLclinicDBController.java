@@ -7,16 +7,12 @@ package clinicdb;
 
 import DBAccess.ClinicDBAccess;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javafx.beans.binding.Bindings;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -26,22 +22,23 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import model.Appointment;
 import model.Doctor;
 import model.Patient;
-import clinicdb.FXMLWatchPatientController;
 import java.awt.image.BufferedImage;
-import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
@@ -49,10 +46,13 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import javax.imageio.ImageIO;
+import model.Days;
+import model.ExaminationRoom;
+import model.LocalTimeAdapter;
 
 /**
  *
@@ -142,18 +142,33 @@ public class FXMLclinicDBController implements Initializable {
     @FXML
     private TextField examinationRoom;
     @FXML
-    private TextField availableDays;
+    private HBox availableDays;
     @FXML
-    private TextField iniDay;
+    private ComboBox<?> iniDay;
     @FXML
-    private TextField fiDay;
+    private ComboBox<?> fiDay;
     
         
     private ClinicDBAccess clinic;
     private ObservableList<Patient> listPatients;
     private ObservableList<Doctor> listDoctors;
     private ObservableList<Appointment> listCitas;
+    private ObservableList<ExaminationRoom> listSalas;
+    private ArrayList<LocalTime> listHours;
+    private ArrayList<Days> listDays;
     private TextField salaText;
+    @FXML
+    private ToggleButton Monday;
+    @FXML
+    private ToggleButton Tuesday;
+    @FXML
+    private ToggleButton Wednesday;
+    @FXML
+    private ToggleButton Thursday;
+    @FXML
+    private ToggleButton Friday;
+    @FXML
+    private ToggleButton Saturday;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -163,6 +178,13 @@ public class FXMLclinicDBController implements Initializable {
         listPatients = FXCollections.observableList(clinic.getPatients());
         listDoctors = FXCollections.observableList(clinic.getDoctors());
         listCitas = FXCollections.observableList(clinic.getAppointments());
+        listSalas = FXCollections.observableList(clinic.getExaminationRooms());
+        listDays = new ArrayList<>();
+        try {
+            listHours = createList();
+        } catch (Exception ex) {
+            Logger.getLogger(FXMLclinicDBController.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
 //-----------------------------------------------------------------------//
         // Añadir pacientes a la lista de pacientes desde el archivo
@@ -284,7 +306,7 @@ public class FXMLclinicDBController implements Initializable {
         TabAppointment.setItems(sortedDataAppointment);
 
  //---------------------------------------------------------------------------//       
-        
+        // Añadir //
         choice.getItems().addAll("Paciente", "Médico", "Cita");
         choice.setValue("Paciente");
         ID.getItems().addAll("DNI","NIF","SS");
@@ -295,7 +317,15 @@ public class FXMLclinicDBController implements Initializable {
         iniDay.setVisible(false);
         fiDay.setVisible(false);
 
-        
+        tel.textProperty().addListener(new ChangeListener<String>() { // Para que solo se añadan numeros 
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                    String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    tel.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
 //---------------------------------------------------------------------------//
         // TABLE VIEW PACIENTE //
 
@@ -417,26 +447,24 @@ public class FXMLclinicDBController implements Initializable {
 // ----------------------------------------------------------------------//
         // AnchorPane add // COMPLETAR
         choice.getSelectionModel().selectedIndexProperty().addListener((observable,oldValue,newValue) -> { // Para cambiar los textfield al decir paciente medico tal 
-            TextField examination = new TextField(); // En algún momento habrá que montar esto como global.
             switch (newValue.intValue()) {
                 case 0:
                     examinationRoom.setVisible(false);
                     availableDays.setVisible(false);
                     iniDay.setVisible(false);
                     fiDay.setVisible(false);
+                    break;
                 case 1:
                     examinationRoom.setVisible(true);
                     availableDays.setVisible(true);
                     iniDay.setVisible(true);
                     fiDay.setVisible(true);
-
                     break;
                 case 2: 
                     examinationRoom.setVisible(false);
                     availableDays.setVisible(false);
                     iniDay.setVisible(false);
                     fiDay.setVisible(false);
-
                     break;
             }
         });
@@ -474,18 +502,20 @@ public class FXMLclinicDBController implements Initializable {
                 break;
             case ("Médico"):
                 Doctor doctor = null;
-                if(!checkInputsPatient()) {somethingEmpty();break;}
+                if(!checkInputsDoctor()) {somethingEmpty();break;}
                 if (!existeMedico(listDoctors, id.getText())) {
+                    
                     doctor = new Doctor(
-                            null,
-                            null,
-                            null,
-                            null,
+                            listSalas.get(Integer.parseInt(examinationRoom.getText())),
+                            null,//availableDays.getText(),
+                            LocalTime.now(),//iniDay.getText(),
+                            LocalTime.NOON,//fiDay.getText(),
                             id.getText(),
                             name.getText(),
                             surname.getText(),
                             tel.getText(),
                             imageAdd.getImage());
+                    doctor.setVisitDays(listDays);
                     listDoctors.add(doctor);
                     acceptAlert("Médico");
                     newInput();
@@ -517,13 +547,13 @@ public class FXMLclinicDBController implements Initializable {
                 || tel.getText().equals(""));
     }
      
-     //Esto esta bien?
+     //Esto esta bien? No 
     private boolean checkInputsDoctor(){
         return !(id.getText().equals("")
                 || name.getText().equals("")
                 || surname.getText().equals("")
                 || tel.getText().equals("")
-                || (salaText.visibleProperty().getValue() && salaText.getText().equals("")));
+                || examinationRoom.getText().equals(""));
     } 
      
     @FXML
@@ -533,6 +563,8 @@ public class FXMLclinicDBController implements Initializable {
         surname.setText("");
         tel.setText("");
         imageAdd.setImage(new Image(getClass().getResource("/images/default.png").toExternalForm())); // Pa encontrar bien la foto, se lo dejas hacer a java
+        examinationRoom.setText("");
+        
     }
      
     
@@ -709,6 +741,32 @@ public class FXMLclinicDBController implements Initializable {
         } catch (IOException er) {
             System.out.println("adkñlsjf");
         }
+    }
+
+    @FXML
+    private void getDays(ActionEvent event) {
+        ToggleButton button = (ToggleButton)event.getSource();
+        String day = button.getId();
+        if(button.isSelected()) listDays.add(Days.valueOf(day)); 
+        else listDays.remove(Days.valueOf(day));
+    }
+
+    private ArrayList<LocalTime> createList() throws Exception {
+        ArrayList<LocalTime> res = new ArrayList();
+        for(int i = 8; i < 20; i ++) {
+            String hours = String.format("%02d", i);
+            
+            for(int j = 0; j <= 45; j=j+15){
+                String minutes = String.format("%02d", j);
+                String aux = hours+":"+minutes+":00";
+                //res.add(LocalTime.parse((hours+":"+minutes,DateTimeFormatter.ofPattern("hh:mm")));
+                res.add(
+                        LocalTime.parse(aux, 
+                        DateTimeFormatter.ISO_LOCAL_TIME));
+                
+            }
+        }
+        return res;
     }
     
 }

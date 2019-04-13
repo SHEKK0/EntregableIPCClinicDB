@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
+<?import javafx.collections.*?>
 <?import javafx.geometry.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
@@ -31,24 +32,24 @@
 
 <StackPane id="stackRootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="425.0" prefWidth="624.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="clinicdb.FXMLclinicDBController">
   <children>
-    <BorderPane prefHeight="200.0" prefWidth="200.0">
+    <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="-1.0" prefWidth="-1.0">
       <center>
-        <TabPane fx:id="tabPane" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+        <TabPane fx:id="tabPane" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="1.7976931348623157E308" BorderPane.alignment="CENTER">
           <tabs>
             <Tab text="Pacientes">
               <content>
-                <AnchorPane id="inicioPane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                <AnchorPane id="inicioPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="-1.0" prefWidth="-1.0">
                   <children>
-                    <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="-1.0" prefWidth="-1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                       <children>
                         <TextField fx:id="searchPatient" minHeight="35.0" promptText="Buscar paciente" text="">
                           <VBox.margin>
                             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                           </VBox.margin>
                         </TextField>
-                        <GridPane>
+                        <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                           <children>
-                            <TableView fx:id="TabPaciente" prefHeight="315.0" prefWidth="466.0">
+                            <TableView fx:id="TabPaciente" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="-1.0" prefWidth="-1.0">
                               <columns>
                                 <TableColumn prefWidth="75.0" text="Nombre" fx:id="NPatient" />
                                 <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="177.0" text="Apellidos" fx:id="APatient" />
@@ -56,7 +57,7 @@
                                 <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="87.0" text="Teléfono" fx:id="TelPatient" />
                               </columns>
                             </TableView>
-                            <VBox alignment="CENTER" minWidth="134.0" prefHeight="300.0" prefWidth="137.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                            <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                               <children>
                                 <Button fx:id="newPacienteButton" alignment="CENTER" minWidth="-Infinity" mnemonicParsing="false" prefWidth="130.0" text="Añadir Paciente" textAlignment="CENTER" wrapText="false">
                                   <font>
@@ -246,9 +247,42 @@
                             <TextField fx:id="tel" prefHeight="24.9998779296875" prefWidth="302.0" promptText="Teléfono" GridPane.columnIndex="0" GridPane.rowIndex="4" />
                             <ChoiceBox fx:id="ID" prefHeight="26.0" prefWidth="54.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3" />
                             <TextField id="tel" fx:id="examinationRoom" prefHeight="24.9998779296875" prefWidth="302.0" promptText="Sala" text="" GridPane.columnIndex="0" GridPane.rowIndex="5" />
-                            <TextField fx:id="availableDays" prefWidth="200.0" promptText="Días disponible" GridPane.columnIndex="0" GridPane.rowIndex="6" />
-                            <TextField fx:id="iniDay" maxWidth="-Infinity" minWidth="-Infinity" prefColumnCount="100" prefWidth="143.0" promptText="Hora inicio" GridPane.columnIndex="0" GridPane.rowIndex="7" />
-                            <TextField fx:id="fiDay" maxWidth="-Infinity" minWidth="-Infinity" prefColumnCount="100" prefWidth="146.0" promptText="Hora final" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="7" />
+                            <!--
+                            <Spinner fx:id="iniDay" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="143.0" GridPane.columnIndex="0" GridPane.rowIndex="7" >
+                                <editable>true</editable>
+                            </Spinner>
+                            <Spinner fx:id="fiDay" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="146.0" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="7" >
+                                <editable>true</editable>
+                            </Spinner>
+                            -->
+                            <HBox id="days" fx:id="availableDays" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="6">
+                              <children>
+                                <ToggleButton fx:id="Monday" mnemonicParsing="false" onAction="#getDays" text="Lunes" />
+                                <ToggleButton fx:id="Tuesday" mnemonicParsing="false" onAction="#getDays" text="Martes" />
+                                <ToggleButton fx:id="Wednesday" mnemonicParsing="false" onAction="#getDays" text="Miércoles" />
+                                <ToggleButton fx:id="Thursday" mnemonicParsing="false" onAction="#getDays" text="Jueves" />
+                                <ToggleButton fx:id="Friday" mnemonicParsing="false" onAction="#getDays" text="Viernes" />
+                                <ToggleButton fx:id="Saturday" mnemonicParsing="false" onAction="#getDays" text="Sábado" />
+                              </children>
+                            </HBox>
+                            <ComboBox fx:id="iniDay" prefHeight="21.0" prefWidth="133.0" GridPane.columnIndex="0" GridPane.rowIndex="7">
+                              <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                  <String fx:value="Item 1" />
+                                  <String fx:value="Item 2" />
+                                  <String fx:value="Item 3" />
+                                </FXCollections>
+                              </items>
+                            </ComboBox>
+                            <ComboBox fx:id="fiDay" prefHeight="21.0" prefWidth="152.0" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="7">
+                              <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                  <String fx:value="Item 1" />
+                                  <String fx:value="Item 2" />
+                                  <String fx:value="Item 3" />
+                                </FXCollections>
+                              </items>
+                            </ComboBox>
                           </children>
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

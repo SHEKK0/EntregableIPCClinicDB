@@ -319,7 +319,23 @@ public class FXMLclinicDBController implements Initializable {
         iniDay.setVisible(false);
         fiDay.setVisible(false);
 
-        tel.textProperty().addListener(new ChangeListener<String>() { // Para que solo se añadan numeros 
+        name.textProperty().addListener((observable, oldValue, newValue) -> { // SOLO TEXTO
+            if (!newValue.matches("\\sa-zA-Z*")) {
+                name.setText(newValue.replaceAll("[^\\sa-zA-Z]", ""));
+            }
+        });
+        surname.textProperty().addListener((observable, oldValue, newValue) -> { // SOLO TEXTO
+            if (!newValue.matches("\\sa-zA-Z*")) {
+                surname.setText(newValue.replaceAll("[^\\sa-zA-Z]", ""));
+            }
+        });
+        id.textProperty().addListener((observable, oldValue, newValue) -> { // TEXTO Y NUMEROS
+            if (!newValue.matches("\\sa-zA-Z*\\d*")) {
+                id.setText(newValue.replaceAll("[^\\sa-zA-Z\\d]", ""));
+            }
+        });
+        
+        tel.textProperty().addListener(new ChangeListener<String>() { //SOLO NUMEROS
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue,
                     String newValue) {
@@ -328,7 +344,7 @@ public class FXMLclinicDBController implements Initializable {
                 }
             }
         });
-        examinationRoom.textProperty().addListener(new ChangeListener<String>() { // Para que solo se añadan numeros 
+        examinationRoom.textProperty().addListener(new ChangeListener<String>() { // SOLO NUMEROS
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue,
                     String newValue) {
@@ -337,6 +353,8 @@ public class FXMLclinicDBController implements Initializable {
                 }
             }
         });
+        
+        
         iniDay.getItems().removeAll();
         iniDay.setItems(listHours);
         iniDay.setValue(listHours.get(0));
@@ -497,11 +515,11 @@ public class FXMLclinicDBController implements Initializable {
         switch (choice.getValue().toString()) {
             case ("Paciente"):
                 Patient patient = null;
-                if (!checkInputsPatient()) {somethingEmpty();break;}
-                boolean aux = existePaciente(listPatients, id.getText());
-                if (!aux) {
+                if (!checkInputsPatient()) {errorAlert("Rellena los campos obligatorios!");break;}
+                boolean aux = existePaciente(listPatients, id.getText().toUpperCase());
+                if (aux) {errorAlert("Identificación duplicada!");break;}
                     patient = new Patient(
-                            id.getText(),
+                            id.getText().toUpperCase(),
                             name.getText(),
                             surname.getText(),
                             tel.getText(),
@@ -512,48 +530,38 @@ public class FXMLclinicDBController implements Initializable {
                     acceptAlert("Paciente");
                     newInput();
                     TabPaciente.setItems(listPatients); // Refresh
-                } else {
-                    duplicate();
-                }
-
                 break;
             case ("Médico"):
                 Doctor doctor = null;
-                if(!checkInputsDoctor()) {somethingEmpty();break;}
-                if (!existeMedico(listDoctors, id.getText())) {
-                    
-                    doctor = new Doctor(
-                            listSalas.get(Integer.parseInt(examinationRoom.getText())),
-                            null,//abajo lo creamos tranqui
-                            iniDay.getValue(),//iniDay.getText(),
-                            fiDay.getValue(),//fiDay.getText(),
-                            id.getText(),
-                            name.getText(),
-                            surname.getText(),
-                            tel.getText(),
-                            imageAdd.getImage());
-                    doctor.setVisitDays(listDays);
-                    listDoctors.add(doctor);
-                    acceptAlert("Médico");
-                    newInput();
-                    TabMedico.setItems(listDoctors);
-                } else {
-                    duplicate();
-                }
-
+                if (!checkInputsDoctor()) {errorAlert("Rellena los campos obligatorios!");break;}
+                if (existeMedico(listDoctors, id.getText().toUpperCase())) { errorAlert("Identifiación duplicada!");break;}
+                if (!salaInBounds(Integer.parseInt(examinationRoom.getText()))) { errorAlert("Número de sala incorrecto!"); break;}
+                if(iniDay.getValue().compareTo(fiDay.getValue())<0) {errorAlert("Hora de inicio mayor que de final!");break;}
+                doctor = new Doctor(
+                        listSalas.get(Integer.parseInt(examinationRoom.getText())),
+                        null,//abajo lo creamos tranqui
+                        iniDay.getValue(),//iniDay.getText(),
+                        fiDay.getValue(),//fiDay.getText(),
+                        id.getText().toUpperCase(),
+                        name.getText(),
+                        surname.getText(),
+                        tel.getText(),
+                        imageAdd.getImage());
+                doctor.setVisitDays(listDays);
+                listDoctors.add(doctor);
+                acceptAlert("Médico");
+                newInput();
+                TabMedico.setItems(listDoctors);
                 break;
             case ("Cita"):
                 Appointment cita = null;
-                if(!checkInputsDoctor()) {somethingEmpty();break;}
+                if(!checkInputsPatient()) {errorAlert("Rellena los campos obligatorios!");break;}
                 //cita = new Appointment(LocalDateTime.MIN, doctorField.getText(), patientField.getText());
-                if (!existeCita(listCitas,cita)) { // FIX ME !existeCita(listCitas)
+                if (existeCita(listCitas,cita)) {errorAlert("La cita ya existe!");break;}
                     listCitas.add(cita);
                     acceptAlert("Cita");
                     newInput();
                     TabAppointment.setItems(listCitas);
-                } else {
-                    duplicate();
-                }
                 break;
         }
     }
@@ -581,7 +589,14 @@ public class FXMLclinicDBController implements Initializable {
         tel.setText("");
         imageAdd.setImage(new Image(getClass().getResource("/images/default.png").toExternalForm())); // Pa encontrar bien la foto, se lo dejas hacer a java
         examinationRoom.setText("");
-        
+        Monday.setSelected(false);
+        Tuesday.setSelected(false);
+        Wednesday.setSelected(false);
+        Thursday.setSelected(false);
+        Friday.setSelected(false);
+        Saturday.setSelected(false);
+        iniDay.setValue(listHours.get(0));
+        fiDay.setValue(listHours.get(listHours.size()-1));
     }
      
     
@@ -702,10 +717,10 @@ public class FXMLclinicDBController implements Initializable {
         }
     }
     
-    private void somethingEmpty() {
+    private void errorAlert(String s) {
         Alert alert = new Alert(AlertType.ERROR);
         alert.setTitle(clinic.getClinicName());
-        alert.setHeaderText("¡Rellena los campos obligatorios!");
+        alert.setHeaderText(s);
 
         alert.showAndWait();
     }
@@ -717,15 +732,6 @@ public class FXMLclinicDBController implements Initializable {
         return result.get() == ButtonType.OK;
 
     }
-        
-    private void duplicate() {
-        Alert alert = new Alert(AlertType.ERROR);
-        alert.setTitle(clinic.getClinicName());
-        alert.setHeaderText("¡Identificación duplicada!");
-
-        alert.showAndWait();
-    }
-
     private void acceptAlert(String string) {
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle(clinic.getClinicName());
@@ -780,12 +786,16 @@ public class FXMLclinicDBController implements Initializable {
                 res.add(
                         LocalTime.parse(aux, 
                         DateTimeFormatter.ISO_LOCAL_TIME));
-                
             }
+            res.add(LocalTime.parse("20:00",DateTimeFormatter.ISO_LOCAL_TIME));
         }
         return res;
     }
-    
+
+    private boolean salaInBounds(int x) {
+        if(x <= listSalas.size()) return true;
+        else return false;
+    }
 }
 
 

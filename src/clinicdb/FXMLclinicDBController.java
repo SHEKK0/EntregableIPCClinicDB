@@ -48,8 +48,10 @@ import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import static javafx.scene.input.KeyCode.E;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javax.imageio.ImageIO;
 import model.Days;
@@ -171,7 +173,19 @@ public class FXMLclinicDBController implements Initializable {
     private ToggleButton Friday;
     @FXML
     private ToggleButton Saturday;
-    
+    @FXML
+    private AnchorPane paneAdd;
+    @FXML
+    private VBox vBoxAddPac;
+    @FXML
+    private VBox vBoxAddCita;
+    @FXML
+    private ListView<Patient> listViewPaciente;
+    @FXML
+    private ListView<Doctor> listViewDoctor;
+    @FXML
+    private ChoiceBox choice1;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // Añadimos la clinica al iniciar
@@ -311,6 +325,8 @@ public class FXMLclinicDBController implements Initializable {
         // Añadir //
         choice.getItems().addAll("Paciente", "Médico", "Cita");
         choice.setValue("Paciente");
+        choice1.getItems().addAll("Paciente", "Médico", "Cita");
+        choice1.setValue("Paciente");
         ID.getItems().addAll("DNI","NIF","SS");
         ID.setValue("DNI");
 
@@ -484,31 +500,66 @@ public class FXMLclinicDBController implements Initializable {
         choice.getSelectionModel().selectedIndexProperty().addListener((observable,oldValue,newValue) -> { // Para cambiar los textfield al decir paciente medico tal 
             switch (newValue.intValue()) {
                 case 0:
+                    vBoxAddPac.setVisible(true);
+                    vBoxAddCita.setVisible(false);
+                    vBoxAddCita.setDisable(true);
+                    vBoxAddPac.setDisable(false);
                     examinationRoom.setVisible(false);
                     availableDays.setVisible(false);
                     iniDay.setVisible(false);
                     fiDay.setVisible(false);
                     break;
                 case 1:
+                    vBoxAddPac.setVisible(true);
+                    vBoxAddCita.setVisible(false);
+                    vBoxAddCita.setDisable(true);
+                    vBoxAddPac.setDisable(false);
                     examinationRoom.setVisible(true);
                     availableDays.setVisible(true);
                     iniDay.setVisible(true);
                     fiDay.setVisible(true);
                     break;
-                case 2: 
+                case 2:
+                    vBoxAddPac.setVisible(false);
+                    vBoxAddCita.setVisible(true);
+                    vBoxAddCita.setDisable(false);
+                    vBoxAddPac.setDisable(true);
+            }
+        });
+        choice1.getSelectionModel().selectedIndexProperty().addListener((observable,oldValue,newValue) -> { // Para cambiar los textfield al decir paciente medico tal 
+            switch (newValue.intValue()) {
+                case 0:
+                    vBoxAddPac.setVisible(true);
+                    vBoxAddCita.setVisible(false);
+                    vBoxAddCita.setDisable(true);
+                    vBoxAddPac.setDisable(false);
                     examinationRoom.setVisible(false);
                     availableDays.setVisible(false);
                     iniDay.setVisible(false);
                     fiDay.setVisible(false);
                     break;
+                case 1:
+                    vBoxAddPac.setVisible(true);
+                    vBoxAddCita.setVisible(false);
+                    vBoxAddCita.setDisable(true);
+                    vBoxAddPac.setDisable(false);
+                    examinationRoom.setVisible(true);
+                    availableDays.setVisible(true);
+                    iniDay.setVisible(true);
+                    fiDay.setVisible(true);
+                    break;
+                case 2:
+                    vBoxAddPac.setVisible(false);
+                    vBoxAddCita.setVisible(true);
+                    vBoxAddCita.setDisable(false);
+                    vBoxAddPac.setDisable(true);
             }
         });
-        
         
 // ----------------------------------------------------------------------// 
 
     }
-   
+ 
     @FXML
     private void accept() {
         //AÑADIR BOTON ACEPTAR, A TERMINAR

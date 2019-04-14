@@ -29,6 +29,7 @@ import model.Appointment;
 import model.Doctor;
 import model.Patient;
 import java.awt.image.BufferedImage;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -193,13 +194,15 @@ public class FXMLclinicDBController implements Initializable {
     private ArrayList<Days> listDays;
     private ObservableList<LocalTime> listHoursCita;
     @FXML
-    private TableView<?> tableCitaPac;
+    private TableView<Patient> tableCitaPac;
     @FXML
-    private TableColumn<?, ?> colPa;
+    private TableColumn<Patient, String> colPa;
     @FXML
-    private TableView<?> tableCitaDoc;
+    private TableView<Doctor> tableCitaDoc;
     @FXML
-    private TableColumn<?, ?> colDoc;
+    private TableColumn<Doctor, String> colDoc;
+    @FXML
+    private DatePicker datePicker;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // Añadimos la clinica al iniciar
@@ -340,7 +343,10 @@ public class FXMLclinicDBController implements Initializable {
         choice.setValue("Paciente");
         ID.getItems().addAll("DNI","NIF","SS");
         ID.setValue("DNI");
-
+        datePicker.setValue(LocalDate.now());
+        vBoxAddCita.setVisible(false);
+        vBoxAddPac.setVisible(true);
+        vBoxAddPac.setDisable(false);
         examinationRoom.setVisible(false);
         availableDays.setVisible(false);
         iniDay.setVisible(false);
@@ -506,10 +512,10 @@ public class FXMLclinicDBController implements Initializable {
             choice.setValue("Cita");
         });      
 //----------------------------------------------------------------------------//        
-    listViewPaciente.setItems(listPatients);
-    listViewDoctor.setItems(listDoctors);
+   // listViewPaciente.setItems(listPatients);
+   // listViewDoctor.setItems(listDoctors);
 
-    Doctor citaDoctor = listViewDoctor.getSelectionModel().getSelectedItem();
+    // Doctor citaDoctor = listViewDoctor.getSelectionModel().getSelectedItem();
 
     iniCita.getItems().removeAll();
     iniCita.setItems(listHours);
@@ -548,8 +554,68 @@ choice.getSelectionModel().selectedIndexProperty().addListener((observable,oldVa
     }
 });
 
+
+colPa.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getName()+ " " + cellData.getValue().getSurname()));    
+FilteredList<Patient> filteredDataDatePatient = new FilteredList<>(listPatients, p -> true);
+
+        // 2. Set the filter Predicate whenever the filter changes.
+        addCitaPatientSearch.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredDataDatePatient.setPredicate(patient -> {
+                // If filter text is empty, display all persons.
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                // Compare first name and last name of every person with filter text.
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (patient.getName().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Filter matches first name.
+                } else if (patient.getSurname().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Filter matches last name.
+                }
+                return false; // Does not match.
+            });
+        });
+
+        // 3. Wrap the FilteredList in a SortedList.
+        SortedList<Patient> sortedDataDatePatient = new SortedList<>(filteredDataDatePatient);
+
+        // 4. Bind the SortedList comparator to the TableView comparator.
+        sortedDataDatePatient.comparatorProperty().bind(tableCitaPac.comparatorProperty());
+
+        // 5. Add sorted (and filtered) data to the table.
+        tableCitaPac.setItems(sortedDataDatePatient);
         
-        
+colDoc.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getName()+ " " + cellData.getValue().getSurname()));    
+FilteredList<Doctor> filteredDataDateDoctor = new FilteredList<>(listDoctors, p -> true);
+
+        // 2. Set the filter Predicate whenever the filter changes.
+        addCitaDoctorSearch.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredDataDateDoctor.setPredicate(doctor -> {
+                // If filter text is empty, display all persons.
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                // Compare first name and last name of every person with filter text.
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (doctor.getName().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Filter matches first name.
+                } else if (doctor.getSurname().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Filter matches last name.
+                }
+                return false; // Does not match.
+            });
+        });
+
+        // 3. Wrap the FilteredList in a SortedList.
+        SortedList<Doctor> sortedDataDateDoctor = new SortedList<>(filteredDataDateDoctor);
+
+        // 4. Bind the SortedList comparator to the TableView comparator.
+        sortedDataDateDoctor.comparatorProperty().bind(tableCitaDoc.comparatorProperty());
+
+        // 5. Add sorted (and filtered) data to the table.
+        tableCitaDoc.setItems(sortedDataDateDoctor);
 // ----------------------------------------------------------------------// 
 
     }
@@ -583,7 +649,7 @@ choice.getSelectionModel().selectedIndexProperty().addListener((observable,oldVa
                 if (existeMedico(listDoctors, id.getText().toUpperCase())) { errorAlert("Identifiación duplicada!");break;}
                 if (!salaInBounds(Integer.parseInt(examinationRoom.getText()))) { errorAlert("Número de sala incorrecto!"); break;}
                 if(tel.getText().length()!=9) {errorAlert("El número de teléfono no es correcto!");break;}
-                if(iniDay.getValue().compareTo(fiDay.getValue())<0) {errorAlert("Hora de inicio mayor que de final!");break;}
+                if(iniDay.getValue().compareTo(fiDay.getValue())>0) {errorAlert("Hora de inicio mayor que de final!");break;}
                 doctor = new Doctor(
                         listSalas.get(Integer.parseInt(examinationRoom.getText())),
                         null,//abajo lo creamos tranqui
@@ -603,7 +669,10 @@ choice.getSelectionModel().selectedIndexProperty().addListener((observable,oldVa
             case ("Cita"):
                 Appointment cita = null;
                 if(!checkInputsCita()) {errorAlert("Rellena los campos obligatorios!");break;}
-                //cita = new Appointment(LocalDateTime.MIN, doctorField.getText(), patientField.getText());
+                cita = new Appointment(
+                        LocalDateTime.of(datePicker.getValue(),iniCita.getValue()),
+                        tableCitaDoc.getSelectionModel().getSelectedItem(), 
+                        tableCitaPac.getSelectionModel().getSelectedItem());
                 if (existeCita(listCitas,cita)) {errorAlert("La cita ya existe!");break;}
                     listCitas.add(cita);
                     acceptAlert("Cita");
@@ -628,8 +697,8 @@ choice.getSelectionModel().selectedIndexProperty().addListener((observable,oldVa
                 || examinationRoom.getText().equals(""));
     } 
     private boolean checkInputsCita(){
-        return !(listViewDoctor.getSelectionModel().getSelectedItem().equals(null)
-                 || listViewPaciente.getSelectionModel().getSelectedItem().equals(null)   
+        return !(tableCitaDoc.getSelectionModel().getSelectedItem().equals(null)
+                 || tableCitaPac.getSelectionModel().getSelectedItem().equals(null)   
                     );
     }
      
@@ -841,8 +910,8 @@ choice.getSelectionModel().selectedIndexProperty().addListener((observable,oldVa
                         LocalTime.parse(aux, 
                         DateTimeFormatter.ISO_LOCAL_TIME));
             }
-            res.add(LocalTime.parse("20:00",DateTimeFormatter.ISO_LOCAL_TIME));
         }
+        res.add(LocalTime.parse("20:00",DateTimeFormatter.ISO_LOCAL_TIME));
         return res;
     }
 

@@ -227,7 +227,7 @@
               <content>
                 <AnchorPane id="AnchorPane" fx:id="paneAdd" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="370.0" prefWidth="624.0">
                   <children>
-                    <VBox fx:id="vBoxAddPac" prefHeight="200.0" prefWidth="100.0" visible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <VBox fx:id="vBoxAddPac" disable="true" prefHeight="200.0" prefWidth="100.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                       <children>
                         <GridPane fx:id="gridAdd" gridLinesVisible="false" prefHeight="302.0" prefWidth="603.0" VBox.vgrow="ALWAYS">
                           <children>
@@ -317,7 +317,7 @@
                         </HBox>
                       </children>
                     </VBox>
-                    <VBox fx:id="vBoxAddCita" disable="true" prefHeight="200.0" prefWidth="100.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <VBox fx:id="vBoxAddCita" disable="false" prefHeight="200.0" prefWidth="100.0" visible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="0.0">
                       <children>
                         <GridPane id="gridAdd" gridLinesVisible="false" prefHeight="314.0" prefWidth="624.0" VBox.vgrow="ALWAYS">
                           <children>
@@ -332,8 +332,17 @@
                                 </FXCollections>
                               </items>
                             </ComboBox>
-                            <ListView fx:id="listViewPaciente" prefHeight="80.0" prefWidth="307.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                            <ListView fx:id="listViewDoctor" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                            <TableView fx:id="tableCitaPac" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                              <columns>
+                                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="304.0" text="Pacientes" fx:id="colPa" />
+                              </columns>
+                            </TableView>
+                            <TableView fx:id="tableCitaDoc" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                              <columns>
+                                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="312.0" text="Doctores" fx:id="colDoc" />
+                              </columns>
+                            </TableView>
+                            <DatePicker fx:id="datePicker" prefHeight="21.0" prefWidth="164.0" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
                           </children>
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="393.0" minWidth="10.0" prefWidth="307.0" />

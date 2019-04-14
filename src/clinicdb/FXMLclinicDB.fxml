@@ -342,6 +342,7 @@
                                 <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="312.0" text="Doctores" fx:id="colDoc" />
                               </columns>
                             </TableView>
+                            <DatePicker fx:id="datePicker" prefHeight="21.0" prefWidth="164.0" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
                           </children>
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="393.0" minWidth="10.0" prefWidth="307.0" />

@@ -151,15 +151,7 @@ public class FXMLclinicDBController implements Initializable {
     private ComboBox<LocalTime> iniDay;
     @FXML
     private ComboBox<LocalTime> fiDay;
-    
-        
-    private ClinicDBAccess clinic;
-    private ObservableList<Patient> listPatients;
-    private ObservableList<Doctor> listDoctors;
-    private ObservableList<Appointment> listCitas;
-    private ObservableList<ExaminationRoom> listSalas;
-    private ObservableList<LocalTime> listHours;
-    private ArrayList<Days> listDays;
+  
     private TextField salaText;
     @FXML
     private ToggleButton Monday;
@@ -179,13 +171,35 @@ public class FXMLclinicDBController implements Initializable {
     private VBox vBoxAddPac;
     @FXML
     private VBox vBoxAddCita;
+    private ListView<Patient> listViewPaciente;
+    private ListView<Doctor> listViewDoctor;
     @FXML
-    private ChoiceBox<?> choice1;
+    private TextField addCitaPatientSearch;
     @FXML
-    private ListView<?> listViewPaciente;
+    private TextField addCitaDoctorSearch;
     @FXML
-    private ListView<?> listViewDoctor;
+    private ComboBox<LocalTime> iniCita;
+
     
+    
+        
+        
+    private ClinicDBAccess clinic;
+    private ObservableList<Patient> listPatients;
+    private ObservableList<Doctor> listDoctors;
+    private ObservableList<Appointment> listCitas;
+    private ObservableList<ExaminationRoom> listSalas;
+    private ObservableList<LocalTime> listHours;
+    private ArrayList<Days> listDays;
+    private ObservableList<LocalTime> listHoursCita;
+    @FXML
+    private TableView<?> tableCitaPac;
+    @FXML
+    private TableColumn<?, ?> colPa;
+    @FXML
+    private TableView<?> tableCitaDoc;
+    @FXML
+    private TableColumn<?, ?> colDoc;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // Añadimos la clinica al iniciar
@@ -214,7 +228,6 @@ public class FXMLclinicDBController implements Initializable {
                 if (newValue == null || newValue.isEmpty()) {
                     return true;
                 }
-
                 // Compare first name and last name of every person with filter text.
                 String lowerCaseFilter = newValue.toLowerCase();
 
@@ -492,40 +505,19 @@ public class FXMLclinicDBController implements Initializable {
             tabPane.getSelectionModel().select(3);
             choice.setValue("Cita");
         });      
-         
+//----------------------------------------------------------------------------//        
+    listViewPaciente.setItems(listPatients);
+    listViewDoctor.setItems(listDoctors);
 
+    Doctor citaDoctor = listViewDoctor.getSelectionModel().getSelectedItem();
+
+    iniCita.getItems().removeAll();
+    iniCita.setItems(listHours);
+    iniCita.setValue(listHours.get(0));
+    
+        
 // ----------------------------------------------------------------------//
 choice.getSelectionModel().selectedIndexProperty().addListener((observable,oldValue,newValue) -> { // Para cambiar los textfield al decir paciente medico tal 
-    switch (newValue.intValue()) {
-        case 0:
-            vBoxAddPac.setVisible(true);
-            vBoxAddCita.setVisible(false);
-            vBoxAddCita.setDisable(true);
-            vBoxAddPac.setDisable(false);
-            examinationRoom.setVisible(false);
-            availableDays.setVisible(false);
-            iniDay.setVisible(false);
-            fiDay.setVisible(false);
-            break;
-        case 1:
-            vBoxAddPac.setVisible(true);
-            vBoxAddCita.setVisible(false);
-            vBoxAddCita.setDisable(true);
-            vBoxAddPac.setDisable(false);
-            examinationRoom.setVisible(true);
-            availableDays.setVisible(true);
-            iniDay.setVisible(true);
-            fiDay.setVisible(true);
-            break;
-        case 2:
-            vBoxAddPac.setVisible(false);
-            vBoxAddCita.setVisible(true);
-            vBoxAddCita.setDisable(false);
-            vBoxAddPac.setDisable(true);
-            break;
-    }
-});
-choice1.getSelectionModel().selectedIndexProperty().addListener((observable,oldValue,newValue) -> { // Para cambiar los textfield al decir paciente medico tal 
     switch (newValue.intValue()) {
         case 0:
             vBoxAddPac.setVisible(true);
@@ -610,7 +602,7 @@ choice1.getSelectionModel().selectedIndexProperty().addListener((observable,oldV
                 break;
             case ("Cita"):
                 Appointment cita = null;
-                if(!checkInputsPatient()) {errorAlert("Rellena los campos obligatorios!");break;}
+                if(!checkInputsCita()) {errorAlert("Rellena los campos obligatorios!");break;}
                 //cita = new Appointment(LocalDateTime.MIN, doctorField.getText(), patientField.getText());
                 if (existeCita(listCitas,cita)) {errorAlert("La cita ya existe!");break;}
                     listCitas.add(cita);
@@ -635,6 +627,11 @@ choice1.getSelectionModel().selectedIndexProperty().addListener((observable,oldV
                 || tel.getText().equals("")
                 || examinationRoom.getText().equals(""));
     } 
+    private boolean checkInputsCita(){
+        return !(listViewDoctor.getSelectionModel().getSelectedItem().equals(null)
+                 || listViewPaciente.getSelectionModel().getSelectedItem().equals(null)   
+                    );
+    }
      
     @FXML
     private void newInput() {

@@ -227,7 +227,7 @@
               <content>
                 <AnchorPane id="AnchorPane" fx:id="paneAdd" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="370.0" prefWidth="624.0">
                   <children>
-                    <VBox fx:id="vBoxAddPac" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <VBox fx:id="vBoxAddPac" prefHeight="200.0" prefWidth="100.0" visible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                       <children>
                         <GridPane fx:id="gridAdd" gridLinesVisible="false" prefHeight="302.0" prefWidth="603.0" VBox.vgrow="ALWAYS">
                           <children>
@@ -240,7 +240,6 @@
                                 <Insets top="-10.0" />
                               </GridPane.margin>
                             </ImageView>
-                            <ChoiceBox fx:id="choice" prefWidth="150.0" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" />
                             <TextField fx:id="name" prefHeight="26.0" prefWidth="-1.0" promptText="Nombre" GridPane.columnIndex="0" GridPane.rowIndex="1" />
                             <TextField fx:id="surname" prefHeight="26.0" prefWidth="258.0" promptText="Apellidos" GridPane.columnIndex="0" GridPane.rowIndex="2" />
                             <TextField fx:id="id" prefHeight="26.0" prefWidth="153.0" promptText="Identificación" GridPane.columnIndex="0" GridPane.rowIndex="3" />
@@ -322,19 +321,9 @@
                       <children>
                         <GridPane id="gridAdd" gridLinesVisible="false" prefHeight="314.0" prefWidth="624.0" VBox.vgrow="ALWAYS">
                           <children>
-                            <ChoiceBox id="choice" fx:id="choice1" prefWidth="150.0" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" />
-                            <TextField id="name" prefHeight="26.0" prefWidth="-1.0" promptText="Nombre Paciente" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                            <TextField id="surname" prefHeight="26.0" prefWidth="258.0" promptText="Nombre Doctor" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                            <ComboBox id="iniDay" prefHeight="21.0" prefWidth="133.0" GridPane.columnIndex="0" GridPane.rowIndex="4">
-                              <items>
-                                <FXCollections fx:factory="observableArrayList">
-                                  <String fx:value="Item 1" />
-                                  <String fx:value="Item 2" />
-                                  <String fx:value="Item 3" />
-                                </FXCollections>
-                              </items>
-                            </ComboBox>
-                            <ComboBox id="fiDay" prefHeight="21.0" prefWidth="152.0" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
+                            <TextField id="name" fx:id="addCitaPatientSearch" prefHeight="26.0" prefWidth="-1.0" promptText="Nombre Paciente" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                            <TextField id="surname" fx:id="addCitaDoctorSearch" prefHeight="26.0" prefWidth="258.0" promptText="Nombre Doctor" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                            <ComboBox id="iniDay" fx:id="iniCita" prefHeight="21.0" prefWidth="133.0" GridPane.columnIndex="0" GridPane.rowIndex="3">
                               <items>
                                 <FXCollections fx:factory="observableArrayList">
                                   <String fx:value="Item 1" />
@@ -355,10 +344,9 @@
                           </padding>
                           <rowConstraints>
                             <RowConstraints maxHeight="47.0" minHeight="10.0" prefHeight="47.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="143.0" minHeight="10.0" prefHeight="119.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="106.0" minHeight="0.0" prefHeight="100.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="90.0" minHeight="10.0" prefHeight="16.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="96.0" minHeight="10.0" prefHeight="39.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="143.0" minHeight="10.0" prefHeight="117.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="116.0" minHeight="0.0" prefHeight="113.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="96.0" minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                         </GridPane>
                         <HBox alignment="CENTER" prefHeight="48.999900000002526" prefWidth="624.0">
@@ -377,6 +365,7 @@
                         </HBox>
                       </children>
                     </VBox>
+                    <ChoiceBox fx:id="choice" focusTraversable="true" prefWidth="150.0" visible="true" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="310.0" AnchorPane.topAnchor="12.0" />
                   </children>
                 </AnchorPane>
               </content>

@@ -213,7 +213,8 @@ public class FXMLclinicDBController implements Initializable {
         } catch (Exception ex) {
             Logger.getLogger(FXMLclinicDBController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
+        
 //-----------------------------------------------------------------------//
         // Añadir pacientes a la lista de pacientes desde el archivo
         // 1. Wrap the ObservableList in a FilteredList (initially display all data).
@@ -622,7 +623,7 @@ public class FXMLclinicDBController implements Initializable {
             }
             iniCita.setValue(iniCita.getItems().get(0));
         });
-
+        
         datePicker.disableProperty().bind(Bindings.isEmpty(tableCitaDoc.getSelectionModel().getSelectedItems()));
         datePicker.setEditable(false);
         datePicker.setShowWeekNumbers(false);
@@ -661,7 +662,7 @@ public class FXMLclinicDBController implements Initializable {
     }
 // ----------------------------------------------------------------------//
     @FXML
-    private void accept() {
+    private void accept() throws Exception {
         //AÑADIR BOTON ACEPTAR, A TERMINAR
         switch (choice.getValue().toString()) {
             case ("Paciente"):
@@ -748,6 +749,9 @@ public class FXMLclinicDBController implements Initializable {
                 acceptAlert("Cita");
                 newInput();
                 TabAppointment.setItems(listCitas);
+                iniCita.setItems(FXCollections.observableList(createListHours(tableCitaDoc.getSelectionModel().getSelectedItem())));
+                 iniCita.setValue(iniCita.getItems().get(0));
+
                 break;
         }
     }
@@ -1026,6 +1030,7 @@ private ArrayList<LocalTime> createListHours(Doctor doc) throws Exception {
             else{
                 System.out.println("ya existe");
             }
+            
         }
         return res;
     }

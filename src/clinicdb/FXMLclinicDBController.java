@@ -177,16 +177,6 @@ public class FXMLclinicDBController implements Initializable {
     private TextField addCitaDoctorSearch;
     @FXML
     private ComboBox<LocalTime> iniCita;
-
-
-    private ClinicDBAccess clinic;
-    private ObservableList<Patient> listPatients;
-    private ObservableList<Doctor> listDoctors;
-    private ObservableList<Appointment> listCitas;
-    private ObservableList<ExaminationRoom> listSalas;
-    private ObservableList<LocalTime> listHours;
-    private ArrayList<Days> listDays;
-    private ObservableList<LocalTime> listHoursCita;
     @FXML
     private TableView<Patient> tableCitaPac;
     @FXML
@@ -197,6 +187,16 @@ public class FXMLclinicDBController implements Initializable {
     private TableColumn<Doctor, String> colDoc;
     @FXML
     private DatePicker datePicker;
+
+
+    private ClinicDBAccess clinic;
+    private ObservableList<Patient> listPatients;
+    private ObservableList<Doctor> listDoctors;
+    private ObservableList<Appointment> listCitas;
+    private ObservableList<ExaminationRoom> listSalas;
+    private ObservableList<LocalTime> listHours;
+    private ArrayList<Days> listDays;
+    private ObservableList<LocalTime> listHoursCita;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -616,7 +616,7 @@ public class FXMLclinicDBController implements Initializable {
             System.out.println(newValue.getVisitStartTime());
             System.out.println(newValue.getVisitEndTime());
             try {
-                iniCita.setItems(FXCollections.observableList(createListHours(newValue.getVisitStartTime(),newValue.getVisitEndTime())));
+                iniCita.setItems(FXCollections.observableList(createListHours(newValue)));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -840,7 +840,7 @@ public class FXMLclinicDBController implements Initializable {
     private boolean existeCita(ObservableList<Appointment> list, Appointment cita) {
         System.out.println(cita);
         for (Appointment aux : list) {
-            if (cita == null || aux.equals(cita)) return true;
+            if (cita == null || aux.getAppointmentDateTime().equals(cita.getAppointmentDateTime()) && aux.getDoctor().equals(cita.getDoctor()))return true;
         }
         return false;
     }
@@ -887,6 +887,10 @@ public class FXMLclinicDBController implements Initializable {
         } catch (IOException er) {
             System.out.println("adkñlsjf");
         }
+    }
+    
+    private void disableChoiceDoc(Doctor d){
+        
     }
 
     @FXML
@@ -984,11 +988,47 @@ private ArrayList<LocalTime> createListHours(LocalTime ini, LocalTime fin) throw
         long elapsedMinutes = Duration.between(ini, fin).toMinutes();
         System.out.println(elapsedMinutes);
         for (int i = 0; i <= elapsedMinutes; i=i+15) {
-            res.add(ini.plusMinutes(i));
+            LocalTime aux = ini.plusMinutes(i);
+            
+            res.add(aux);
         }
         return res;
     }
-
+private ArrayList<LocalTime> createListHours(Doctor doc) throws Exception {
+        ArrayList<LocalTime> res = new ArrayList();
+        LocalTime ini = doc.getVisitStartTime();
+        LocalTime fin = doc.getVisitEndTime();
+        long elapsedMinutes = Duration.between(ini, fin).toMinutes();
+        System.out.println(elapsedMinutes);
+        for (int i = 0; i <= elapsedMinutes; i=i+15) {
+            LocalTime aux = ini.plusMinutes(i);
+            boolean existe = false;
+            for(int j = 0; j < listCitas.size(); j ++){
+                LocalDateTime listaTime = listCitas.get(j).getAppointmentDateTime();
+                Doctor doctor2 = listCitas.get(j).getDoctor();
+                LocalDate picked = datePicker.getValue();
+                int year = picked.getYear();
+                int month = picked.getMonthValue();
+                int dayOfMonth = picked.getDayOfMonth();
+                int hour = aux.getHour();
+                int min = aux.getMinute();
+                LocalDateTime time = LocalDateTime.of(year, month, dayOfMonth, hour, min);
+                if(time.equals(listaTime) && doc.getIdentifier().compareTo(doctor2.getIdentifier())== 0){
+                    existe = true;
+                    break;
+                }
+                else{
+                    existe = false;
+                    
+                }
+            }
+            if(existe == false) res.add(aux);
+            else{
+                System.out.println("ya existe");
+            }
+        }
+        return res;
+    }
     private boolean salaInBounds(int x) {
         if (x <= listSalas.size()) return true;
         else return false;

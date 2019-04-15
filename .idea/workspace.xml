@@ -2,9 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a0346447-cd85-4a9d-9e4e-63c3541255dd" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/EntregableIPCClinicDB/clinicdb/FXMLclinicDBController$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/EntregableIPCClinicDB/clinicdb/FXMLclinicDBController$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/EntregableIPCClinicDB/clinicdb/FXMLclinicDBController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/EntregableIPCClinicDB/clinicdb/FXMLclinicDBController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/clinicdb/FXMLclinicDBController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clinicdb/FXMLclinicDBController.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -31,8 +28,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/clinicdb/FXMLclinicDBController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="273">
-              <caret line="1017" column="91" selection-start-line="1017" selection-start-column="91" selection-end-line="1017" selection-end-column="91" />
+            <state relative-caret-position="93">
+              <caret line="618" column="60" selection-start-line="618" selection-start-column="60" selection-end-line="618" selection-end-column="60" />
             </state>
           </provider>
         </entry>
@@ -59,7 +56,7 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="8" />
     <option name="y" value="17" />
-    <option name="width" value="674" />
+    <option name="width" value="1350" />
     <option name="height" value="743" />
   </component>
   <component name="ProjectView">
@@ -253,8 +250,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/clinicdb/FXMLclinicDBController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="1017" column="91" selection-start-line="1017" selection-start-column="91" selection-end-line="1017" selection-end-column="91" />
+        <state relative-caret-position="93">
+          <caret line="618" column="60" selection-start-line="618" selection-start-column="60" selection-end-line="618" selection-end-column="60" />
         </state>
       </provider>
     </entry>

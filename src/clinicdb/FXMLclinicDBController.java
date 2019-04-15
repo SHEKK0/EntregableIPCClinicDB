@@ -613,13 +613,16 @@ public class FXMLclinicDBController implements Initializable {
 
 
         iniCita.disableProperty().bind(Bindings.isEmpty(tableCitaDoc.getSelectionModel().getSelectedItems()));
+        datePicker.valueProperty().addListener((obs,old,newVaule)->{
+            try {
+                iniCita.setItems(FXCollections.observableList(createListHours(tableCitaDoc.getSelectionModel().getSelectedItem())));
+                iniCita.setValue(iniCita.getItems().get(0));
+            } catch(Exception e){}
+        });
         tableCitaDoc.getSelectionModel().selectedItemProperty().addListener((o,old,newValue)->{
-            System.out.println(newValue.getVisitStartTime());
-            System.out.println(newValue.getVisitEndTime());
             try {
                 iniCita.setItems(FXCollections.observableList(createListHours(newValue)));
             } catch (Exception e) {
-                e.printStackTrace();
             }
             iniCita.setValue(iniCita.getItems().get(0));
         });
@@ -1008,16 +1011,13 @@ private ArrayList<LocalTime> createListHours(Doctor doc) throws Exception {
     //for(LocalTime aux : res) {
     for(int i = 0; i < res.size(); i++) {
             for(int j = 0; j < listCitas.size(); j ++){  //miramos en la lista de citas(la completa no la del medico)  si hay alguna cita que concuerde con la hora y el medico que tenemos seleccionados
-                int hour = res.get(i).getHour();   //hora seleccionada
+                int hour = res.get(i).getHour();
                 int minute = res.get(i).getMinute();
                 LocalDateTime time = LocalDateTime.of(year, month, dayOfMonth, hour, minute); //creamos el LocalDateTime con los datos aux
 
-                if(doc.getIdentifier().equals(listCitas.get(j).getDoctor().getIdentifier())
-                    && time.equals(listCitas.get(j).getAppointmentDateTime())) {
-                    System.out.println(doc.getIdentifier()+":"+listCitas.get(j).getDoctor().getIdentifier());
-                    System.out.println(time+":"+listCitas.get(j).getAppointmentDateTime());
-                    res.remove(res.get(i));
-                    System.out.println(res);
+                if(doc.getIdentifier().equals(listCitas.get(j).getDoctor().getIdentifier()) // Si tienen el mismo dni
+                    && time.equals(listCitas.get(j).getAppointmentDateTime())) { // Si tienen la misma fecha de cita.
+                    res.remove(res.get(i)); // Actualizamos la lista sin la fecha esa ya ocupada.
                 }
             }
         }

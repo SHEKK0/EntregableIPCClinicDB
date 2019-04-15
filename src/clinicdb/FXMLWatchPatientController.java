@@ -99,7 +99,7 @@ public class FXMLWatchPatientController implements Initializable {
             }
         });
         
-    }    
+    }
     
       private boolean confirm(String string) { // Los delete
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);

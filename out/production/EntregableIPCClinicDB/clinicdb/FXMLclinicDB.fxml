@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.text.Font?>
+
+<StackPane id="stackRootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="425.0" prefWidth="624.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="clinicdb.FXMLclinicDBController">
+  <children>
+    <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="-1.0" prefWidth="-1.0">
+      <center>
+        <TabPane fx:id="tabPane" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="1.7976931348623157E308" BorderPane.alignment="CENTER">
+          <tabs>
+            <Tab text="Pacientes">
+              <content>
+                <AnchorPane id="inicioPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="-1.0" prefWidth="-1.0">
+                  <children>
+                    <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="-1.0" prefWidth="-1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                      <children>
+                        <TextField fx:id="searchPatient" minHeight="35.0" promptText="Buscar paciente" text="">
+                          <VBox.margin>
+                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                          </VBox.margin>
+                        </TextField>
+                        <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                          <children>
+                            <TableView fx:id="TabPaciente" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="-1.0" prefWidth="-1.0">
+                              <columns>
+                                <TableColumn prefWidth="75.0" text="Nombre" fx:id="NPatient" />
+                                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="177.0" text="Apellidos" fx:id="APatient" />
+                                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="89.0" text="Identificación" fx:id="IdPatient" />
+                                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="87.0" text="Teléfono" fx:id="TelPatient" />
+                              </columns>
+                            </TableView>
+                            <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                              <children>
+                                <Button fx:id="newPacienteButton" alignment="CENTER" minWidth="-Infinity" mnemonicParsing="false" prefWidth="130.0" text="Añadir Paciente" textAlignment="CENTER" wrapText="false">
+                                  <font>
+                                    <Font size="12.0" fx:id="x1" />
+                                  </font>
+                                  <VBox.margin>
+                                    <Insets bottom="20.0" left="10.0" />
+                                  </VBox.margin>
+                                </Button>
+                                <Button fx:id="datePatient" font="$x1" minWidth="-Infinity" mnemonicParsing="false" text="Nueva Cita">
+                                  <VBox.margin>
+                                    <Insets bottom="20.0" left="10.0" />
+                                  </VBox.margin>
+                                </Button>
+                                <Button fx:id="verPatient" alignment="CENTER" contentDisplay="CENTER" font="$x1" minWidth="-Infinity" mnemonicParsing="false" onAction="#verPaciente" text="Ver Paciente">
+                                  <VBox.margin>
+                                    <Insets bottom="20.0" left="10.0" />
+                                  </VBox.margin>
+                                </Button>
+                                <Button fx:id="deletePatient" alignment="CENTER" font="$x1" minWidth="-Infinity" mnemonicParsing="false" text="Eliminar Paciente">
+                                  <VBox.margin>
+                                    <Insets bottom="20.0" left="10.0" />
+                                  </VBox.margin>
+                                </Button>
+                              </children>
+                            </VBox>
+                          </children>
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="442.0" minWidth="10.0" prefWidth="430.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="281.0" minWidth="10.0" prefWidth="170.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints maxHeight="316.0" minHeight="10.0" prefHeight="316.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                        </GridPane>
+                      </children>
+                    </VBox>
+                  </children>
+                </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Médicos">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                  <children>
+                    <VBox prefHeight="368.0" prefWidth="600.0">
+                      <children>
+                        <TextField fx:id="searchDoctor" minHeight="35.0" promptText="Buscar médico">
+                          <VBox.margin>
+                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                          </VBox.margin>
+                        </TextField>
+                        <GridPane>
+                          <children>
+                            <TableView fx:id="TabMedico" prefHeight="300.0" prefWidth="430.0">
+                              <columns>
+                                <TableColumn prefWidth="75.0" text="Nombre" fx:id="NMedico" />
+                                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="150.0" text="Apellidos" fx:id="AMedico" />
+                                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="130.0" text="Identificación" fx:id="IdMedico" />
+                                <TableColumn prefWidth="75.0" text="Teléfono" fx:id="TelMedico" />
+                              </columns>
+                            </TableView>
+                            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                              <children>
+                                <Button id="newPacienteButton1" fx:id="newMedicoButton" alignment="CENTER" font="$x1" minWidth="-Infinity" mnemonicParsing="false" prefWidth="130.0" text="Añadir médico">
+                                  <VBox.margin>
+                                    <Insets bottom="20.0" left="10.0" />
+                                  </VBox.margin>
+                                </Button>
+                                <Button id="dateDoctor" fx:id="dateMedic" font="$x1" minWidth="-Infinity" mnemonicParsing="false" text="Nueva Cita">
+                                  <VBox.margin>
+                                    <Insets bottom="20.0" left="10.0" />
+                                  </VBox.margin>
+                                </Button>
+                                <Button id="seeDoctor" fx:id="seeMedic" alignment="CENTER" contentDisplay="CENTER" font="$x1" minWidth="-Infinity" mnemonicParsing="false" text="Ver médico">
+                                  <VBox.margin>
+                                    <Insets bottom="20.0" left="10.0" />
+                                  </VBox.margin>
+                                </Button>
+                                <Button fx:id="deleteMedic" alignment="CENTER" font="$x1" minWidth="-Infinity" mnemonicParsing="false" text="Eliminar médico">
+                                  <VBox.margin>
+                                    <Insets bottom="20.0" left="10.0" />
+                                  </VBox.margin>
+                                </Button>
+                              </children>
+                            </VBox>
+                          </children>
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="442.0" minWidth="10.0" prefWidth="430.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="281.0" minWidth="10.0" prefWidth="170.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints maxHeight="316.0" minHeight="10.0" prefHeight="316.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                        </GridPane>
+                      </children>
+                    </VBox>
+                  </children>
+                </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Citas">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                  <children>
+                    <VBox prefHeight="369.0" prefWidth="600.0">
+                      <children>
+                        <TextField fx:id="searchDate" minHeight="35.0" promptText="Buscar cita">
+                          <VBox.margin>
+                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                          </VBox.margin>
+                        </TextField>
+                        <GridPane>
+                          <children>
+                            <TableView fx:id="TabAppointment" prefHeight="315.0" prefWidth="466.0">
+                              <columns>
+                                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="179.0" text="Paciente" fx:id="colPatient" />
+                                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="135.0" text="Medico" fx:id="colMedico" />
+                                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="116.0" text="Fecha" fx:id="colFecha" />
+                              </columns>
+                            </TableView>
+                            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                              <children>
+                                <Button id="seeDate" fx:id="newDate" alignment="CENTER" contentDisplay="CENTER" font="$x1" minWidth="-Infinity" mnemonicParsing="false" text="Nueva Cita">
+                                  <VBox.margin>
+                                    <Insets bottom="20.0" left="10.0" />
+                                  </VBox.margin>
+                                </Button>
+                                <Button id="newPacienteButton2" fx:id="seePatientDate" alignment="CENTER" font="$x1" minWidth="-Infinity" mnemonicParsing="false" prefWidth="130.0" text="Ver Paciente">
+                                  <VBox.margin>
+                                    <Insets bottom="20.0" left="10.0" />
+                                  </VBox.margin>
+                                </Button>
+                                <Button fx:id="seeMedicDate" alignment="CENTER" font="$x1" minWidth="-Infinity" mnemonicParsing="false" text="Ver medico">
+                                  <VBox.margin>
+                                    <Insets bottom="20.0" left="10.0" />
+                                  </VBox.margin>
+                                </Button>
+                                <Button fx:id="seeDate" alignment="CENTER" contentDisplay="CENTER" font="$x1" minWidth="-Infinity" mnemonicParsing="false" text="Ver Cita">
+                                  <VBox.margin>
+                                    <Insets bottom="20.0" left="10.0" />
+                                  </VBox.margin>
+                                </Button>
+                                <Button fx:id="deleteDate" font="$x1" minWidth="-Infinity" mnemonicParsing="false" text="Borrar Cita">
+                                  <VBox.margin>
+                                    <Insets bottom="20.0" left="10.0" />
+                                  </VBox.margin>
+                                </Button>
+                              </children>
+                            </VBox>
+                          </children>
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="442.0" minWidth="10.0" prefWidth="430.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="281.0" minWidth="10.0" prefWidth="170.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints maxHeight="316.0" minHeight="10.0" prefHeight="316.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                        </GridPane>
+                      </children>
+                    </VBox>
+                  </children>
+                </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Añadir">
+              <content>
+                <AnchorPane id="AnchorPane" fx:id="paneAdd" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="370.0" prefWidth="624.0">
+                  <children>
+                    <VBox fx:id="vBoxAddPac" disable="true" prefHeight="200.0" prefWidth="100.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                      <children>
+                        <GridPane fx:id="gridAdd" gridLinesVisible="false" prefHeight="302.0" prefWidth="603.0" VBox.vgrow="ALWAYS">
+                          <children>
+                            <Button id="addImageButton" mnemonicParsing="false" onAction="#cargarImagen" prefHeight="26.0" prefWidth="154.0" text="Cargar" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+                            <ImageView id="imagePatient" fx:id="imageAdd" fitHeight="151.96721694048713" fitWidth="180.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                              <image>
+                                <Image url="@../images/default.png" />
+                              </image>
+                              <GridPane.margin>
+                                <Insets top="-10.0" />
+                              </GridPane.margin>
+                            </ImageView>
+                            <TextField fx:id="name" prefHeight="26.0" prefWidth="-1.0" promptText="Nombre" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                            <TextField fx:id="surname" prefHeight="26.0" prefWidth="258.0" promptText="Apellidos" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                            <TextField fx:id="id" prefHeight="26.0" prefWidth="153.0" promptText="Identificación" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                            <TextField fx:id="tel" prefHeight="24.9998779296875" prefWidth="302.0" promptText="Teléfono" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                            <ChoiceBox fx:id="ID" prefHeight="26.0" prefWidth="54.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3" />
+                            <TextField id="tel" fx:id="examinationRoom" prefHeight="24.9998779296875" prefWidth="302.0" promptText="Sala" text="" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                            <!--
+                            <Spinner fx:id="iniDay" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="143.0" GridPane.columnIndex="0" GridPane.rowIndex="7" >
+                                <editable>true</editable>
+                            </Spinner>
+                            <Spinner fx:id="fiDay" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="146.0" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="7" >
+                                <editable>true</editable>
+                            </Spinner>
+                            -->
+                            <HBox id="days" fx:id="availableDays" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="6">
+                              <children>
+                                <ToggleButton fx:id="Monday" mnemonicParsing="false" onAction="#getDays" text="Lunes" />
+                                <ToggleButton fx:id="Tuesday" mnemonicParsing="false" onAction="#getDays" text="Martes" />
+                                <ToggleButton fx:id="Wednesday" mnemonicParsing="false" onAction="#getDays" text="Miércoles" />
+                                <ToggleButton fx:id="Thursday" mnemonicParsing="false" onAction="#getDays" text="Jueves" />
+                                <ToggleButton fx:id="Friday" mnemonicParsing="false" onAction="#getDays" text="Viernes" />
+                                <ToggleButton fx:id="Saturday" mnemonicParsing="false" onAction="#getDays" text="Sábado" />
+                              </children>
+                            </HBox>
+                            <ComboBox fx:id="iniDay" prefHeight="21.0" prefWidth="133.0" GridPane.columnIndex="0" GridPane.rowIndex="7">
+                              <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                  <String fx:value="Item 1" />
+                                  <String fx:value="Item 2" />
+                                  <String fx:value="Item 3" />
+                                </FXCollections>
+                              </items>
+                            </ComboBox>
+                            <ComboBox fx:id="fiDay" prefHeight="21.0" prefWidth="152.0" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="7">
+                              <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                  <String fx:value="Item 1" />
+                                  <String fx:value="Item 2" />
+                                  <String fx:value="Item 3" />
+                                </FXCollections>
+                              </items>
+                            </ComboBox>
+                          </children>
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <padding>
+                            <Insets left="5.0" right="5.0" />
+                          </padding>
+                          <rowConstraints>
+                            <RowConstraints maxHeight="47.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="47.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="47.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="47.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="46.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="46.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="44.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="76.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                        </GridPane>
+                        <HBox alignment="CENTER" prefHeight="49.0" prefWidth="603.0">
+                          <children>
+                            <Button id="acceptButton" mnemonicParsing="false" onMouseClicked="#accept" text="Aceptar">
+                              <HBox.margin>
+                                <Insets right="20.0" />
+                              </HBox.margin>
+                            </Button>
+                            <Button id="clearFields" mnemonicParsing="false" onAction="#newInput" text="Borrar">
+                              <HBox.margin>
+                                <Insets left="20.0" />
+                              </HBox.margin>
+                            </Button>
+                          </children>
+                        </HBox>
+                      </children>
+                    </VBox>
+                    <VBox fx:id="vBoxAddCita" disable="false" prefHeight="200.0" prefWidth="100.0" visible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="0.0">
+                      <children>
+                        <GridPane id="gridAdd" gridLinesVisible="false" prefHeight="314.0" prefWidth="624.0" VBox.vgrow="ALWAYS">
+                          <children>
+                            <TextField id="name" fx:id="addCitaPatientSearch" prefHeight="26.0" prefWidth="-1.0" promptText="Nombre Paciente" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                            <TextField id="surname" fx:id="addCitaDoctorSearch" prefHeight="26.0" prefWidth="258.0" promptText="Nombre Doctor" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                            <ComboBox id="iniDay" fx:id="iniCita" prefHeight="21.0" prefWidth="133.0" GridPane.columnIndex="0" GridPane.rowIndex="3">
+                              <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                  <String fx:value="Item 1" />
+                                  <String fx:value="Item 2" />
+                                  <String fx:value="Item 3" />
+                                </FXCollections>
+                              </items>
+                            </ComboBox>
+                            <TableView fx:id="tableCitaPac" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                              <columns>
+                                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="304.0" text="Pacientes" fx:id="colPa" />
+                              </columns>
+                            </TableView>
+                            <TableView fx:id="tableCitaDoc" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                              <columns>
+                                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="312.0" text="Doctores" fx:id="colDoc" />
+                              </columns>
+                            </TableView>
+                            <DatePicker fx:id="datePicker" prefHeight="21.0" prefWidth="164.0" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+                          </children>
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="393.0" minWidth="10.0" prefWidth="307.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="307.0" minWidth="10.0" prefWidth="307.0" />
+                          </columnConstraints>
+                          <padding>
+                            <Insets left="5.0" right="5.0" />
+                          </padding>
+                          <rowConstraints>
+                            <RowConstraints maxHeight="47.0" minHeight="10.0" prefHeight="47.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="143.0" minHeight="10.0" prefHeight="117.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="116.0" minHeight="0.0" prefHeight="113.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="96.0" minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                        </GridPane>
+                        <HBox alignment="CENTER" prefHeight="48.999900000002526" prefWidth="624.0">
+                          <children>
+                            <Button id="acceptButton" mnemonicParsing="false" onMouseClicked="#accept" text="Aceptar">
+                              <HBox.margin>
+                                <Insets right="20.0" />
+                              </HBox.margin>
+                            </Button>
+                            <Button id="clearFields" mnemonicParsing="false" onAction="#newInput" text="Borrar">
+                              <HBox.margin>
+                                <Insets left="20.0" />
+                              </HBox.margin>
+                            </Button>
+                          </children>
+                        </HBox>
+                      </children>
+                    </VBox>
+                    <ChoiceBox fx:id="choice" focusTraversable="true" prefWidth="150.0" visible="true" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="310.0" AnchorPane.topAnchor="12.0" />
+                  </children>
+                </AnchorPane>
+              </content>
+            </Tab>
+          </tabs>
+        </TabPane>
+      </center>
+      <top>
+        <MenuBar>
+          <menus>
+            <Menu mnemonicParsing="false" text="Archivo">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#exitApplication" text="Close" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Añadir">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Paciente" />
+                <MenuItem mnemonicParsing="false" text="Médico" />
+                <MenuItem mnemonicParsing="false" text="Cita" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Ver ">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Pacientes" />
+                <MenuItem mnemonicParsing="false" text="Médicos" />
+                <MenuItem mnemonicParsing="false" text="Acerca de" />
+              </items>
+            </Menu>
+          </menus>
+        </MenuBar>
+      </top>
+    </BorderPane>
+  </children>
+</StackPane>

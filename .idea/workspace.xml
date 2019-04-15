@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a0346447-cd85-4a9d-9e4e-63c3541255dd" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/clinicdb/FXMLWatchPatientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clinicdb/FXMLWatchPatientController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/EntregableIPCClinicDB/clinicdb/FXMLclinicDBController$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/EntregableIPCClinicDB/clinicdb/FXMLclinicDBController$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/EntregableIPCClinicDB/clinicdb/FXMLclinicDBController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/EntregableIPCClinicDB/clinicdb/FXMLclinicDBController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/clinicdb/FXMLclinicDBController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clinicdb/FXMLclinicDBController.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -20,7 +22,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/clinicdb/FXMLWatchPatientController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="585">
+            <state relative-caret-position="377">
               <caret line="75" column="7" selection-start-line="75" selection-start-column="7" selection-end-line="75" selection-end-column="7" />
             </state>
           </provider>
@@ -29,40 +31,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/clinicdb/FXMLclinicDBController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="622" column="53" selection-start-line="622" selection-start-column="53" selection-end-line="622" selection-end-column="53" />
-              <folding>
-                <element signature="e#26643#26649#0" expanded="true" />
-                <element signature="e#26679#28194#0" expanded="true" />
-                <element signature="e#28193#28194#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://$PROJECT_DIR$/dist/lib/clinicDBAccess.jar!/model/Doctor.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="29" column="39" selection-start-line="29" selection-start-column="27" selection-end-line="29" selection-end-column="39" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://$PROJECT_DIR$/dist/lib/clinicDBAccess.jar!/utils/SlotAppointmentsWeek.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://$PROJECT_DIR$/dist/lib/clinicDBAccess.jar!/utils/SlotWeek.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="5" column="13" selection-start-line="5" selection-start-column="8" selection-end-line="5" selection-end-column="13" />
+            <state relative-caret-position="273">
+              <caret line="1017" column="91" selection-start-line="1017" selection-start-column="91" selection-end-line="1017" selection-end-column="91" />
             </state>
           </provider>
         </entry>
@@ -72,6 +42,7 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>atepicker</find>
+      <find>createListHours</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -88,7 +59,7 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="8" />
     <option name="y" value="17" />
-    <option name="width" value="1350" />
+    <option name="width" value="674" />
     <option name="height" value="743" />
   </component>
   <component name="ProjectView">
@@ -206,10 +177,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="8" y="17" width="1350" height="743" extended-state="0" />
+    <frame x="8" y="17" width="674" height="743" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13174114" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14308682" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -252,17 +223,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/clinicdb/FXMLWatchPatientController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="585">
-          <caret line="75" column="7" selection-start-line="75" selection-start-column="7" selection-end-line="75" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/dist/lib/clinicDBAccess.jar!/model/Doctor.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
           <caret line="29" column="39" selection-start-line="29" selection-start-column="27" selection-end-line="29" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/dist/lib/clinicDBAccess.jar!/utils/SlotAppointmentsWeek.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -273,22 +244,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/dist/lib/clinicDBAccess.jar!/utils/SlotAppointmentsWeek.class">
+    <entry file="file://$PROJECT_DIR$/src/clinicdb/FXMLWatchPatientController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+        <state relative-caret-position="377">
+          <caret line="75" column="7" selection-start-line="75" selection-start-column="7" selection-end-line="75" selection-end-column="7" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/clinicdb/FXMLclinicDBController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="622" column="53" selection-start-line="622" selection-start-column="53" selection-end-line="622" selection-end-column="53" />
-          <folding>
-            <element signature="e#26643#26649#0" expanded="true" />
-            <element signature="e#26679#28194#0" expanded="true" />
-            <element signature="e#28193#28194#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="273">
+          <caret line="1017" column="91" selection-start-line="1017" selection-start-column="91" selection-end-line="1017" selection-end-column="91" />
         </state>
       </provider>
     </entry>

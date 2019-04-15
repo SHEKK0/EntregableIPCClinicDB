@@ -999,41 +999,32 @@ private ArrayList<LocalTime> createListHours(LocalTime ini, LocalTime fin) throw
         return res;
     }
 private ArrayList<LocalTime> createListHours(Doctor doc) throws Exception {
-        ArrayList<LocalTime> res = new ArrayList(); //lista resultante con las horas disponibles del doctor en question
-        LocalTime ini = doc.getVisitStartTime();  //inicio de la hora de visitas del doctor seleccionado
-        LocalTime fin = doc.getVisitEndTime();      //fin de la hora de visitas del doctor seleccionado
-        long elapsedMinutes = Duration.between(ini, fin).toMinutes();  //minutos entre las dos horas
-        System.out.println(elapsedMinutes);
-        for (int i = 0; i <= elapsedMinutes; i=i+15) {  //añadimos la hora cada 15 min des de la hora inicio del doctor
-            LocalTime aux = ini.plusMinutes(i); //datos actuales, a ver si ya hay una cita con esta hora en este dia, con el doctor y dia seleccionados (esta lista solo sirve si hay cosas seleccionadas)
-            boolean existe = false;
+        ArrayList<LocalTime> res = createListHours(doc.getVisitStartTime(),doc.getVisitEndTime()); //lista resultante con las horas disponibles del doctor en question
+        LocalDate picked = datePicker.getValue(); //fecha del datepicker
+        int year = picked.getYear();    //año del datePicker
+        int month = picked.getMonthValue(); //mes del datePicker
+        int dayOfMonth = picked.getDayOfMonth(); //dia del datePicker
+
+    //for(LocalTime aux : res) {
+    for(int i = 0; i < res.size(); i++) {
             for(int j = 0; j < listCitas.size(); j ++){  //miramos en la lista de citas(la completa no la del medico)  si hay alguna cita que concuerde con la hora y el medico que tenemos seleccionados
-                LocalDateTime listaTime = listCitas.get(j).getAppointmentDateTime(); //dateTime de la lista de citas, el elemento actual de la lista de citas
-                Doctor doctor2 = listCitas.get(j).getDoctor(); //doctor del elemento actual de la lista de citas
-                LocalDate picked = datePicker.getValue(); //fecha del datepicker
-                int year = picked.getYear();    //año del datePicker
-                int month = picked.getMonthValue(); //mes del datePicker
-                int dayOfMonth = picked.getDayOfMonth(); //dia del datePicker
-                int hour = aux.getHour();   //hora seleccionada
-                int min = aux.getMinute();  //min seleccionado
-                LocalDateTime time = LocalDateTime.of(year, month, dayOfMonth, hour, min); //creamos el LocalDateTime con los datos aux
-                if(time.equals(listaTime) && doc.getIdentifier().compareTo(doctor2.getIdentifier())== 0){ //si ya existe una cita con elmismo doctor que el seleccionado y a la hora seleccionada salimos del bucle
-                    existe = true;
-                    break;
-                }
-                else{
-                    existe = false;
-                    
+                int hour = res.get(i).getHour();   //hora seleccionada
+                int minute = res.get(i).getMinute();
+                LocalDateTime time = LocalDateTime.of(year, month, dayOfMonth, hour, minute); //creamos el LocalDateTime con los datos aux
+
+                if(doc.getIdentifier().equals(listCitas.get(j).getDoctor().getIdentifier())
+                    && time.equals(listCitas.get(j).getAppointmentDateTime())) {
+                    System.out.println(doc.getIdentifier()+":"+listCitas.get(j).getDoctor().getIdentifier());
+                    System.out.println(time+":"+listCitas.get(j).getAppointmentDateTime());
+                    res.remove(res.get(i));
+                    System.out.println(res);
                 }
             }
-            if(existe == false) res.add(aux); // si no existe una cita igual a la que se esta buscando en este bucle la añadimos a la lista resultante
-            else{
-                System.out.println("ya existe"); //esto era pa comprobar cosas
-            }
-            
         }
         return res; //devuelve la lista res con las horas disponibles?
     }
+
+
     private boolean salaInBounds(int x) {
         if (x <= listSalas.size()) return true;
         else return false;

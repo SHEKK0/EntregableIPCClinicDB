@@ -498,7 +498,14 @@ public class FXMLclinicDBController implements Initializable {
 
                     alert.showAndWait();
                 }
+                try {
+                    iniCita.setItems(FXCollections.observableList(createListHours(tableCitaDoc.getSelectionModel().getSelectedItem())));
+                } catch (Exception ex) {
+                    Logger.getLogger(FXMLclinicDBController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                iniCita.setValue(iniCita.getItems().get(0));
             }
+            
         });
         newDate.setOnAction(e -> {
             //NUEVO MÉDICO, A TERMINAR
@@ -797,6 +804,9 @@ public class FXMLclinicDBController implements Initializable {
         Saturday.setSelected(false);
         iniDay.setValue(listHours.get(0));
         fiDay.setValue(listHours.get(listHours.size() - 1));
+        //tableCitaDoc.getSelectionModel().select(null);
+        tableCitaPac.getSelectionModel().select(null);
+        datePicker.setValue(LocalDate.now());
     }
 
 

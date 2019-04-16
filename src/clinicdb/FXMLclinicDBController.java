@@ -200,6 +200,10 @@ public class FXMLclinicDBController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        TabPaciente.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        TabMedico.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        tableCitaDoc.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        tableCitaPac.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         // Añadimos la clinica al iniciar
         clinic = ClinicDBAccess.getSingletonClinicDBAccess();
         //listas de pacientes , doctores y citas

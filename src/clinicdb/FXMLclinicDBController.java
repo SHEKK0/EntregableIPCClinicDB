@@ -1062,4 +1062,38 @@ private ArrayList<LocalTime> createListHours(Doctor doc) throws Exception {
         return res; //devuelve la lista res con las horas disponibles?
     }
 
+    @FXML
+    private void cambiarVentanPaciente(ActionEvent event) {
+        tabPane.getSelectionModel().select(0);
+    }
+
+    @FXML
+    private void cambiarVentanDoctor(ActionEvent event) {
+        tabPane.getSelectionModel().select(1);
+    }
+
+    @FXML
+    private void cambiarVentanCitas(ActionEvent event) {
+        tabPane.getSelectionModel().select(2);
+    }
+
+    @FXML
+    private void ventanaAddPac(ActionEvent event) {
+        tabPane.getSelectionModel().select(3);
+        choice.getSelectionModel().select(0);
+    }
+
+    @FXML
+    private void ventanaAddDoc(ActionEvent event) {
+         tabPane.getSelectionModel().select(3);
+        choice.getSelectionModel().select(1);
+    }
+
+    @FXML
+    private void ventanaAddDate(ActionEvent event) {
+         tabPane.getSelectionModel().select(3);
+        choice.getSelectionModel().select(2);
+    }
+
+    
 }

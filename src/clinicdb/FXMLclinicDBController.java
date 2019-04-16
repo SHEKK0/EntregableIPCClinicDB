@@ -210,13 +210,10 @@ public class FXMLclinicDBController implements Initializable {
         listDays = new ArrayList<>();
         try {
             listHours = FXCollections.observableList(createListHours());
-        } catch (Exception ex) {
-            Logger.getLogger(FXMLclinicDBController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        
+        } catch (Exception ex) {}
 //-----------------------------------------------------------------------//
-        // Añadir pacientes a la lista de pacientes desde el archivo
+/* INICIALIZAR PACIENTES */
+
         // 1. Wrap the ObservableList in a FilteredList (initially display all data).
         FilteredList<Patient> filteredData = new FilteredList<>(listPatients, p -> true);
 
@@ -251,10 +248,57 @@ public class FXMLclinicDBController implements Initializable {
 
         // 5. Add sorted (and filtered) data to the table.
         TabPaciente.setItems(sortedData);
+//---------------------------------------------------------------------------//
+/*
+
+ TABLE VIEW PACIENTE
+
+ */
 
 
-        //Añadir medicos a la lista de medicos desde el archivo
+        NPatient.setCellValueFactory(new PropertyValueFactory<>("name")); // Asegurarse que el nombre es el mismo que el de la clase. Asi puede recuperar el valor.
+        APatient.setCellValueFactory(new PropertyValueFactory<>("surname"));
+        IdPatient.setCellValueFactory(new PropertyValueFactory<>("identifier"));
+        TelPatient.setCellValueFactory(new PropertyValueFactory<>("telephon"));
+//---------------------------------------------------------------------//
+        verPatient.disableProperty().bind(Bindings.isEmpty(TabPaciente.getSelectionModel().getSelectedItems()));
+        deletePatient.disableProperty().bind(Bindings.isEmpty(TabPaciente.getSelectionModel().getSelectedItems()));
+        datePatient.disableProperty().bind(Bindings.isEmpty(TabPaciente.getSelectionModel().getSelectedItems()));
+//---------------------------------------------------------------------//
+        newPacienteButton.setOnAction(e -> {
+            //NUEVO PACIENTE BOTON, A TERMINAR
+            tabPane.getSelectionModel().select(3);
+            choice.setValue("Paciente");
+        });
+//---------------------------------------------------------------------//
+        datePatient.setOnAction(e -> {
+            tabPane.getSelectionModel().select(3);
+            choice.setValue("Cita");
+            tableCitaPac.getSelectionModel().select(TabPaciente.getSelectionModel().getSelectedItem());
+            addCitaPatientSearch.setText(TabPaciente.getSelectionModel().getSelectedItem().getName());
+        });
+//---------------------------------------------------------------------//
+        deletePatient.setOnAction((ActionEvent e) -> {
+            if (confirm("paciente?")) {
+                Patient aEliminar = TabPaciente.getSelectionModel().getSelectedItem();
+                if (!clinic.hasAppointments(aEliminar)) {
+                    listPatients.remove(aEliminar); //falta añadir alerta si no se elimin
+                    TabPaciente.getItems().remove(aEliminar);
+                    TabPaciente.getSelectionModel().select(null);
+                } else {
+                    Alert alert = new Alert(AlertType.ERROR);
+                    alert.setTitle(clinic.getClinicName());
+                    alert.setHeaderText("¡No se puede eliminar!");
+                    alert.setContentText("El paciente tiene citas pendientes.");
 
+                    alert.showAndWait();
+                }
+            }
+        });
+//---------------------------------------------------------------------//
+        verPatient.setOnAction(e -> seePatient(TabPaciente.getSelectionModel().getSelectedItem()));
+//---------------------------------------------------------------------//
+/* INICIALIZAR MEDICOS */
 
         // 1. Wrap the ObservableList in a FilteredList (initially display all data).
         FilteredList<Doctor> filteredDataDoctor = new FilteredList<>(listDoctors, p -> true);
@@ -292,10 +336,55 @@ public class FXMLclinicDBController implements Initializable {
         // 5. Add sorted (and filtered) data to the table.
         TabMedico.setItems(sortedDataDoctor);
 
-        //Añadir citas a la lista
+//---------------------------------------------------------------------------//
+
+// TABLEVIEW MEDICO //
+
+        NMedico.setCellValueFactory(new PropertyValueFactory<>("name")); // Asegurarse que el nombre es el mismo que el de la clase. Asi puede recuperar el valor.
+        AMedico.setCellValueFactory(new PropertyValueFactory<>("surname"));
+        IdMedico.setCellValueFactory(new PropertyValueFactory<>("identifier"));
+        TelMedico.setCellValueFactory(new PropertyValueFactory<>("telephon"));
+//---------------------------------------------------------------------//
+        deleteMedic.disableProperty().bind(Bindings.isEmpty(TabMedico.getSelectionModel().getSelectedItems()));
+        seeMedic.disableProperty().bind(Bindings.isEmpty(TabMedico.getSelectionModel().getSelectedItems()));
+        dateMedic.disableProperty().bind(Bindings.isEmpty(TabMedico.getSelectionModel().getSelectedItems()));
+//---------------------------------------------------------------------//
+        newMedicoButton.setOnAction(e -> {
+            tabPane.getSelectionModel().select(3);
+            choice.setValue("Médico");
+        });
+//---------------------------------------------------------------------//
+        deleteMedic.setOnMouseClicked(e -> {
+            if (confirm("médico?")) {
+                Doctor aEliminar = TabMedico.getSelectionModel().getSelectedItem();
+                if (!clinic.hasAppointments(aEliminar)) {
+                    listDoctors.remove(aEliminar); // falta añadir alerta si no se elimina
+                    //eliminar de la tabla
+                    TabMedico.getItems().remove(aEliminar);
+                    TabMedico.getSelectionModel().setSelectionMode(null);
+                } else {
+                    Alert alert = new Alert(AlertType.ERROR);
+                    alert.setTitle(clinic.getClinicName());
+                    alert.setHeaderText("¡No se puede eliminar!");
+                    alert.setContentText("El médico tiene citas pendientes.");
+
+                    alert.showAndWait();
+                }
+            }
+        });
+//---------------------------------------------------------------------//
+        seeMedic.setOnAction(e -> seeMedic(TabMedico.getSelectionModel().getSelectedItem()));
+//---------------------------------------------------------------------//
+        dateMedic.setOnAction(e -> {
+            tabPane.getSelectionModel().select(3);
+            choice.setValue("Cita");
+            tableCitaDoc.getSelectionModel().select(TabMedico.getSelectionModel().getSelectedItem());
+            addCitaDoctorSearch.setText(TabMedico.getSelectionModel().getSelectedItem().getName());
+        });
+//---------------------------------------------------------------------//
+
+/* INICIALIZAR CITAS */
         // 1. Wrap the ObservableList in a FilteredList (initially display all data).
-
-
         FilteredList<Appointment> filteredDataAppointment = new FilteredList<>(listCitas, p -> true);
 
         // 2. Set the filter Predicate whenever the filter changes.
@@ -331,8 +420,63 @@ public class FXMLclinicDBController implements Initializable {
         // 5. Add sorted (and filtered) data to the table.
         TabAppointment.setItems(sortedDataAppointment);
 
-        //---------------------------------------------------------------------------//
-        // Añadir //
+//---------------------------------------------------------------------//
+//----------- CITAS ----------------//
+
+
+        seeMedicDate.disableProperty().bind(Bindings.isEmpty(TabAppointment.getSelectionModel().getSelectedItems()));
+        seeDate.disableProperty().bind(Bindings.isEmpty(TabAppointment.getSelectionModel().getSelectedItems()));
+        seePatientDate.disableProperty().bind(Bindings.isEmpty(TabAppointment.getSelectionModel().getSelectedItems()));
+        deleteDate.disableProperty().bind(Bindings.isEmpty(TabAppointment.getSelectionModel().getSelectedItems()));
+//---------------------------------------------------------------------//
+        colPatient.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(
+                cellData.getValue().getPatient().getName() + " "
+                        + cellData.getValue().getPatient().getSurname()
+        ));
+        colMedico.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(
+                cellData.getValue().getDoctor().getName() + " "
+                        + cellData.getValue().getDoctor().getSurname()
+        ));
+        colFecha.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(
+                cellData.getValue().getAppointmentDateTime().toString()
+        ));
+//---------------------------------------------------------------------//
+        seePatientDate.setOnAction(e -> seePatient(TabAppointment.getSelectionModel().getSelectedItem().getPatient()));
+        seeMedicDate.setOnAction(e -> seeMedic(TabAppointment.getSelectionModel().getSelectedItem().getDoctor()));
+//---------------------------------------------------------------------//
+        deleteDate.setOnAction(e -> {
+            if (confirm("cita?")) {
+                Appointment aEliminar = TabAppointment.getSelectionModel().getSelectedItem();
+                if (true) { // La cita aun no ha sucedido
+                    listCitas.remove(aEliminar);
+                    //eliminar de la tabla
+                    TabAppointment.getItems().remove(aEliminar);
+                    TabAppointment.getSelectionModel().setSelectionMode(null);
+                } else {
+                    Alert alert = new Alert(AlertType.ERROR);
+                    alert.setTitle(clinic.getClinicName());
+                    alert.setHeaderText("¡No se puede eliminar!");
+                    alert.setContentText("La cita ya ha sucedido.");
+
+                    alert.showAndWait();
+                }
+                try {
+                    iniCita.setItems(FXCollections.observableList(createListHours(tableCitaDoc.getSelectionModel().getSelectedItem())));
+                } catch (Exception ex) {
+                    Logger.getLogger(FXMLclinicDBController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                iniCita.setValue(iniCita.getItems().get(0));
+            }
+
+        });
+//---------------------------------------------------------------------//
+        newDate.setOnAction(e -> {
+            tabPane.getSelectionModel().select(3);
+            choice.setValue("Cita");
+        });
+//---------------------------------------------------------------------------//
+/* AÑADIR */
+
         choice.getItems().addAll("Paciente", "Médico", "Cita");
         choice.setValue("Paciente");
         ID.getItems().addAll("DNI", "NIF", "SS");
@@ -346,6 +490,30 @@ public class FXMLclinicDBController implements Initializable {
         iniDay.setVisible(false);
         fiDay.setVisible(false);
 
+/*
+ * LAS LISTAS DE LAS HORAS EN ADD MEDICO
+ */
+        iniDay.getItems().removeAll();
+        iniDay.setItems(listHours);
+        iniDay.setValue(listHours.get(0));
+        fiDay.getItems().removeAll();
+        fiDay.setItems(listHours);
+        fiDay.setValue(listHours.get(listHours.size() - 1));
+// --------------------------------------------//
+// EL SELECTOR DE LA HORA EN CITAS
+        iniCita.getItems().removeAll();
+        iniCita.setItems(listHours);
+        iniCita.setValue(listHours.get(0));
+// --------------------------------------------//
+// EL CALENDARIO EN LAS CITAS
+        datePicker.setEditable(false);
+        datePicker.setShowWeekNumbers(false);
+
+/*
+*
+* FILTROS PARA LOS CAMPOS DE TEXTO O NUMEROS
+*
+* */
         name.textProperty().addListener((observable, oldValue, newValue) -> { // SOLO TEXTO
             if (!newValue.matches("\\sa-zA-Z*")) {
                 name.setText(newValue.replaceAll("[^\\sa-zA-Z]", ""));
@@ -380,181 +548,23 @@ public class FXMLclinicDBController implements Initializable {
                 }
             }
         });
-
-
-        iniDay.getItems().removeAll();
-        iniDay.setItems(listHours);
-        iniDay.setValue(listHours.get(0));
-        fiDay.getItems().removeAll();
-        fiDay.setItems(listHours);
-        fiDay.setValue(listHours.get(listHours.size() - 1));
-//---------------------------------------------------------------------------//
-        // TABLE VIEW PACIENTE //
-
-
-        NPatient.setCellValueFactory(new PropertyValueFactory<>("name")); // Asegurarse que el nombre es el mismo que el de la clase. Asi puede recuperar el valor.
-        APatient.setCellValueFactory(new PropertyValueFactory<>("surname"));
-        IdPatient.setCellValueFactory(new PropertyValueFactory<>("identifier"));
-        TelPatient.setCellValueFactory(new PropertyValueFactory<>("telephon"));
-        //--------------------------------------------
-        verPatient.disableProperty().bind(Bindings.isEmpty(TabPaciente.getSelectionModel().getSelectedItems()));
-        deletePatient.disableProperty().bind(Bindings.isEmpty(TabPaciente.getSelectionModel().getSelectedItems()));
-        datePatient.disableProperty().bind(Bindings.isEmpty(TabPaciente.getSelectionModel().getSelectedItems()));
-
-        //-------------------------------------------------------
-        newPacienteButton.setOnAction(e -> {
-            //NUEVO PACIENTE BOTON, A TERMINAR
-            tabPane.getSelectionModel().select(3);
-            choice.setValue("Paciente");
-        });
-
-
-        datePatient.setOnAction(e -> {
-            tabPane.getSelectionModel().select(3);
-            choice.setValue("Cita");
-            // Patient patient = TabPaciente.getSelectionModel().getSelectedItem();
-            //patientField.setText(patient.getName() + " " + patient.getSurname());
-        });
-
-        deletePatient.setOnAction((ActionEvent e) -> {
-            deletePatient();
-        });
-
-        verPatient.setOnAction(e -> seePatient(TabPaciente.getSelectionModel().getSelectedItem()));
-//---------------------------------------------------------------------------//
-        // TABLEVIEW MEDICO //
-        NMedico.setCellValueFactory(new PropertyValueFactory<>("name")); // Asegurarse que el nombre es el mismo que el de la clase. Asi puede recuperar el valor.
-        AMedico.setCellValueFactory(new PropertyValueFactory<>("surname"));
-        IdMedico.setCellValueFactory(new PropertyValueFactory<>("identifier"));
-        TelMedico.setCellValueFactory(new PropertyValueFactory<>("telephon"));
-        //-----------------------------------------------------------------------
-        deleteMedic.disableProperty().bind(Bindings.isEmpty(TabMedico.getSelectionModel().getSelectedItems()));
-        seeMedic.disableProperty().bind(Bindings.isEmpty(TabMedico.getSelectionModel().getSelectedItems()));
-        dateMedic.disableProperty().bind(Bindings.isEmpty(TabMedico.getSelectionModel().getSelectedItems()));
-        //------------------------------------------------------------------------
-        newMedicoButton.setOnAction(e -> {
-            //NUEVO MÉDICO, A TERMINAR
-            tabPane.getSelectionModel().select(3);
-            choice.setValue("Médico");
-        });
-
-        deleteMedic.setOnMouseClicked(e -> {
-            if (confirm("médico?")) {
-                Doctor aEliminar = TabMedico.getSelectionModel().getSelectedItem();
-                if (!clinic.hasAppointments(aEliminar)) {
-                    listDoctors.remove(aEliminar); // falta añadir alerta si no se elimina
-                    //eliminar de la tabla
-                    TabMedico.getItems().remove(aEliminar);
-                    TabMedico.getSelectionModel().setSelectionMode(null);
-                } else {
-                    Alert alert = new Alert(AlertType.ERROR);
-                    alert.setTitle(clinic.getClinicName());
-                    alert.setHeaderText("¡No se puede eliminar!");
-                    alert.setContentText("El médico tiene citas pendientes.");
-
-                    alert.showAndWait();
-                }
-            }
-        });
-
-        //VER MÉDICO, A CREAR
-        seeMedic.setOnAction(e -> seeMedic(TabMedico.getSelectionModel().getSelectedItem()));
-
-        //_------------------------------------------//
-        //----------- CITAS ----------------//
-        seeMedicDate.disableProperty().bind(Bindings.isEmpty(TabAppointment.getSelectionModel().getSelectedItems()));
-        seeDate.disableProperty().bind(Bindings.isEmpty(TabAppointment.getSelectionModel().getSelectedItems()));
-        seePatientDate.disableProperty().bind(Bindings.isEmpty(TabAppointment.getSelectionModel().getSelectedItems()));
-        deleteDate.disableProperty().bind(Bindings.isEmpty(TabAppointment.getSelectionModel().getSelectedItems()));
-
-        seePatientDate.setOnAction(e -> seePatient(TabAppointment.getSelectionModel().getSelectedItem().getPatient()));
-        seeMedicDate.setOnAction(e -> seeMedic(TabAppointment.getSelectionModel().getSelectedItem().getDoctor()));
-
-        colPatient.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(
-                cellData.getValue().getPatient().getName() + " "
-                        + cellData.getValue().getPatient().getSurname()
-        ));
-        colMedico.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(
-                cellData.getValue().getDoctor().getName() + " "
-                        + cellData.getValue().getDoctor().getSurname()
-        ));
-        colFecha.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(
-                cellData.getValue().getAppointmentDateTime().toString()
-        ));
-
-        deleteDate.setOnAction(e -> {
-            if (confirm("cita?")) {
-                Appointment aEliminar = TabAppointment.getSelectionModel().getSelectedItem();
-                if (true) { // La cita aun no ha sucedido 
-                    listCitas.remove(aEliminar);
-                    //eliminar de la tabla
-                    TabAppointment.getItems().remove(aEliminar);
-                    TabAppointment.getSelectionModel().setSelectionMode(null);
-                } else {
-                    Alert alert = new Alert(AlertType.ERROR);
-                    alert.setTitle(clinic.getClinicName());
-                    alert.setHeaderText("¡No se puede eliminar!");
-                    alert.setContentText("La cita ya ha sucedido.");
-
-                    alert.showAndWait();
-                }
-                try {
-                    iniCita.setItems(FXCollections.observableList(createListHours(tableCitaDoc.getSelectionModel().getSelectedItem())));
-                } catch (Exception ex) {
-                    Logger.getLogger(FXMLclinicDBController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                iniCita.setValue(iniCita.getItems().get(0));
-            }
-            
-        });
-        newDate.setOnAction(e -> {
-            //NUEVO MÉDICO, A TERMINAR
-            tabPane.getSelectionModel().select(3);
-            choice.setValue("Cita");
-        });
-//----------------------------------------------------------------------------//        
-        // listViewPaciente.setItems(listPatients);
-        // listViewDoctor.setItems(listDoctors);
-
-        // Doctor citaDoctor = listViewDoctor.getSelectionModel().getSelectedItem();
-
-        iniCita.getItems().removeAll();
-        iniCita.setItems(listHours);
-        iniCita.setValue(listHours.get(0));
-
-
 // ----------------------------------------------------------------------//
         choice.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> { // Para cambiar los textfield al decir paciente medico tal
             switch (newValue.intValue()) {
                 case 0:
-                    vBoxAddPac.setVisible(true);
-                    vBoxAddCita.setVisible(false);
-                    vBoxAddCita.setDisable(true);
-                    vBoxAddPac.setDisable(false);
-                    examinationRoom.setVisible(false);
-                    availableDays.setVisible(false);
-                    iniDay.setVisible(false);
-                    fiDay.setVisible(false);
+                    visibility(false,false);
                     break;
                 case 1:
-                    vBoxAddPac.setVisible(true);
-                    vBoxAddCita.setVisible(false);
-                    vBoxAddCita.setDisable(true);
-                    vBoxAddPac.setDisable(false);
-                    examinationRoom.setVisible(true);
-                    availableDays.setVisible(true);
-                    iniDay.setVisible(true);
-                    fiDay.setVisible(true);
+                    visibility(true,false);
                     break;
                 case 2:
-                    vBoxAddPac.setVisible(false);
-                    vBoxAddCita.setVisible(true);
-                    vBoxAddCita.setDisable(false);
-                    vBoxAddPac.setDisable(true);
+                    visibility(false,true);
                     break;
             }
         });
 
+// ----------------------------------------------------------------------//
+// TABLE VIEW PACIENTE Y MEDIC EN ADD DATE
 
         colPa.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getName() + " " + cellData.getValue().getSurname()));
         FilteredList<Patient> filteredDataDatePatient = new FilteredList<>(listPatients, p -> true);
@@ -618,14 +628,23 @@ public class FXMLclinicDBController implements Initializable {
         // 5. Add sorted (and filtered) data to the table.
         tableCitaDoc.setItems(sortedDataDateDoctor);
 
+// ----------------------------------------------------------------------//
+// BINDINGS ENTRE MEDICOS HORAS DISPONIBLES Y DIAS DISPONIBLES EN ADD DATE
 
         iniCita.disableProperty().bind(Bindings.isEmpty(tableCitaDoc.getSelectionModel().getSelectedItems()));
+        datePicker.disableProperty().bind(Bindings.isEmpty(tableCitaDoc.getSelectionModel().getSelectedItems()));
+
+// ----------------------------------------------------------------------//
+// HORAS DISPONIBLES DE CADA MEDICO (CAMBIANDO ENTRE DIAS, SI HAY CITAS EN ESE DIA NO SALEN)
         datePicker.valueProperty().addListener((obs,old,newVaule)->{
             try {
                 iniCita.setItems(FXCollections.observableList(createListHours(tableCitaDoc.getSelectionModel().getSelectedItem())));
                 iniCita.setValue(iniCita.getItems().get(0));
             } catch(Exception e){}
         });
+
+// ----------------------------------------------------------------------//
+// HORAS DISPONIBLES DE CADA MEDICO (CONTANDO LAS CITAS EN EL DIA YA MARCADO EN EL DATEPICKER)
         tableCitaDoc.getSelectionModel().selectedItemProperty().addListener((o,old,newValue)->{
             try {
                 iniCita.setItems(FXCollections.observableList(createListHours(newValue)));
@@ -633,25 +652,25 @@ public class FXMLclinicDBController implements Initializable {
             }
             iniCita.setValue(iniCita.getItems().get(0));
         });
-        
-        datePicker.disableProperty().bind(Bindings.isEmpty(tableCitaDoc.getSelectionModel().getSelectedItems()));
-        datePicker.setEditable(false);
-        datePicker.setShowWeekNumbers(false);
+
+// ----------------------------------------------------------------------//
+// CREACION INICIAL DE LOS DIAS DISPONIBLES DEL MEDICO EN EL CALENDARIO
         tableCitaDoc.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            Days[] values = Days.values();
-            List<Days> list = new LinkedList<Days>(Arrays.asList(values));
-            for (Days day : newValue.getVisitDays()) {
-                for (Days d : values) {
-                    if (d.equals(day)) list.remove(d);
-                }
-            }
+                    Days[] values = Days.values();
+                    List<Days> list = new LinkedList<Days>(Arrays.asList(values));
+                    try {
+                        for (Days day : newValue.getVisitDays()) {
+                            for (Days d : values) {
+                                if (d.equals(day)) list.remove(d);
+                            }
+                        }
+                    } catch(Exception e){}
 
                 datePicker.setDayCellFactory(picker -> new DateCell() {
                     @Override
                     public void updateItem(LocalDate date, boolean empty) {
                         super.updateItem(date, empty);
                         for (Days day_list : list) {
-                            System.out.println(day_list);
                             if (date.getDayOfWeek() == DayOfWeek.MONDAY && day_list.equals(Days.Monday))
                                 setStyle("-fx-background-color: #ffc0cb;");
                             if (date.getDayOfWeek() == DayOfWeek.TUESDAY && day_list.equals(Days.Tuesday))
@@ -670,7 +689,14 @@ public class FXMLclinicDBController implements Initializable {
                 });
         });
     }
+
 // ----------------------------------------------------------------------//
+// F    I   N        D  E   L       I   N   I   T   I   A   L   I   Z    E
+// ----------------------------------------------------------------------//
+
+
+// ----------------------------------------------------------------------//
+// TODA LA LOGICA DEL BOTÓN ACEPTAR
     @FXML
     private void accept() throws Exception {
         //AÑADIR BOTON ACEPTAR, A TERMINAR
@@ -700,7 +726,7 @@ public class FXMLclinicDBController implements Initializable {
                 patient.setPhoto(imageAdd.getImage());
                 listPatients.add(patient);
                 acceptAlert("Paciente");
-                newInput();
+                newInput(); // Borra todos los campos
                 TabPaciente.setItems(listPatients); // Refresh
                 break;
             case ("Médico"):
@@ -755,15 +781,25 @@ public class FXMLclinicDBController implements Initializable {
                     errorAlert("La cita ya existe!");
                     break;
                 }
+                if (isErrorDate(datePicker.getValue(),cita.getDoctor())) {errorAlert("Ese día el doctor no admite visitas!");break;}
                 listCitas.add(cita);
                 acceptAlert("Cita");
                 newInput();
                 TabAppointment.setItems(listCitas);
                 iniCita.setItems(FXCollections.observableList(createListHours(tableCitaDoc.getSelectionModel().getSelectedItem())));
-                 iniCita.setValue(iniCita.getItems().get(0));
-
+                iniCita.setValue(iniCita.getItems().get(0));
                 break;
         }
+    }
+
+//-----------------------------------------------------------------//
+// COMPROBACIONES ASI EN GENERAL
+
+    private boolean isErrorDate(LocalDate value, Doctor doctor) {
+        for(Days day : doctor.getVisitDays()) {
+            if(value.getDayOfWeek().toString().equals(day.toString().toUpperCase())) return false;
+        }
+        return true;
     }
 
     private boolean checkInputsPatient() { // Comprueba que los campos no estén vacíos. Un poco la doble negación rara.
@@ -773,7 +809,6 @@ public class FXMLclinicDBController implements Initializable {
                 || tel.getText().equals(""));
     }
 
-    //Esto esta bien? No
     private boolean checkInputsDoctor() {
         return !(id.getText().equals("")
                 || name.getText().equals("")
@@ -784,10 +819,42 @@ public class FXMLclinicDBController implements Initializable {
 
     private boolean checkInputsCita() {
         return !(tableCitaDoc.getSelectionModel().getSelectedItem().equals(null)
-                || tableCitaPac.getSelectionModel().getSelectedItem().equals(null)
-        );
+                || tableCitaPac.getSelectionModel().getSelectedItem().equals(null));
+    }
+    private boolean existePaciente(ObservableList<Patient> list, String id) {
+        Boolean res = false;
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getIdentifier().compareTo(id) == 0) return true;
+        }
+        return res;
     }
 
+    private boolean existeMedico(ObservableList<Doctor> list, String id) {
+        Boolean res = false;
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getIdentifier().compareTo(id) == 0) return true;
+        }
+        return res;
+    }
+
+    private boolean existeCita(ObservableList<Appointment> list, Appointment cita) {
+        for (Appointment aux : list) {
+            if (cita == null || aux.getAppointmentDateTime().equals(cita.getAppointmentDateTime()) && aux.getDoctor().equals(cita.getDoctor()))return true;
+        }
+        return false;
+    }
+
+    private boolean salaInBounds(int x) {
+        if (x <= listSalas.size()) return true;
+        else return false;
+    }
+
+
+
+
+
+    //-----------------------------------------------------------------//
+// CONTROLADORES DEL ACCEPT
     @FXML
     private void newInput() {
         id.setText("");
@@ -808,60 +875,6 @@ public class FXMLclinicDBController implements Initializable {
         tableCitaPac.getSelectionModel().select(null);
         datePicker.setValue(LocalDate.now());
     }
-
-
-    private void deletePatient() {
-        if (confirm("paciente?")) {
-            Patient aEliminar = TabPaciente.getSelectionModel().getSelectedItem();
-            if (!clinic.hasAppointments(aEliminar)) {
-                listPatients.remove(aEliminar); //falta añadir alerta si no se elimin
-                TabPaciente.getItems().remove(aEliminar);
-                TabPaciente.getSelectionModel().select(null);
-            } else {
-                Alert alert = new Alert(AlertType.ERROR);
-                alert.setTitle(clinic.getClinicName());
-                alert.setHeaderText("¡No se puede eliminar!");
-                alert.setContentText("El paciente tiene citas pendientes.");
-
-                alert.showAndWait();
-            }
-        }
-    }
-
-    /**
-     * @param list
-     * @param id
-     * @return booleano de si existe o no ese paciente ya
-     */
-    private boolean existePaciente(ObservableList<Patient> list, String id) {
-        Boolean res = false;
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getIdentifier().compareTo(id) == 0) return true;
-        }
-        return res;
-    }
-
-    /**
-     * @param list
-     * @param id
-     * @return booleano de si existe o no ese médico ya
-     */
-    private boolean existeMedico(ObservableList<Doctor> list, String id) {
-        Boolean res = false;
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getIdentifier().compareTo(id) == 0) return true;
-        }
-        return res;
-    }
-
-    private boolean existeCita(ObservableList<Appointment> list, Appointment cita) {
-        System.out.println(cita);
-        for (Appointment aux : list) {
-            if (cita == null || aux.getAppointmentDateTime().equals(cita.getAppointmentDateTime()) && aux.getDoctor().equals(cita.getDoctor()))return true;
-        }
-        return false;
-    }
-
     @FXML
     private void cargarImagen(ActionEvent event) throws IOException {
         FileChooser fileChooser = new FileChooser();
@@ -881,7 +894,8 @@ public class FXMLclinicDBController implements Initializable {
         }
     }
 
-
+//-----------------------------------------------------------------//
+// VER NUEVOS FXML
     private void seePatient(Patient patient) {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -905,17 +919,40 @@ public class FXMLclinicDBController implements Initializable {
             System.out.println("adkñlsjf");
         }
     }
-    
-    private void disableChoiceDoc(Doctor d){
-        
+
+
+    private void seeMedic(Doctor doctor) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("FXMLWatchDoctor.fxml"));
+            loader.load();
+            Parent p = loader.getRoot();
+            Stage stage = new Stage();
+            stage.setTitle(clinic.getClinicName());
+            stage.setScene(new Scene(p));
+            FXMLWatchDoctorController controller = loader.getController();
+            controller.setName(doctor.getName() + ", " + doctor.getSurname());
+            controller.setImage(doctor.getPhoto());
+            controller.setTelf(doctor.getTelephon());
+            controller.setTable(clinic.getDoctorAppointments(doctor.getIdentifier()));
+            controller.setClinic(clinic);
+            controller.setSala(doctor.getExaminationRoom());
+            controller.setId(doctor.getIdentifier());
+            controller.setTableDays(doctor.getVisitDays());
+            stage.show();
+            controller.getTable();
+            listCitas = FXCollections.observableList(controller.getTable());
+        } catch (IOException er) {
+            System.out.println("adkñlsjf");
+        }
     }
 
+    // ESTO HAY QUE QUITARLO
     @FXML
     private void verPaciente(ActionEvent event) {
     }
 
-
-    //---------------------//
+//-----------------------------------------------------------------//
 // ALERTAS // 
 
     @FXML
@@ -957,31 +994,19 @@ public class FXMLclinicDBController implements Initializable {
         alert.showAndWait();
     }
 
+//--------------------------------------------------//
+// LOGICA DEL INITIALIZE
 
-    private void seeMedic(Doctor doctor) {
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("FXMLWatchDoctor.fxml"));
-            loader.load();
-            Parent p = loader.getRoot();
-            Stage stage = new Stage();
-            stage.setTitle(clinic.getClinicName());
-            stage.setScene(new Scene(p));
-            FXMLWatchDoctorController controller = loader.getController();
-            controller.setName(doctor.getName() + ", " + doctor.getSurname());
-            controller.setImage(doctor.getPhoto());
-            controller.setTelf(doctor.getTelephon());
-            controller.setTable(clinic.getDoctorAppointments(doctor.getIdentifier()));
-            controller.setClinic(clinic);
-            controller.setSala(doctor.getExaminationRoom());
-            controller.setId(doctor.getIdentifier());
-            controller.setTableDays(doctor.getVisitDays());
-            stage.show();
-            controller.getTable();
-            listCitas = FXCollections.observableList(controller.getTable());
-        } catch (IOException er) {
-            System.out.println("adkñlsjf");
-        }
+
+    private void visibility(boolean medic, boolean date) {
+        vBoxAddPac.setVisible(!date);
+        vBoxAddCita.setVisible(date);
+        //vBoxAddCita.setDisable(!date);
+        //vBoxAddPac.setDisable(false);
+        examinationRoom.setVisible(medic);
+        availableDays.setVisible(medic);
+        iniDay.setVisible(medic);
+        fiDay.setVisible(medic);
     }
 
     @FXML
@@ -1003,10 +1028,9 @@ public class FXMLclinicDBController implements Initializable {
 private ArrayList<LocalTime> createListHours(LocalTime ini, LocalTime fin) throws Exception {
         ArrayList<LocalTime> res = new ArrayList();
         long elapsedMinutes = Duration.between(ini, fin).toMinutes();
-        System.out.println(elapsedMinutes);
         for (int i = 0; i <= elapsedMinutes; i=i+15) {
             LocalTime aux = ini.plusMinutes(i);
-            
+
             res.add(aux);
         }
         return res;
@@ -1034,11 +1058,4 @@ private ArrayList<LocalTime> createListHours(Doctor doc) throws Exception {
         return res; //devuelve la lista res con las horas disponibles?
     }
 
-
-    private boolean salaInBounds(int x) {
-        if (x <= listSalas.size()) return true;
-        else return false;
-    }
-
 }
-

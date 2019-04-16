@@ -19,7 +19,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/clinicdb/FXMLWatchPatientController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="377">
+            <state relative-caret-position="585">
               <caret line="75" column="7" selection-start-line="75" selection-start-column="7" selection-end-line="75" selection-end-column="7" />
             </state>
           </provider>
@@ -28,8 +28,13 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/clinicdb/FXMLclinicDBController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="93">
-              <caret line="618" column="60" selection-start-line="618" selection-start-column="60" selection-end-line="618" selection-end-column="60" />
+            <state relative-caret-position="111">
+              <caret line="1029" column="69" selection-start-line="1029" selection-start-column="69" selection-end-line="1029" selection-end-column="69" />
+              <folding>
+                <element signature="e#27259#27265#0" expanded="true" />
+                <element signature="e#27528#29101#0" expanded="true" />
+                <element signature="e#29100#29101#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -40,6 +45,10 @@
     <findStrings>
       <find>atepicker</find>
       <find>createListHours</find>
+      <find>datePicker.set</find>
+      <find>CONFIRM</find>
+      <find>newDate</find>
+      <find>System.out.</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -64,6 +73,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -120,8 +131,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -174,10 +183,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="8" y="17" width="674" height="743" extended-state="0" />
+    <frame x="8" y="17" width="1350" height="743" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14308682" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.046224963" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -243,15 +252,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/clinicdb/FXMLWatchPatientController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="377">
+        <state relative-caret-position="585">
           <caret line="75" column="7" selection-start-line="75" selection-start-column="7" selection-end-line="75" selection-end-column="7" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/clinicdb/FXMLclinicDBController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="93">
-          <caret line="618" column="60" selection-start-line="618" selection-start-column="60" selection-end-line="618" selection-end-column="60" />
+        <state relative-caret-position="111">
+          <caret line="1029" column="69" selection-start-line="1029" selection-start-column="69" selection-end-line="1029" selection-end-column="69" />
+          <folding>
+            <element signature="e#27259#27265#0" expanded="true" />
+            <element signature="e#27528#29101#0" expanded="true" />
+            <element signature="e#29100#29101#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

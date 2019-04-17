@@ -451,7 +451,7 @@ public class FXMLclinicDBController implements Initializable {
         deleteDate.setOnAction(e -> {
             if (confirm("cita?")) {
                 Appointment aEliminar = TabAppointment.getSelectionModel().getSelectedItem();
-                if (true) { // La cita aun no ha sucedido
+                if (aEliminar.getAppointmentDateTime().compareTo(LocalDateTime.now())>0) { // La cita aun no ha sucedido
                     listCitas.remove(aEliminar);
                     //eliminar de la tabla
                     TabAppointment.getItems().remove(aEliminar);
@@ -951,9 +951,21 @@ public class FXMLclinicDBController implements Initializable {
         }
     }
 
-    // ESTO HAY QUE QUITARLO
     @FXML
-    private void verPaciente(ActionEvent event) {
+    private void settingsApplication(ActionEvent event) {
+        Dialog<String> dialog = new Dialog<>();
+        CheckBox hola = new CheckBox();
+        hola.setText("Hola");
+        CheckBox adios = new CheckBox();
+        adios.setText("adioooo");
+        dialog.getDialogPane().setContent(new VBox(2,hola,adios));
+
+        dialog.getDialogPane().setHeaderText("text");
+        ButtonType confirm = new ButtonType("ok", ButtonBar.ButtonData.OK_DONE);
+        ButtonType cancel = new ButtonType("cansel", ButtonBar.ButtonData.CANCEL_CLOSE);
+        dialog.getDialogPane().getButtonTypes().addAll(cancel, confirm);
+        dialog.setTitle("title");
+        dialog.showAndWait();
     }
 
 //-----------------------------------------------------------------//

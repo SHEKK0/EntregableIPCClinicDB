@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a0346447-cd85-4a9d-9e4e-63c3541255dd" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/src/clinicdb/FXMLclinicDB.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/clinicdb/FXMLclinicDB.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/clinicdb/FXMLclinicDBController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clinicdb/FXMLclinicDBController.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -28,13 +29,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/clinicdb/FXMLclinicDBController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="111">
-              <caret line="1029" column="69" selection-start-line="1029" selection-start-column="69" selection-end-line="1029" selection-end-column="69" />
-              <folding>
-                <element signature="e#27259#27265#0" expanded="true" />
-                <element signature="e#27528#29101#0" expanded="true" />
-                <element signature="e#29100#29101#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="195">
+              <caret line="960" column="63" selection-start-line="960" selection-start-column="63" selection-end-line="960" selection-end-column="63" />
             </state>
           </provider>
         </entry>
@@ -74,47 +70,12 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="EntregableIPCClinicDB" type="b2602c69:ProjectViewProjectNode" />
               <item name="EntregableIPCClinicDB" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="EntregableIPCClinicDB" type="b2602c69:ProjectViewProjectNode" />
-              <item name="EntregableIPCClinicDB" type="462c0819:PsiDirectoryNode" />
-              <item name="dist" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="EntregableIPCClinicDB" type="b2602c69:ProjectViewProjectNode" />
-              <item name="EntregableIPCClinicDB" type="462c0819:PsiDirectoryNode" />
-              <item name="dist" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="EntregableIPCClinicDB" type="b2602c69:ProjectViewProjectNode" />
-              <item name="EntregableIPCClinicDB" type="462c0819:PsiDirectoryNode" />
-              <item name="dist" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-              <item name="clinicDBAccess.jar" type="ab9368bb:PsiFileNode" />
-            </path>
-            <path>
-              <item name="EntregableIPCClinicDB" type="b2602c69:ProjectViewProjectNode" />
-              <item name="EntregableIPCClinicDB" type="462c0819:PsiDirectoryNode" />
-              <item name="dist" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-              <item name="clinicDBAccess.jar" type="ab9368bb:PsiFileNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="EntregableIPCClinicDB" type="b2602c69:ProjectViewProjectNode" />
-              <item name="EntregableIPCClinicDB" type="462c0819:PsiDirectoryNode" />
-              <item name="dist" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-              <item name="clinicDBAccess.jar" type="ab9368bb:PsiFileNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="EntregableIPCClinicDB" type="b2602c69:ProjectViewProjectNode" />
@@ -131,6 +92,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -186,7 +148,7 @@
     <frame x="8" y="17" width="1350" height="743" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.046224963" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15485363" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -259,13 +221,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/clinicdb/FXMLclinicDBController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="111">
-          <caret line="1029" column="69" selection-start-line="1029" selection-start-column="69" selection-end-line="1029" selection-end-column="69" />
-          <folding>
-            <element signature="e#27259#27265#0" expanded="true" />
-            <element signature="e#27528#29101#0" expanded="true" />
-            <element signature="e#29100#29101#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="195">
+          <caret line="960" column="63" selection-start-line="960" selection-start-column="63" selection-end-line="960" selection-end-column="63" />
         </state>
       </provider>
     </entry>

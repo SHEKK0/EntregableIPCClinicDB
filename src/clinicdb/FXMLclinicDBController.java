@@ -40,7 +40,9 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
+import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
@@ -52,6 +54,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import static javafx.scene.input.KeyCode.E;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -200,6 +203,14 @@ public class FXMLclinicDBController implements Initializable {
     private Label font_label = new Label("Tamaño de la letra: ");
     private ChoiceBox font = new ChoiceBox();
     private Integer[] defaultSettings;
+    @FXML
+    private BorderPane root;
+    @FXML
+    private Font x1;
+    @FXML
+    private AnchorPane paneAdd;
+    @FXML
+    private GridPane gridAdd;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -1030,6 +1041,7 @@ public class FXMLclinicDBController implements Initializable {
         dialog.setTitle("title");
 
         Optional<ButtonType> result = dialog.showAndWait();
+        int tamañoLetra = 14;
         if(result.get() == ButtonType.OK) {
             if(theme.isSelected()) System.out.println("Hola quiero un tema oscuro");
             else System.out.println("Hola quiero un tema claro");
@@ -1037,15 +1049,20 @@ public class FXMLclinicDBController implements Initializable {
             else System.out.println("Well well well how the turntables");
             switch(font.getSelectionModel().getSelectedIndex()){
                 case 0:
+                    tamañoLetra = 10;
                     System.out.println("Letra pequeña marchando!!");
                     break;
                 case 1:
+                    tamañoLetra = 14;
                     System.out.println("Letra mediana ujuuuuuu");
                     break;
                 case 2:
+                    tamañoLetra = 22;
                     System.out.println("MANDEEEEE? NO LE OIGOOOOOOOOOO");
                     break;
             }
+            DoubleProperty fontSize = new SimpleDoubleProperty(tamañoLetra);
+            root.styleProperty().bind(Bindings.concat("-fx-font-size: ",fontSize.asString(), ";"));
             defaultSettings = getSettings();
             setDefaultSettings(); // store in properties
         }

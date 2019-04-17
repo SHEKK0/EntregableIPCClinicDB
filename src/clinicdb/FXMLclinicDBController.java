@@ -14,6 +14,9 @@ import java.util.*;
 
 import javafx.beans.binding.Binding;
 import javafx.beans.binding.Bindings;
+import javafx.beans.property.ReadOnlyIntegerWrapper;
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -112,6 +115,8 @@ public class FXMLclinicDBController implements Initializable {
     @FXML
     private TableColumn<Appointment, String> colFecha;
     @FXML
+    private TableColumn<Appointment, Integer> colRoom;
+    @FXML
     private Button verPatient;
     @FXML
     private Button datePatient;
@@ -136,11 +141,7 @@ public class FXMLclinicDBController implements Initializable {
     @FXML
     private Button deleteDate;
     @FXML
-    private GridPane gridAdd;
-    @FXML
     private ImageView imageAdd;
-    @FXML
-    private Font x1;
     @FXML
     private TextField examinationRoom;
     @FXML
@@ -149,8 +150,6 @@ public class FXMLclinicDBController implements Initializable {
     private ComboBox<LocalTime> iniDay;
     @FXML
     private ComboBox<LocalTime> fiDay;
-
-    private TextField salaText;
     @FXML
     private ToggleButton Monday;
     @FXML
@@ -164,13 +163,9 @@ public class FXMLclinicDBController implements Initializable {
     @FXML
     private ToggleButton Saturday;
     @FXML
-    private AnchorPane paneAdd;
-    @FXML
     private VBox vBoxAddPac;
     @FXML
     private VBox vBoxAddCita;
-    private ListView<Patient> listViewPaciente;
-    private ListView<Doctor> listViewDoctor;
     @FXML
     private TextField addCitaPatientSearch;
     @FXML
@@ -444,6 +439,12 @@ public class FXMLclinicDBController implements Initializable {
         colFecha.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(
                 cellData.getValue().getAppointmentDateTime().toString()
         ));
+        colRoom.
+                setCellValueFactory(
+                        cellData ->
+               new SimpleIntegerProperty(cellData.getValue().getDoctor().getExaminationRoom().getIdentNumber()).asObject()
+        );
+        // new SimpleIntegerProperty(integer_value).asObject()
 //---------------------------------------------------------------------//
         seePatientDate.setOnAction(e -> seePatient(TabAppointment.getSelectionModel().getSelectedItem().getPatient()));
         seeMedicDate.setOnAction(e -> seeMedic(TabAppointment.getSelectionModel().getSelectedItem().getDoctor()));
@@ -953,19 +954,46 @@ public class FXMLclinicDBController implements Initializable {
 
     @FXML
     private void settingsApplication(ActionEvent event) {
-        Dialog<String> dialog = new Dialog<>();
-        CheckBox hola = new CheckBox();
-        hola.setText("Hola");
-        CheckBox adios = new CheckBox();
-        adios.setText("adioooo");
-        dialog.getDialogPane().setContent(new VBox(2,hola,adios));
+        Dialog<ButtonType> dialog = new Dialog<>();
+        CheckBox theme = new CheckBox();
+        theme.setText("Tema oscuro");
+        ChoiceBox idioma = new ChoiceBox();
+        idioma.getItems().addAll("Castellano","Inglés");
+        idioma.setValue(idioma.getItems().get(0));
+        Label idioma_label = new Label("Idioma: ");
+        Label font_label = new Label("Tamaño de la letra: ");
+        ChoiceBox font = new ChoiceBox();
+        font.getItems().addAll("Pequeña","Mediana","Grande");
+        font.setValue(font.getItems().get(1));
+        dialog.getDialogPane().setContent(
+                new VBox(8,
+                        theme,
+                        new HBox(idioma_label,idioma),
+                        new HBox(font_label,font))
+                );
 
         dialog.getDialogPane().setHeaderText("text");
-        ButtonType confirm = new ButtonType("ok", ButtonBar.ButtonData.OK_DONE);
-        ButtonType cancel = new ButtonType("cansel", ButtonBar.ButtonData.CANCEL_CLOSE);
-        dialog.getDialogPane().getButtonTypes().addAll(cancel, confirm);
+        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.CANCEL,ButtonType.OK);
+        dialog.setY(300);
         dialog.setTitle("title");
-        dialog.showAndWait();
+        Optional<ButtonType> result = dialog.showAndWait();
+        if(result.get() == ButtonType.OK) {
+            if(theme.isSelected()) System.out.println("Hola quiero un tema oscuro");
+            else System.out.println("Hola quiero un tema claro");
+            if(idioma.getSelectionModel().getSelectedIndex() == 0) System.out.println("Hola quiero todo en castellano");
+            else System.out.println("Well well well how the turntables");
+            switch(font.getSelectionModel().getSelectedIndex()){
+                case 0:
+                    System.out.println("Letra pequeña marchando!!");
+                    break;
+                case 1:
+                    System.out.println("Letra mediana ujuuuuuu");
+                    break;
+                case 2:
+                    System.out.println("MANDEEEEE? NO LE OIGOOOOOOOOOO");
+                    break;
+            }
+        }
     }
 
 //-----------------------------------------------------------------//

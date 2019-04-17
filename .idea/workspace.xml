@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a0346447-cd85-4a9d-9e4e-63c3541255dd" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/First.properties" beforeDir="false" afterPath="$PROJECT_DIR$/First.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/clinicdb/FXMLclinicDBController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clinicdb/FXMLclinicDBController.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -30,8 +28,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/clinicdb/FXMLclinicDBController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="101">
-              <caret line="723" column="39" selection-start-line="723" selection-start-column="39" selection-end-line="723" selection-end-column="39" />
+            <state relative-caret-position="-109">
+              <caret line="752" column="105" selection-end-line="1211" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -72,10 +70,10 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="8" />
-    <option name="y" value="17" />
-    <option name="width" value="1350" />
-    <option name="height" value="743" />
+    <option name="x" value="-2" />
+    <option name="y" value="-18" />
+    <option name="width" value="1370" />
+    <option name="height" value="788" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -158,10 +156,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="8" y="17" width="674" height="743" extended-state="0" />
+    <frame x="-2" y="-18" width="1370" height="788" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.3279743" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15477997" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -170,7 +168,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.28089887" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.26197603" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39967898" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -238,8 +236,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/clinicdb/FXMLclinicDBController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="101">
-          <caret line="723" column="39" selection-start-line="723" selection-start-column="39" selection-end-line="723" selection-end-column="39" />
+        <state relative-caret-position="-109">
+          <caret line="752" column="105" selection-end-line="1211" selection-end-column="1" />
         </state>
       </provider>
     </entry>

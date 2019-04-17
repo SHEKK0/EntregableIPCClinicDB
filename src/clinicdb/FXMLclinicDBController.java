@@ -726,21 +726,21 @@ public class FXMLclinicDBController implements Initializable {
 // ----------------------------------------------------------------------//
 // F    I   N        D  E   L       I   N   I   T   I   A   L   I   Z    E
 // ----------------------------------------------------------------------//
-    private void setDefaultSettings() {
+    private void setDefaultSettings() { // Nivel global
         try {
-            Properties props = new Properties();
-            FileOutputStream out = new FileOutputStream("First.properties");
-            props.setProperty("tema",defaultSettings[0].toString());
+            Properties props = new Properties(); // Herramienta para sacar los datos
+            FileOutputStream out = new FileOutputStream("First.properties"); // Fichero donde vamos a guardar las cosas
+            props.setProperty("tema",defaultSettings[0].toString()); // Metes la primera variable de la lista settings y así todo
            props.setProperty("idioma", defaultSettings[1].toString());
            props.setProperty("letra", defaultSettings[2].toString());
             props.setProperty("fontSize", defaultSettings[3].toString());
 
-            props.store(out, null);
+            props.store(out, null); // Guarda el archivo
             out.close();
 
         } catch (Exception e) {System.out.println("Algo salio mal intentando escribir");}
     }
-    private void setSettings() {
+    private void setSettings() { // Nivel Local
         if(defaultSettings[0] == 0) {theme.setSelected(false);}
         else {theme.setSelected(true);}
         idioma.setValue(idioma.getItems().get(defaultSettings[1]));
@@ -750,7 +750,7 @@ public class FXMLclinicDBController implements Initializable {
 
     }
 
-    private Integer[] getSettings() {
+    private Integer[] getSettings() { // Actualiza  a nivel local (con los objetos de la ventana ajustes) la lista de defaultSettings
         Integer[] aux = new Integer[4];
         if(theme.isSelected()) aux[0] = 1;
         else aux[0]= 0;
@@ -770,7 +770,7 @@ public class FXMLclinicDBController implements Initializable {
         return aux;
 
     }
-    private Integer[] getDefaultSettings() {
+    private Integer[] getDefaultSettings() { // Creando default settings IMPORTANTE QUE EXISTA UN FILE PRIMERO
         Properties props = new Properties();
         Integer[] aux = new Integer[4];
         try {

@@ -32,8 +32,8 @@ public class ClinicDB extends Application {
         Scene scene = new Scene(root);
         stage.setTitle("IPC MEDICAL SERVICES CLINIC");
         stage.setScene(scene);
-        stage.setMinHeight(450);
-        stage.setMinWidth(600);
+        stage.setMinHeight(600);
+        stage.setMinWidth(900);
 
         stage.show();
 

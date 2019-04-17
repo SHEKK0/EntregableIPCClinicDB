@@ -16,49 +16,64 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clinicdb.FXMLWatchPatientController">
+<AnchorPane id="AnchorPane" fx:id="root" prefHeight="700.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clinicdb.FXMLWatchPatientController">
   <children>
     <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <children>
         <GridPane prefHeight="486.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
           <children>
-            <TextField fx:id="textNombre" disable="false" prefWidth="200.0" text="textNombre" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+            <TextField fx:id="textNombre" disable="false" prefWidth="200.0" promptText="nombre" GridPane.columnIndex="1" GridPane.rowIndex="0" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre" GridPane.columnIndex="0" GridPane.rowIndex="0">
               <font>
                 <Font size="18.0" fx:id="x1" />
               </font>
+                     <GridPane.margin>
+                        <Insets right="10.0" />
+                     </GridPane.margin>
             </Text>
             <ImageView fx:id="imagePersona" fitHeight="80.25" fitWidth="107.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
               <image>
                 <Image url="@../images/default.png" />
               </image>
             </ImageView>
-            <Text font="$x1" strokeType="OUTSIDE" strokeWidth="0.0" text="Telefono" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-            <TextField fx:id="textTel" prefWidth="200.0" text="663682332" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <Text font="$x1" strokeType="OUTSIDE" strokeWidth="0.0" text="Telefono" GridPane.columnIndex="0" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets right="10.0" />
+                     </GridPane.margin></Text>
+            <TextField fx:id="textTel" prefWidth="200.0" promptText="tel." GridPane.columnIndex="1" GridPane.rowIndex="2">
               <GridPane.margin>
                 <Insets right="250.0" />
               </GridPane.margin>
             </TextField>
             <TableView fx:id="tabCitas" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
               <columns>
-                <TableColumn fx:id="colDate" maxWidth="5000.0" minWidth="10.0" prefWidth="196.0" text="Fecha" />
-                <TableColumn fx:id="colMed" maxWidth="5000.0" minWidth="10.0" prefWidth="167.0" text="Medico" />
+                <TableColumn fx:id="colDate" maxWidth="5000.0" minWidth="10.0" prefWidth="223.0" text="Fecha" />
+                <TableColumn fx:id="colMed" maxWidth="5000.0" minWidth="10.0" prefWidth="240.0" text="Medico" />
               </columns>
             </TableView>
-            <Text font="$x1" strokeType="OUTSIDE" strokeWidth="0.0" text="Citas" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-            <Text font="$x1" strokeType="OUTSIDE" strokeWidth="0.0" text="Identificador(DNI) :" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-            <TextField fx:id="textId" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Text font="$x1" strokeType="OUTSIDE" strokeWidth="0.0" text="Citas" GridPane.columnIndex="0" GridPane.rowIndex="4">
+                     <GridPane.margin>
+                        <Insets right="10.0" />
+                     </GridPane.margin></Text>
+            <Text font="$x1" strokeType="OUTSIDE" strokeWidth="0.0" text="Identificador(DNI) :" GridPane.columnIndex="0" GridPane.rowIndex="3">
+                     <GridPane.margin>
+                        <Insets right="10.0" />
+                     </GridPane.margin></Text>
+            <TextField fx:id="textId" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <GridPane.margin>
+                        <Insets right="250.0" />
+                     </GridPane.margin></TextField>
           </children>
           <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="299.0" minWidth="10.0" prefWidth="238.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="362.0" minWidth="10.0" prefWidth="362.0" />
+            <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" maxWidth="299.0" minWidth="10.0" prefWidth="200.0" />
+            <ColumnConstraints hgrow="ALWAYS" maxWidth="472.0" minWidth="10.0" prefWidth="450.0" />
           </columnConstraints>
           <rowConstraints>
-            <RowConstraints maxHeight="76.0" minHeight="10.0" prefHeight="76.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="77.0" minHeight="10.0" prefHeight="77.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="71.0" minHeight="10.0" prefHeight="71.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="153.0" minHeight="10.0" prefHeight="51.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="218.0" minHeight="10.0" prefHeight="201.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="76.0" minHeight="10.0" prefHeight="76.0" vgrow="ALWAYS" />
+            <RowConstraints maxHeight="77.0" minHeight="10.0" prefHeight="77.0" vgrow="ALWAYS" />
+            <RowConstraints maxHeight="71.0" minHeight="10.0" prefHeight="71.0" vgrow="ALWAYS" />
+            <RowConstraints maxHeight="153.0" minHeight="10.0" prefHeight="51.0" vgrow="ALWAYS" />
+            <RowConstraints maxHeight="218.0" minHeight="10.0" prefHeight="201.0" vgrow="ALWAYS" />
           </rowConstraints>
         </GridPane>
         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">

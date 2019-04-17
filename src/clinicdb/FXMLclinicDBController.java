@@ -218,6 +218,8 @@ public class FXMLclinicDBController implements Initializable {
         TabMedico.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         tableCitaDoc.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         tableCitaPac.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        TabAppointment.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        colRoom.prefWidthProperty().bind(TabAppointment.widthProperty().divide(90));
         // Añadimos la clinica al iniciar
         clinic = ClinicDBAccess.getSingletonClinicDBAccess();
         //listas de pacientes , doctores y citas
@@ -484,12 +486,6 @@ public class FXMLclinicDBController implements Initializable {
 
                     alert.showAndWait();
                 }
-                try {
-                    iniCita.setItems(FXCollections.observableList(createListHours(tableCitaDoc.getSelectionModel().getSelectedItem())));
-                } catch (Exception ex) {
-                    Logger.getLogger(FXMLclinicDBController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                iniCita.setValue(iniCita.getItems().get(0));
             }
 
         });
@@ -568,7 +564,7 @@ public class FXMLclinicDBController implements Initializable {
             public void changed(ObservableValue<? extends String> observable, String oldValue,
                                 String newValue) {
                 if (!newValue.matches("\\d*")) {
-                    tel.setText(newValue.replaceAll("[^\\d]", ""));
+                    examinationRoom.setText(newValue.replaceAll("[^\\d]", ""));
                 }
             }
         });
@@ -747,7 +743,6 @@ public class FXMLclinicDBController implements Initializable {
         font.setValue(font.getItems().get(defaultSettings[2]));
         DoubleProperty fontSize = new SimpleDoubleProperty(defaultSettings[3]);
         root.styleProperty().bind(Bindings.concat("-fx-font-size: ",fontSize.asString(), ";"));
-
     }
 
     private Integer[] getSettings() { // Actualiza  a nivel local (con los objetos de la ventana ajustes) la lista de defaultSettings
@@ -764,7 +759,7 @@ public class FXMLclinicDBController implements Initializable {
                 aux[3] = 14;
                 break;
             case 2:
-                aux[3] = 22;
+                aux[3] = 20;
                 break;
         }
         return aux;
@@ -874,13 +869,12 @@ public class FXMLclinicDBController implements Initializable {
                     errorAlert("La cita ya existe!");
                     break;
                 }
+                if(!checkChronology()) {errorAlert("La fecha es anterior a hoy!");break;}
                 if (isErrorDate(datePicker.getValue(),cita.getDoctor())) {errorAlert("Ese día el doctor no admite visitas!");break;}
                 listCitas.add(cita);
                 acceptAlert("Cita");
                 newInput();
                 TabAppointment.setItems(listCitas);
-                iniCita.setItems(FXCollections.observableList(createListHours(tableCitaDoc.getSelectionModel().getSelectedItem())));
-                iniCita.setValue(iniCita.getItems().get(0));
                 break;
         }
     }
@@ -911,8 +905,19 @@ public class FXMLclinicDBController implements Initializable {
     }
 
     private boolean checkInputsCita() {
-        return !(tableCitaDoc.getSelectionModel().getSelectedItem().equals(null)
-                || tableCitaPac.getSelectionModel().getSelectedItem().equals(null));
+        try {
+            return !(tableCitaDoc.getSelectionModel().getSelectedItem().equals(null)
+                    || tableCitaPac.getSelectionModel().getSelectedItem().equals(null));
+        } catch (Exception e) {return false;}
+        }
+
+    private boolean checkChronology() {
+        int days = datePicker.getValue().compareTo(LocalDate.now());
+        if(days < 0) { // Si es ayer o mas, a tomar por culo
+            return false;
+        } else if (days ==0) { // Si es hoy Y antes de ahora, pa fuera.
+            return iniCita.getValue().compareTo(LocalTime.now())>0;
+        }   else return true; // si es luego, pues luego
     }
     private boolean existePaciente(ObservableList<Patient> list, String id) {
         Boolean res = false;
@@ -938,7 +943,7 @@ public class FXMLclinicDBController implements Initializable {
     }
 
     private boolean salaInBounds(int x) {
-        if (x <= listSalas.size()) return true;
+        if (x <= listSalas.size() && x >= 0) return true;
         else return false;
     }
 
@@ -965,6 +970,9 @@ public class FXMLclinicDBController implements Initializable {
         iniDay.setValue(listHours.get(0));
         fiDay.setValue(listHours.get(listHours.size() - 1));
         //tableCitaDoc.getSelectionModel().select(null);
+        tableCitaDoc.getSelectionModel().select(null);
+        iniCita.setItems(listHours);
+        iniCita.setValue(iniCita.getItems().get(0));
         tableCitaPac.getSelectionModel().select(null);
         datePicker.setValue(LocalDate.now());
     }
@@ -1005,6 +1013,9 @@ public class FXMLclinicDBController implements Initializable {
             controller.setTable(clinic.getPatientAppointments(patient.getIdentifier()));
             controller.setClinic(clinic);
             controller.setId(patient.getIdentifier());
+            controller.setTextSize(defaultSettings[3]);
+            stage.setMinHeight(500);
+            stage.setMinWidth(600);
             stage.show();
             controller.getTable();
             listCitas = FXCollections.observableList(controller.getTable());
@@ -1032,8 +1043,11 @@ public class FXMLclinicDBController implements Initializable {
             controller.setSala(doctor.getExaminationRoom());
             controller.setId(doctor.getIdentifier());
             controller.setTableDays(doctor.getVisitDays());
+             stage.setMinHeight(600);
+            stage.setMinWidth(700);
             stage.show();
             controller.getTable();
+            controller.setTextSize(defaultSettings[3]);
             listCitas = FXCollections.observableList(controller.getTable());
         } catch (IOException er) {
             System.out.println("adkñlsjf");

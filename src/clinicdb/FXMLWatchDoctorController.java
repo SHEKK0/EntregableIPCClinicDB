@@ -8,11 +8,14 @@ package clinicdb;
 import DBAccess.ClinicDBAccess;
 import java.io.FileNotFoundException;
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.beans.binding.Bindings;
+import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -26,6 +29,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -80,18 +84,22 @@ public class FXMLWatchDoctorController implements Initializable {
     private Text sabado;
     @FXML
     private Text domingo;
+    @FXML
+    private AnchorPane root;
     /**
      * Initializes the controller class.
      */
+    int textSize = 14;
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle rb){
+       tableCitas.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         seeDate.disableProperty().bind(Bindings.isEmpty(tableCitas.getSelectionModel().getSelectedItems()));
         deleteDate.disableProperty().bind(Bindings.isEmpty(tableCitas.getSelectionModel().getSelectedItems()));
         seeDate.setOnAction(e-> System.out.println("Hola esto falta por arreglar"));
         deleteDate.setOnAction(e -> {
             if (confirm("cita?")) {
                 Appointment aEliminar = tableCitas.getSelectionModel().getSelectedItem();
-                if (true) { // La cita aun no ha sucedido
+                if (aEliminar.getAppointmentDateTime().compareTo(LocalDateTime.now()) > 0) { // La cita aun no ha sucedido
                     list.remove(aEliminar);
                     //eliminar de la tabla
                     tableCitas.getItems().remove(aEliminar);
@@ -152,7 +160,10 @@ public class FXMLWatchDoctorController implements Initializable {
         textSala.setText(Integer.toString(ex.getIdentNumber()));
         textSala.setDisable(true);
     }
-    
+    public void setTextSize(int i){
+        DoubleProperty fontSize = new SimpleDoubleProperty(i);
+        root.styleProperty().bind(Bindings.concat("-fx-font-size: ",fontSize.asString(), ";"));
+    }
     public void setTableDays(ArrayList<Days> list){
         this.listDays = list;
         

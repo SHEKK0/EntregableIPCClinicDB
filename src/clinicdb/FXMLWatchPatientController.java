@@ -9,12 +9,15 @@ import DBAccess.ClinicDBAccess;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
+import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -31,6 +34,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import static javafx.scene.input.KeyCode.C;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
@@ -71,19 +75,21 @@ public class FXMLWatchPatientController implements Initializable {
     
     private ArrayList<Appointment> list;
     private ClinicDBAccess clinic;
+    @FXML
+    private AnchorPane root;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+        tabCitas.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         seeDate.disableProperty().bind(Bindings.isEmpty(tabCitas.getSelectionModel().getSelectedItems()));
         deleteDate.disableProperty().bind(Bindings.isEmpty(tabCitas.getSelectionModel().getSelectedItems()));
         seeDate.setOnAction(e-> System.out.println("Hola esto falta por arreglar"));
         deleteDate.setOnAction(e -> {
             if (confirm("cita?")) {
                 Appointment aEliminar = tabCitas.getSelectionModel().getSelectedItem();
-                if (true) { // La cita aun no ha sucedido
+                if (aEliminar.getAppointmentDateTime().compareTo(LocalDateTime.now())>0) { // La cita aun no ha sucedido
                     list.remove(aEliminar);
                     //eliminar de la tabla
                     tabCitas.getItems().remove(aEliminar);
@@ -109,7 +115,10 @@ public class FXMLWatchPatientController implements Initializable {
         return result.get() == ButtonType.OK;
 
     }
-    
+     public void setTextSize(int i){
+        DoubleProperty fontSize = new SimpleDoubleProperty(i);
+        root.styleProperty().bind(Bindings.concat("-fx-font-size: ",fontSize.asString(), ";"));
+    }
     public void setName(String name){
         textNombre.setText(name);
         textNombre.setDisable(true);

@@ -721,6 +721,7 @@ public class FXMLclinicDBController implements Initializable {
         font.getItems().addAll("Pequeña","Mediana","Grande");
         //font.setValue(font.getItems().get(1));
         defaultSettings = getDefaultSettings();
+        setSettings(); // a modo local.
     }
 // ----------------------------------------------------------------------//
 // F    I   N        D  E   L       I   N   I   T   I   A   L   I   Z    E
@@ -732,6 +733,7 @@ public class FXMLclinicDBController implements Initializable {
             props.setProperty("tema",defaultSettings[0].toString());
            props.setProperty("idioma", defaultSettings[1].toString());
            props.setProperty("letra", defaultSettings[2].toString());
+            props.setProperty("fontSize", defaultSettings[3].toString());
 
             props.store(out, null);
             out.close();
@@ -743,21 +745,34 @@ public class FXMLclinicDBController implements Initializable {
         else {theme.setSelected(true);}
         idioma.setValue(idioma.getItems().get(defaultSettings[1]));
         font.setValue(font.getItems().get(defaultSettings[2]));
+        DoubleProperty fontSize = new SimpleDoubleProperty(defaultSettings[3]);
+        root.styleProperty().bind(Bindings.concat("-fx-font-size: ",fontSize.asString(), ";"));
+
     }
 
     private Integer[] getSettings() {
-        Integer[] aux = new Integer[3];
+        Integer[] aux = new Integer[4];
         if(theme.isSelected()) aux[0] = 1;
         else aux[0]= 0;
         aux[1] = idioma.getSelectionModel().getSelectedIndex();
         aux[2] = font.getSelectionModel().getSelectedIndex();
-
+        switch(font.getSelectionModel().getSelectedIndex()){
+            case 0:
+                aux[3] = 10;
+                break;
+            case 1:
+                aux[3] = 14;
+                break;
+            case 2:
+                aux[3] = 22;
+                break;
+        }
         return aux;
 
     }
     private Integer[] getDefaultSettings() {
         Properties props = new Properties();
-        Integer[] aux = new Integer[3];
+        Integer[] aux = new Integer[4];
         try {
             FileInputStream in = new FileInputStream("First.properties");
             props.load(in);
@@ -765,6 +780,7 @@ public class FXMLclinicDBController implements Initializable {
             aux[0] = Integer.parseInt(props.getProperty("tema"));
             aux[1] = Integer.parseInt(props.getProperty("idioma"));
             aux[2] = Integer.parseInt(props.getProperty("letra"));
+            aux[3] = Integer.parseInt(props.getProperty("fontSize"));
             in.close();
         } catch (Exception e) {System.out.println("Algo salio mal intentando leer");}
 
@@ -1026,7 +1042,6 @@ public class FXMLclinicDBController implements Initializable {
 
     @FXML
     private void settingsApplication(ActionEvent event) {
-        setSettings(); // a modo local.
         Dialog<ButtonType> dialog = new Dialog<>();
         dialog.getDialogPane().setContent(
                 new VBox(8,
@@ -1041,30 +1056,16 @@ public class FXMLclinicDBController implements Initializable {
         dialog.setTitle("title");
 
         Optional<ButtonType> result = dialog.showAndWait();
-        int tamañoLetra = 14;
+        int sizeLetra = 14;
         if(result.get() == ButtonType.OK) {
             if(theme.isSelected()) System.out.println("Hola quiero un tema oscuro");
             else System.out.println("Hola quiero un tema claro");
             if(idioma.getSelectionModel().getSelectedIndex() == 0) System.out.println("Hola quiero todo en castellano");
             else System.out.println("Well well well how the turntables");
-            switch(font.getSelectionModel().getSelectedIndex()){
-                case 0:
-                    tamañoLetra = 10;
-                    System.out.println("Letra pequeña marchando!!");
-                    break;
-                case 1:
-                    tamañoLetra = 14;
-                    System.out.println("Letra mediana ujuuuuuu");
-                    break;
-                case 2:
-                    tamañoLetra = 22;
-                    System.out.println("MANDEEEEE? NO LE OIGOOOOOOOOOO");
-                    break;
-            }
-            DoubleProperty fontSize = new SimpleDoubleProperty(tamañoLetra);
-            root.styleProperty().bind(Bindings.concat("-fx-font-size: ",fontSize.asString(), ";"));
             defaultSettings = getSettings();
+
             setDefaultSettings(); // store in properties
+            setSettings(); // a modo local.
         }
     }
 

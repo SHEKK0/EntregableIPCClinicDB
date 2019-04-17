@@ -7,6 +7,8 @@ package clinicdb;
 
 import DBAccess.ClinicDBAccess;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.time.*;
@@ -191,7 +193,13 @@ public class FXMLclinicDBController implements Initializable {
     private ObservableList<ExaminationRoom> listSalas;
     private ObservableList<LocalTime> listHours;
     private ArrayList<Days> listDays;
-    private ObservableList<LocalTime> listHoursCita;
+
+    private CheckBox theme = new CheckBox();
+    private ChoiceBox idioma = new ChoiceBox();
+    private Label idioma_label = new Label("Idioma: ");
+    private Label font_label = new Label("Tamaño de la letra: ");
+    private ChoiceBox font = new ChoiceBox();
+    private Integer[] defaultSettings;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -693,11 +701,64 @@ public class FXMLclinicDBController implements Initializable {
                     }
                 });
         });
-    }
+// ----------------------------------------------------------------------//
+// LAS SETTINGS
 
+        theme.setText("Tema oscuro");
+        idioma.getItems().addAll("Castellano","Inglés");
+        //idioma.setValue(idioma.getItems().get(0));
+        font.getItems().addAll("Pequeña","Mediana","Grande");
+        //font.setValue(font.getItems().get(1));
+        defaultSettings = getDefaultSettings();
+    }
 // ----------------------------------------------------------------------//
 // F    I   N        D  E   L       I   N   I   T   I   A   L   I   Z    E
 // ----------------------------------------------------------------------//
+    private void setDefaultSettings() {
+        try {
+            Properties props = new Properties();
+            FileOutputStream out = new FileOutputStream("First.properties");
+            props.setProperty("tema",defaultSettings[0].toString());
+           props.setProperty("idioma", defaultSettings[1].toString());
+           props.setProperty("letra", defaultSettings[2].toString());
+
+            props.store(out, null);
+            out.close();
+
+        } catch (Exception e) {System.out.println("Algo salio mal intentando escribir");}
+    }
+    private void setSettings() {
+        if(defaultSettings[0] == 0) {theme.setSelected(false);}
+        else {theme.setSelected(true);}
+        idioma.setValue(idioma.getItems().get(defaultSettings[1]));
+        font.setValue(font.getItems().get(defaultSettings[2]));
+    }
+
+    private Integer[] getSettings() {
+        Integer[] aux = new Integer[3];
+        if(theme.isSelected()) aux[0] = 1;
+        else aux[0]= 0;
+        aux[1] = idioma.getSelectionModel().getSelectedIndex();
+        aux[2] = font.getSelectionModel().getSelectedIndex();
+
+        return aux;
+
+    }
+    private Integer[] getDefaultSettings() {
+        Properties props = new Properties();
+        Integer[] aux = new Integer[3];
+        try {
+            FileInputStream in = new FileInputStream("First.properties");
+            props.load(in);
+
+            aux[0] = Integer.parseInt(props.getProperty("tema"));
+            aux[1] = Integer.parseInt(props.getProperty("idioma"));
+            aux[2] = Integer.parseInt(props.getProperty("letra"));
+            in.close();
+        } catch (Exception e) {System.out.println("Algo salio mal intentando leer");}
+
+        return aux;
+    }
 
 
 // ----------------------------------------------------------------------//
@@ -954,17 +1015,8 @@ public class FXMLclinicDBController implements Initializable {
 
     @FXML
     private void settingsApplication(ActionEvent event) {
+        setSettings(); // a modo local.
         Dialog<ButtonType> dialog = new Dialog<>();
-        CheckBox theme = new CheckBox();
-        theme.setText("Tema oscuro");
-        ChoiceBox idioma = new ChoiceBox();
-        idioma.getItems().addAll("Castellano","Inglés");
-        idioma.setValue(idioma.getItems().get(0));
-        Label idioma_label = new Label("Idioma: ");
-        Label font_label = new Label("Tamaño de la letra: ");
-        ChoiceBox font = new ChoiceBox();
-        font.getItems().addAll("Pequeña","Mediana","Grande");
-        font.setValue(font.getItems().get(1));
         dialog.getDialogPane().setContent(
                 new VBox(8,
                         theme,
@@ -976,6 +1028,7 @@ public class FXMLclinicDBController implements Initializable {
         dialog.getDialogPane().getButtonTypes().addAll(ButtonType.CANCEL,ButtonType.OK);
         dialog.setY(300);
         dialog.setTitle("title");
+
         Optional<ButtonType> result = dialog.showAndWait();
         if(result.get() == ButtonType.OK) {
             if(theme.isSelected()) System.out.println("Hola quiero un tema oscuro");
@@ -993,6 +1046,8 @@ public class FXMLclinicDBController implements Initializable {
                     System.out.println("MANDEEEEE? NO LE OIGOOOOOOOOOO");
                     break;
             }
+            defaultSettings = getSettings();
+            setDefaultSettings(); // store in properties
         }
     }
 

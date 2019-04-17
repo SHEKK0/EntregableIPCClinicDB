@@ -16,6 +16,7 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -57,13 +58,13 @@ public class FXMLWatchDoctorController implements Initializable {
     @FXML
     private TableView<Appointment> tableCitas;
     @FXML
-    private Button seeDate;
-    @FXML
     private Button deleteDate;
     @FXML
-    private TableColumn<Appointment,Days > colDate;
+    private TableColumn<Appointment,String > colDate;
     @FXML
     private TableColumn<Appointment, String> colPatient;
+    @FXML
+    private TableColumn<Appointment, Integer> colSala;
     
     private ArrayList<Appointment> list;
     private ArrayList<Days> listDays;
@@ -93,9 +94,7 @@ public class FXMLWatchDoctorController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb){
        tableCitas.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-        seeDate.disableProperty().bind(Bindings.isEmpty(tableCitas.getSelectionModel().getSelectedItems()));
         deleteDate.disableProperty().bind(Bindings.isEmpty(tableCitas.getSelectionModel().getSelectedItems()));
-        seeDate.setOnAction(e-> System.out.println("Hola esto falta por arreglar"));
         deleteDate.setOnAction(e -> {
             if (confirm("cita?")) {
                 Appointment aEliminar = tableCitas.getSelectionModel().getSelectedItem();
@@ -143,14 +142,23 @@ public class FXMLWatchDoctorController implements Initializable {
         textId.setText(Id);
         textId.setDisable(true);
     }
-    
+    private String toFormat(int value) {
+        return String.format("%02d", value);
+    }
     public void setTable(ArrayList<Appointment> list){
         this.list = list;
 
         tableCitas.getItems().addAll(list);
         
-        colDate.setCellValueFactory(new PropertyValueFactory<>("appointmentDateTime"));
+        colDate.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(
+                toFormat(cellData.getValue().getAppointmentDateTime().getDayOfMonth())+"-"+
+                        toFormat(cellData.getValue().getAppointmentDateTime().getMonthValue())+"-"+
+                        toFormat(cellData.getValue().getAppointmentDateTime().getYear())+" "+
+                        toFormat(cellData.getValue().getAppointmentDateTime().getHour())+":"+
+                        toFormat(cellData.getValue().getAppointmentDateTime().getMinute())
+        ));
         colPatient.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getPatient().getName()+ " " + cellData.getValue().getPatient().getSurname()));
+        colSala.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getDoctor().getExaminationRoom().getIdentNumber()).asObject());
     }
     public ArrayList<Appointment> getTable() {
         return list;
@@ -192,7 +200,7 @@ public class FXMLWatchDoctorController implements Initializable {
     }
     @FXML
     private void closeButton(ActionEvent event) {
-        Stage stage = (Stage) seeDate.getScene().getWindow();
+        Stage stage = (Stage) deleteDate.getScene().getWindow();
         stage.close();
     }
     

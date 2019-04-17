@@ -207,10 +207,6 @@ public class FXMLclinicDBController implements Initializable {
     private BorderPane root;
     @FXML
     private Font x1;
-    @FXML
-    private AnchorPane paneAdd;
-    @FXML
-    private GridPane gridAdd;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -457,8 +453,13 @@ public class FXMLclinicDBController implements Initializable {
                 cellData.getValue().getDoctor().getName() + " "
                         + cellData.getValue().getDoctor().getSurname()
         ));
+
         colFecha.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(
-                cellData.getValue().getAppointmentDateTime().toString()
+                toFormat(cellData.getValue().getAppointmentDateTime().getDayOfMonth())+"-"+
+                toFormat(cellData.getValue().getAppointmentDateTime().getMonthValue())+"-"+
+                toFormat(cellData.getValue().getAppointmentDateTime().getYear())+" "+
+                toFormat(cellData.getValue().getAppointmentDateTime().getHour())+":"+
+                toFormat(cellData.getValue().getAppointmentDateTime().getMinute())
         ));
         colRoom.
                 setCellValueFactory(
@@ -647,6 +648,8 @@ public class FXMLclinicDBController implements Initializable {
 
         // 5. Add sorted (and filtered) data to the table.
         tableCitaDoc.setItems(sortedDataDateDoctor);
+// ----------------------------------------------------------------------//
+
 
 // ----------------------------------------------------------------------//
 // BINDINGS ENTRE MEDICOS HORAS DISPONIBLES Y DIAS DISPONIBLES EN ADD DATE
@@ -662,10 +665,15 @@ public class FXMLclinicDBController implements Initializable {
                 iniCita.setValue(iniCita.getItems().get(0));
             } catch(Exception e){}
         });
+// ----------------------------------------------------------------------//
+        tableCitaPac.getSelectionModel().selectedItemProperty().addListener((o,old,newValue)-> {
+                    addCitaPatientSearch.setPromptText(newValue.getName() + " " + newValue.getSurname());
+                });
 
 // ----------------------------------------------------------------------//
 // HORAS DISPONIBLES DE CADA MEDICO (CONTANDO LAS CITAS EN EL DIA YA MARCADO EN EL DATEPICKER)
         tableCitaDoc.getSelectionModel().selectedItemProperty().addListener((o,old,newValue)->{
+            addCitaDoctorSearch.setPromptText(newValue.getName()+" "+newValue.getSurname());
             try {
                 iniCita.setItems(FXCollections.observableList(createListHours(newValue)));
             } catch (Exception e) {
@@ -719,7 +727,13 @@ public class FXMLclinicDBController implements Initializable {
         defaultSettings = getDefaultSettings();
         setSettings(); // a modo local.
     }
-// ----------------------------------------------------------------------//
+
+    private String toFormat(int value) {
+        return String.format("%02d", value);
+
+    }
+
+    // ----------------------------------------------------------------------//
 // F    I   N        D  E   L       I   N   I   T   I   A   L   I   Z    E
 // ----------------------------------------------------------------------//
     private void setDefaultSettings() { // Nivel global

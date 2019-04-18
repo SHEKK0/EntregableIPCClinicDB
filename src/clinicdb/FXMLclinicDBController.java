@@ -1243,7 +1243,7 @@ private ArrayList<LocalTime> createListHours(Doctor doc) throws Exception {
         choice.getSelectionModel().select(2);
     }
     private void setScene(){
-        Scene scene = root.getScene();
+        Scene scene = font_label.getScene();
         if(defaultSettings[0] == 0){
             String css = this.getClass().getResource("/Styles/light_theme.css").toExternalForm();
             scene.getStylesheets().add(css);

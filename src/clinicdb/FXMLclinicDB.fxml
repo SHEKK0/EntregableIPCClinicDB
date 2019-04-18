@@ -7,6 +7,7 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -331,24 +332,29 @@
                             <TextField fx:id="tel" prefHeight="24.9998779296875" prefWidth="302.0" promptText="Teléfono" GridPane.columnIndex="0" GridPane.rowIndex="4" />
                             <ChoiceBox fx:id="ID" prefHeight="26.0" prefWidth="54.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3" />
                             <TextField id="tel" fx:id="examinationRoom" prefHeight="24.9998779296875" prefWidth="302.0" promptText="Sala" text="" GridPane.columnIndex="0" GridPane.rowIndex="5" />
-                            <!--
-                            <Spinner fx:id="iniDay" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="143.0" GridPane.columnIndex="0" GridPane.rowIndex="7" >
-                                <editable>true</editable>
-                            </Spinner>
-                            <Spinner fx:id="fiDay" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="146.0" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="7" >
-                                <editable>true</editable>
-                            </Spinner>
-                            -->
-                            <HBox id="days" fx:id="availableDays" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="6">
-                              <children>
-                                <ToggleButton fx:id="Monday" mnemonicParsing="false" onAction="#getDays" text="Lunes" />
-                                <ToggleButton fx:id="Tuesday" mnemonicParsing="false" onAction="#getDays" text="Martes" />
-                                <ToggleButton fx:id="Wednesday" mnemonicParsing="false" onAction="#getDays" text="Miércoles" />
-                                <ToggleButton fx:id="Thursday" mnemonicParsing="false" onAction="#getDays" text="Jueves" />
-                                <ToggleButton fx:id="Friday" mnemonicParsing="false" onAction="#getDays" text="Viernes" />
-                                <ToggleButton fx:id="Saturday" mnemonicParsing="false" onAction="#getDays" text="Sábado" />
-                              </children>
-                            </HBox>
+                                          <VBox GridPane.rowIndex="6">
+                                             <children>
+                                                <Label text="Días en los que trabaja el médico" />
+                                  <!--
+                                  <Spinner fx:id="iniDay" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="143.0" GridPane.columnIndex="0" GridPane.rowIndex="7" >
+                                      <editable>true</editable>
+                                  </Spinner>
+                                  <Spinner fx:id="fiDay" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="146.0" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="7" >
+                                      <editable>true</editable>
+                                  </Spinner>
+                                  -->
+                                  <HBox id="days" fx:id="availableDays" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                    <children>
+                                      <ToggleButton fx:id="Monday" mnemonicParsing="false" onAction="#getDays" text="Lunes" />
+                                      <ToggleButton fx:id="Tuesday" mnemonicParsing="false" onAction="#getDays" text="Martes" />
+                                      <ToggleButton fx:id="Wednesday" mnemonicParsing="false" onAction="#getDays" text="Miércoles" />
+                                      <ToggleButton fx:id="Thursday" mnemonicParsing="false" onAction="#getDays" text="Jueves" />
+                                      <ToggleButton fx:id="Friday" mnemonicParsing="false" onAction="#getDays" text="Viernes" />
+                                      <ToggleButton fx:id="Saturday" mnemonicParsing="false" onAction="#getDays" text="Sábado" />
+                                    </children>
+                                  </HBox>
+                                             </children>
+                                          </VBox>
                             <ComboBox fx:id="iniDay" prefHeight="21.0" prefWidth="133.0" GridPane.columnIndex="0" GridPane.rowIndex="7">
                               <items>
                                 <FXCollections fx:factory="observableArrayList">
@@ -389,19 +395,22 @@
                                           <Insets left="20.0" />
                                        </VBox.margin>
                         </GridPane>
-                        <HBox alignment="CENTER" prefHeight="49.0" prefWidth="603.0">
+                        <HBox alignment="CENTER_RIGHT" prefHeight="49.0" prefWidth="603.0">
                           <children>
-                            <Button id="acceptButton" mnemonicParsing="false" onMouseClicked="#accept" text="Aceptar">
+                            <Button id="clearFields" mnemonicParsing="false" onAction="#newInput" text="Borrar">
                               <HBox.margin>
                                 <Insets right="20.0" />
                               </HBox.margin>
                             </Button>
-                            <Button id="clearFields" mnemonicParsing="false" onAction="#newInput" text="Borrar">
+                            <Button id="acceptButton" mnemonicParsing="false" onMouseClicked="#accept" text="Aceptar">
                               <HBox.margin>
-                                <Insets left="20.0" />
+                                <Insets left="10.0" />
                               </HBox.margin>
                             </Button>
                           </children>
+                                       <padding>
+                                          <Insets right="30.0" />
+                                       </padding>
                         </HBox>
                       </children>
                     </VBox>

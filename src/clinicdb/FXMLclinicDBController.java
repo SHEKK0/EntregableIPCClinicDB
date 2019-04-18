@@ -1030,6 +1030,9 @@ public class FXMLclinicDBController implements Initializable {
             controller.setTextSize(defaultSettings[3]);
             stage.setMinHeight(500);
             stage.setMinWidth(600);
+            String css = this.getClass().getResource("/Styles/dark_theme.css").toExternalForm();
+            Scene scene = stage.getScene();
+            scene.getStylesheets().add(css);
             stage.show();
             controller.getTable();
             listCitas = FXCollections.observableList(controller.getTable());
@@ -1059,6 +1062,9 @@ public class FXMLclinicDBController implements Initializable {
             controller.setTableDays(doctor.getVisitDays());
              stage.setMinHeight(600);
             stage.setMinWidth(700);
+             String css = this.getClass().getResource("/Styles/dark_theme.css").toExternalForm();
+            Scene scene = stage.getScene();
+            scene.getStylesheets().add(css);
             stage.show();
             controller.getTable();
             controller.setTextSize(defaultSettings[3]);

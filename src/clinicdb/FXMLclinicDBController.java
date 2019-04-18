@@ -243,14 +243,11 @@ public class FXMLclinicDBController implements Initializable {
                 // Compare first name and last name of every person with filter text.
                 String lowerCaseFilter = newValue.toLowerCase();
 
-                if (patient.getName().toLowerCase().startsWith(lowerCaseFilter)) {
-                    return true; // Filter matches first name.
-                } else if (patient.getSurname().toLowerCase().startsWith(lowerCaseFilter)) {
-                    return true; // Filter matches last name.
-                } else if (patient.getIdentifier().toLowerCase().startsWith(lowerCaseFilter)) {
-                    return true; // Filter matches last name.
-                } else if (patient.getTelephon().toLowerCase().startsWith(lowerCaseFilter)) {
-                    return true; // Filter matches last name.
+                if ((patient.getName().toLowerCase()+" "+patient.getSurname().toLowerCase()).startsWith(lowerCaseFilter) ||
+                        patient.getSurname().toLowerCase().startsWith(lowerCaseFilter) ||
+                        patient.getIdentifier().toLowerCase().startsWith(lowerCaseFilter) ||
+                        patient.getTelephon().toLowerCase().startsWith(lowerCaseFilter)) {
+                    return true; // Filter matches.
                 }
                 return false; // Does not match.
             });
@@ -330,14 +327,11 @@ public class FXMLclinicDBController implements Initializable {
                 // Compare first name and last name of every person with filter text.
                 String lowerCaseFilter = newValue.toLowerCase();
 
-                if (doctor.getName().toLowerCase().startsWith(lowerCaseFilter)) {
-                    return true; // Filter matches first name.
-                } else if (doctor.getName().toLowerCase().startsWith(lowerCaseFilter)) {
-                    return true; // Filter matches last name.
-                } else if (doctor.getIdentifier().toLowerCase().startsWith(lowerCaseFilter)) {
-                    return true; // Filter matches last name.
-                } else if (doctor.getTelephon().toLowerCase().startsWith(lowerCaseFilter)) {
-                    return true; // Filter matches last name.
+                if ((doctor.getName().toLowerCase()+" "+doctor.getSurname().toLowerCase()).startsWith(lowerCaseFilter) ||
+                        doctor.getSurname().toLowerCase().startsWith(lowerCaseFilter) ||
+                        doctor.getIdentifier().toLowerCase().startsWith(lowerCaseFilter) ||
+                        doctor.getTelephon().toLowerCase().startsWith(lowerCaseFilter)) {
+                    return true; // Filter matches.
                 }
                 return false; // Does not match.
             });
@@ -414,11 +408,11 @@ public class FXMLclinicDBController implements Initializable {
                 // Compare first name and last name of every person with filter text.
                 String lowerCaseFilter = newValue.toLowerCase();
 
-                if (appointment.getPatient().getName().toLowerCase().startsWith(lowerCaseFilter)) {
+                if ((appointment.getPatient().getName().toLowerCase()+" "+appointment.getPatient().getSurname().toLowerCase()).startsWith(lowerCaseFilter)) {
                     return true; // Filter matches first name.
                 } else if (appointment.getPatient().getSurname().toLowerCase().startsWith(lowerCaseFilter)) {
                     return true; // Filter matches last name.
-                } else if (appointment.getDoctor().getName().toLowerCase().startsWith(lowerCaseFilter)) {
+                } else if ((appointment.getDoctor().getName()+" " +appointment.getDoctor().getSurname().toLowerCase()).toLowerCase().startsWith(lowerCaseFilter)) {
                     return true; // Filter matches first name.
                 } else if (appointment.getDoctor().getSurname().toLowerCase().startsWith(lowerCaseFilter)) {
                     return true; // Filter matches last name.

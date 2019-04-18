@@ -416,6 +416,8 @@ public class FXMLclinicDBController implements Initializable {
                     return true; // Filter matches first name.
                 } else if (appointment.getDoctor().getSurname().toLowerCase().startsWith(lowerCaseFilter)) {
                     return true; // Filter matches last name.
+                } else if (appointment.getAppointmentDateTime().toString().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
                 }
                 return false; // Does not match.
             });

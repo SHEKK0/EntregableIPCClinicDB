@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a0346447-cd85-4a9d-9e4e-63c3541255dd" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/Styles/colors.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Styles/colors.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Styles/dark_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Styles/dark_theme.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/clinicdb/ClinicDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clinicdb/ClinicDB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Styles/light_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Styles/light_theme.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clinicdb/FXMLclinicDBController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clinicdb/FXMLclinicDBController.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -22,7 +21,7 @@
         <entry file="file://$PROJECT_DIR$/src/Styles/dark_theme.css">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="275">
-              <caret line="63" column="62" selection-start-line="63" selection-start-column="62" selection-end-line="63" selection-end-column="62" />
+              <caret line="60" column="25" lean-forward="true" selection-start-line="60" selection-start-column="25" selection-end-line="60" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -30,7 +29,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Styles/colors.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
+            <state relative-caret-position="627">
               <caret line="63" column="2" lean-forward="true" selection-start-line="63" selection-start-column="2" selection-end-line="63" selection-end-column="16" />
             </state>
           </provider>
@@ -39,8 +38,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/clinicdb/FXMLclinicDBController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="339">
-              <caret line="221" column="59" selection-start-line="221" selection-start-column="59" selection-end-line="221" selection-end-column="59" />
+            <state relative-caret-position="90">
+              <caret line="673" column="66" selection-start-line="673" selection-start-column="66" selection-end-line="673" selection-end-column="66" />
             </state>
           </provider>
         </entry>
@@ -57,8 +56,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Styles/light_theme.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
-              <caret line="140" column="29" selection-start-line="140" selection-start-column="29" selection-end-line="140" selection-end-column="29" />
+            <state relative-caret-position="224">
+              <caret line="108" column="28" selection-start-line="108" selection-start-column="28" selection-end-line="108" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -75,9 +74,9 @@
       <find>System.out.</find>
       <find>ClinicDB</find>
       <find>colRoom</find>
-      <find>choi</find>
       <find>fx-dark-te</find>
       <find>light-se</find>
+      <find>choi</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -88,10 +87,10 @@
       <list>
         <option value="$PROJECT_DIR$/src/clinicdb/FXMLWatchDoctorController.java" />
         <option value="$PROJECT_DIR$/src/clinicdb/FXMLWatchPatientController.java" />
-        <option value="$PROJECT_DIR$/src/clinicdb/FXMLclinicDBController.java" />
         <option value="$PROJECT_DIR$/src/Styles/colors.css" />
         <option value="$PROJECT_DIR$/src/Styles/dark_theme.css" />
         <option value="$PROJECT_DIR$/src/clinicdb/ClinicDB.java" />
+        <option value="$PROJECT_DIR$/src/clinicdb/FXMLclinicDBController.java" />
         <option value="$PROJECT_DIR$/src/Styles/light_theme.css" />
       </list>
     </option>
@@ -195,10 +194,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="8" y="17" width="674" height="743" extended-state="0" />
+    <frame x="8" y="17" width="1350" height="743" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.25654852" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12249615" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -207,7 +206,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.18619582" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.16532905" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39967898" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -281,27 +280,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Styles/colors.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="63" column="2" lean-forward="true" selection-start-line="63" selection-start-column="2" selection-end-line="63" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Styles/dark_theme.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="63" column="62" selection-start-line="63" selection-start-column="62" selection-end-line="63" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/clinicdb/FXMLclinicDBController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="339">
-          <caret line="221" column="59" selection-start-line="221" selection-start-column="59" selection-end-line="221" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/clinicdb/ClinicDB.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="406">
@@ -309,10 +287,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Styles/dark_theme.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="275">
+          <caret line="60" column="25" lean-forward="true" selection-start-line="60" selection-start-column="25" selection-end-line="60" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Styles/colors.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="627">
+          <caret line="63" column="2" lean-forward="true" selection-start-line="63" selection-start-column="2" selection-end-line="63" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/clinicdb/FXMLclinicDBController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="673" column="66" selection-start-line="673" selection-start-column="66" selection-end-line="673" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Styles/light_theme.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="140" column="29" selection-start-line="140" selection-start-column="29" selection-end-line="140" selection-end-column="29" />
+        <state relative-caret-position="224">
+          <caret line="108" column="28" selection-start-line="108" selection-start-column="28" selection-end-line="108" selection-end-column="28" />
         </state>
       </provider>
     </entry>

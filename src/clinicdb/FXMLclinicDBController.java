@@ -663,13 +663,15 @@ public class FXMLclinicDBController implements Initializable {
         });
 // ----------------------------------------------------------------------//
         tableCitaPac.getSelectionModel().selectedItemProperty().addListener((o,old,newValue)-> {
-                    addCitaPatientSearch.setPromptText(newValue.getName() + " " + newValue.getSurname());
-                });
+                    if(newValue!=null) addCitaPatientSearch.setPromptText(newValue.getName() + " " + newValue.getSurname());
+                    else {addCitaPatientSearch.setPromptText("Buscar Paciente");}
+            });
 
 // ----------------------------------------------------------------------//
 // HORAS DISPONIBLES DE CADA MEDICO (CONTANDO LAS CITAS EN EL DIA YA MARCADO EN EL DATEPICKER)
         tableCitaDoc.getSelectionModel().selectedItemProperty().addListener((o,old,newValue)->{
-            addCitaDoctorSearch.setPromptText(newValue.getName()+" "+newValue.getSurname());
+            if(newValue!=null) addCitaDoctorSearch.setPromptText(newValue.getName()+" "+newValue.getSurname());
+            else {addCitaDoctorSearch.setPromptText("Buscar Doctor");}
             try {
                 iniCita.setItems(FXCollections.observableList(createListHours(newValue)));
             } catch (Exception e) {

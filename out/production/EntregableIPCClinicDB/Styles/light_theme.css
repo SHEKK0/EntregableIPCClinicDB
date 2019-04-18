@@ -18,11 +18,12 @@
     -fx-white-text:#f2f2f2;
     -fx-hover: #f8f8f8;
     -fx-head: #324960;
-    -fx-active: #f58c6d;
+    -fx-active: #4799C4;
 
     /*BUTTONS*/
-    -fx-orange:#f26b43;
+    -fx-orange:#1A80B6;
     -fx-grey-disabled: #596f7f;
+    -fx-button-selected:#0f4c6d;
     /*TableView*/
     -fx-light-head-table: #324960;
 
@@ -54,6 +55,7 @@
     -fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 3 -1;
     -fx-border: 0.1;
     -fx-border-color: -fx-primary;
+    -fx-padding: 6px 24px;
     }
 .text-field:focused {
     -fx-background-color: derive(-fx-white, 15%);
@@ -63,71 +65,50 @@
   -fx-background-color: -fx-primary;
   -fx-text-fill: -fx-text;
 }
-.choice-box {
+
+
+
+.choice-box, .combo-box-base {
   -fx-background-color: derive(-fx-white, 10%);
-  -fx-color: -fx-black;
-  -fx-text-fill: -fx-black;
   -fx-border:.1;
   -fx-border-color:-fx-primary;
 }
 .choice-box .menu-item {
   -fx-text-fill: -fx-black;
   -fx-color:-fx-black;
-  -fx-background-color:derive(-fx-orange,10%);
+  -fx-background-color:derive(-fx-hover,10%);
   }
-.choice-box .menu-item:focused {
-  -fx-color:white;
-  -fx-background-color: derive(-fx-black,30%);
+ .choice-box .menu-item > .label {
+    -fx-text-fill: derive(-fx-black,30%);
+ }
+.choice-box .menu-item:focused, .combo-box-popup .list-view .list-cell:hover {
+
+  -fx-background-color: -fx-active;
   }
+  .combo-box-popup .list-view .list-cell:selected,.choice-box .menu-item:selected {
+   -fx-background-color: -fx-button-selected;
+   -fx-text-fill: derive(-fx-white,30%);
+   -fx-color: derive(-fx-white,30%);
+  }
+  .combo-box .list-cell {
+    -fx-color: derive(-fx-black,30%);
+    -fx-text-fill: derive(-fx-black,30%);
+  }
+
 .choice-box > .label {
   -fx-text-fill: derive(-fx-black,30%);
+  -fx-color: black;
   }
 .choice-box .menu-item:focused > .label {
-  -fx-text-fill: -fx-primary;
+  -fx-text-fill: -fx-black;
 }
-
-
- /* COMBO-BOX */
-.combo-box .list-cell
-{
-    -fx-background: red;
+.date-picker .button {
     -fx-background-color: transparent;
-    -fx-text-fill: -fx-text-base-color;
-    -fx-padding: 3 0 2 7;
-    -fx-cell-size: 1.66667em;
 }
+.combo-box-base { /*Lo del calendar*/
+      -fx-color: -fx-active;}
 
-.combo-box-popup .list-view
-{
-    -fx-background-color: white, white;
-    -fx-background-insets: 0, 1;
-    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 8, 0.0 , 0 , 0 );
-}
-
-.combo-box-popup .list-view .list-cell
-{
-    -fx-padding: 4 0 4 5;
-
-    /* No alternate highlighting */
-    -fx-background-color: white;
-}
-
-.combo-box-popup .list-view .list-cell:filled:selected, .combo-box-popup .list-view .list-cell:filled:selected:hover
-{
-    -fx-background: -fx-red;
-    -fx-background-color: -fx-selection-bar;
-    -fx-text-fill: -fx-selection-bar-text;
-}
-
-.combo-box-popup .list-view .list-cell:filled:hover
-{
-    -fx-background-color: red;
-    -fx-text-fill: -fx-text-inner-color;
-}
-
-
-
-.button{
+.button, .toggle-button{
     -fx-text-fill: -fx-white;
     -fx-background-color: -fx-orange;
     -fx-border: 0;
@@ -136,11 +117,11 @@
     -fx-cursor: hand;
 }
 
-.button:focused{
-    -fx-background-color: -fx-orange;
+.button:selected, .toggle-button:selected{
+    -fx-background-color: -fx-button-selected;
     -fx-text-fill: -fx-white-text;
 }
-.button:disabled {
+.button:disabled, .toggle-button:disabled{
     -fx-background-color: -fx-grey-disabled;
     -fx-opacity: 1;
 }
@@ -345,6 +326,7 @@
 .table-row-cell:selected {
     -fx-background-color: -fx-active;
     -fx-color: -fx-white;
+    -fx-text-fill: -fx-white;
     -fx-background-insets: 0;
 }
 .placeholder .label{

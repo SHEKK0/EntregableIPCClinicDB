@@ -444,7 +444,6 @@ public class FXMLclinicDBController implements Initializable {
 
 
         seeMedicDate.disableProperty().bind(Bindings.isEmpty(TabAppointment.getSelectionModel().getSelectedItems()));
-        seeDate.disableProperty().bind(Bindings.isEmpty(TabAppointment.getSelectionModel().getSelectedItems()));
         seePatientDate.disableProperty().bind(Bindings.isEmpty(TabAppointment.getSelectionModel().getSelectedItems()));
         deleteDate.disableProperty().bind(Bindings.isEmpty(TabAppointment.getSelectionModel().getSelectedItems()));
 //---------------------------------------------------------------------//
@@ -764,9 +763,11 @@ public class FXMLclinicDBController implements Initializable {
     }
     private void setSettings() { // Nivel Local
         if(defaultSettings[0] == 0) {theme.setSelected(false);
-        setScene();}
+        setScene();
+        }
         else {theme.setSelected(true);
-        setScene();}
+        setScene();
+        }
         idioma.setValue(idioma.getItems().get(defaultSettings[1]));
         font.setValue(font.getItems().get(defaultSettings[2]));
         DoubleProperty fontSize = new SimpleDoubleProperty(defaultSettings[3]);
@@ -1107,8 +1108,12 @@ public class FXMLclinicDBController implements Initializable {
         Optional<ButtonType> result = dialog.showAndWait();
         int sizeLetra = 14;
         if(result.get() == ButtonType.OK) {
-            if(theme.isSelected()) System.out.println("Hola quiero un tema oscuro");
-            else System.out.println("Hola quiero un tema claro");
+            if(theme.isSelected()){
+                System.out.println("Hola quiero un tema oscuro");
+            } 
+            else{
+                System.out.println("Hola quiero un tema claro");
+            }
             if(idioma.getSelectionModel().getSelectedIndex() == 0) System.out.println("Hola quiero todo en castellano");
             else System.out.println("Well well well how the turntables");
             defaultSettings = getSettings();
@@ -1258,11 +1263,11 @@ private ArrayList<LocalTime> createListHours(Doctor doc) throws Exception {
         choice.getSelectionModel().select(2);
     }
     private void setScene(){
-        Scene scene = font_label.getScene();
-        if(defaultSettings[0] == 0){
+        
+        if(theme.isSelected()){
             String css = this.getClass().getResource("/Styles/dark_theme.css").toExternalForm();
             scenario.getStylesheets().add(css);
-        }else{
+        }else if(!theme.isSelected()){
             String css = this.getClass().getResource("/Styles/light_theme.css").toExternalForm();
             scenario.getStylesheets().add(css);
         }

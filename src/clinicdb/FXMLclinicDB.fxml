@@ -325,7 +325,11 @@
                             <TextField id="tel" fx:id="examinationRoom" prefHeight="24.9998779296875" prefWidth="302.0" promptText="Sala" text="" GridPane.columnIndex="0" GridPane.rowIndex="5" />
                                           <VBox GridPane.rowIndex="6">
                                              <children>
-                                                <Label text="Días en los que trabaja el médico" />
+                                                <Label fx:id="diasActivos" text="Días en los que trabaja el médico" visible="false">
+                                                   <VBox.margin>
+                                                      <Insets left="20.0" />
+                                                   </VBox.margin>
+                                                </Label>
                                   <!--
                                   <Spinner fx:id="iniDay" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="143.0" GridPane.columnIndex="0" GridPane.rowIndex="7" >
                                       <editable>true</editable>

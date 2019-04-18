@@ -208,6 +208,12 @@ public class FXMLclinicDBController implements Initializable {
     @FXML
     private Font x1;
     private Scene scenario;
+    @FXML
+    private AnchorPane paneAdd;
+    @FXML
+    private GridPane gridAdd;
+    @FXML
+    private Label diasActivos;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -1163,6 +1169,7 @@ public class FXMLclinicDBController implements Initializable {
         vBoxAddCita.setVisible(date);
         //vBoxAddCita.setDisable(!date);
         //vBoxAddPac.setDisable(false);
+        diasActivos.setVisible(medic);
         examinationRoom.setVisible(medic);
         availableDays.setVisible(medic);
         iniDay.setVisible(medic);
@@ -1253,10 +1260,10 @@ private ArrayList<LocalTime> createListHours(Doctor doc) throws Exception {
     private void setScene(){
         Scene scene = font_label.getScene();
         if(defaultSettings[0] == 0){
-            String css = this.getClass().getResource("/Styles/light_theme.css").toExternalForm();
+            String css = this.getClass().getResource("/Styles/dark_theme.css").toExternalForm();
             scenario.getStylesheets().add(css);
         }else{
-            String css = this.getClass().getResource("/Styles/dark_theme.css").toExternalForm();
+            String css = this.getClass().getResource("/Styles/light_theme.css").toExternalForm();
             scenario.getStylesheets().add(css);
         }
     }

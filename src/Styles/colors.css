@@ -9,7 +9,7 @@
   text-transform: uppercase;
 }
 .enabled {
-  background-color:#f26b43;
+  background-color:#f26b43; /* Naranja*/
 }
 .head {
   background:#324960;

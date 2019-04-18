@@ -1,7 +1,4 @@
-/*
-    Created on : 11 Nov, 2017, 4:42:53 AM
-    Author     : afsal villan
-*/
+
 
 * {
     -fx-primary : #f2f2f2;
@@ -78,6 +75,10 @@
   -fx-color:-fx-black;
   -fx-background-color:derive(-fx-hover,10%);
   }
+  .choice-box > .label {
+    -fx-text-fill: derive(-fx-black,30%);
+    -fx-color: black;
+    }
  .choice-box .menu-item > .label {
     -fx-text-fill: derive(-fx-black,30%);
  }
@@ -95,10 +96,7 @@
     -fx-text-fill: derive(-fx-black,30%);
   }
 
-.choice-box > .label {
-  -fx-text-fill: derive(-fx-black,30%);
-  -fx-color: black;
-  }
+
 .choice-box .menu-item:focused > .label {
   -fx-text-fill: -fx-black;
 }
@@ -106,7 +104,8 @@
     -fx-background-color: transparent;
 }
 .combo-box-base { /*Lo del calendar*/
-      -fx-color: -fx-active;}
+      -fx-color: -fx-active;
+  }
 
 .button, .toggle-button{
     -fx-text-fill: -fx-white;
@@ -159,7 +158,6 @@
     -fx-font-size: 10pt;
 }
 
-
 .tab-main{
     -fx-pref-height : 60;
     -fx-max-height : 60;
@@ -187,7 +185,6 @@
     -fx-base : -fx-primary;
     -fx-background-color: -fx-primary;
 }
-
 .context-menu
 {
     -fx-background-color:  derive(-fx-primary, 20%);

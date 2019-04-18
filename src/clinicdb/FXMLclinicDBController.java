@@ -763,14 +763,13 @@ public class FXMLclinicDBController implements Initializable {
         } catch (Exception e) {System.out.println("Algo salio mal intentando escribir");}
     }
     private void setSettings() { // Nivel Local
-        if(defaultSettings[0] == 0) {theme.setSelected(false);
-        setScene();}
-        else {theme.setSelected(true);
-        setScene();}
+        if(defaultSettings[0] == 0) {theme.setSelected(false);}
+        else {theme.setSelected(true);}
         idioma.setValue(idioma.getItems().get(defaultSettings[1]));
         font.setValue(font.getItems().get(defaultSettings[2]));
         DoubleProperty fontSize = new SimpleDoubleProperty(defaultSettings[3]);
         root.styleProperty().bind(Bindings.concat("-fx-font-size: ",fontSize.asString(), ";"));
+        setScene();
     }
 
     private Integer[] getSettings() { // Actualiza  a nivel local (con los objetos de la ventana ajustes) la lista de defaultSettings
@@ -1107,8 +1106,6 @@ public class FXMLclinicDBController implements Initializable {
         Optional<ButtonType> result = dialog.showAndWait();
         int sizeLetra = 14;
         if(result.get() == ButtonType.OK) {
-            if(theme.isSelected()) System.out.println("Hola quiero un tema oscuro");
-            else System.out.println("Hola quiero un tema claro");
             if(idioma.getSelectionModel().getSelectedIndex() == 0) System.out.println("Hola quiero todo en castellano");
             else System.out.println("Well well well how the turntables");
             defaultSettings = getSettings();
@@ -1258,8 +1255,7 @@ private ArrayList<LocalTime> createListHours(Doctor doc) throws Exception {
         choice.getSelectionModel().select(2);
     }
     private void setScene(){
-        Scene scene = font_label.getScene();
-        if(defaultSettings[0] == 0){
+        if(defaultSettings[0] == 1){
             String css = this.getClass().getResource("/Styles/dark_theme.css").toExternalForm();
             scenario.getStylesheets().add(css);
         }else{

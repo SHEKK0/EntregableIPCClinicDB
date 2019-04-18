@@ -7,6 +7,7 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -29,7 +30,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane id="stackRootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="425.0" prefWidth="624.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clinicdb.FXMLclinicDBController">
+<StackPane id="stackRootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="425.0" prefWidth="624.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clinicdb.FXMLclinicDBController">
   <children>
     <BorderPane fx:id="root" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="-1.0" prefWidth="-1.0" StackPane.alignment="CENTER">
       <center>
@@ -41,25 +42,20 @@
                   <children>
                     <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="-1.0" prefWidth="-1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                       <children>
-                        <TextField fx:id="searchPatient" minHeight="35.0" prefColumnCount="0" prefWidth="200.0" promptText="Buscar paciente" text="" VBox.vgrow="NEVER">
-                          <VBox.margin>
-                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                          </VBox.margin>
-                        </TextField>
-                        <GridPane alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="500.0" VBox.vgrow="ALWAYS">
+                        <GridPane alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="189.0" prefWidth="579.0" VBox.vgrow="ALWAYS">
                           <children>
-                            <TableView fx:id="TabPaciente" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="400.0" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.valignment="BOTTOM" GridPane.vgrow="ALWAYS">
+                            <TableView fx:id="TabPaciente" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="400.0" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" GridPane.vgrow="ALWAYS">
                               <columns>
                                 <TableColumn fx:id="NPatient" prefWidth="75.0" text="Nombre" />
                                 <TableColumn fx:id="APatient" maxWidth="5000.0" minWidth="10.0" prefWidth="177.0" text="Apellidos" />
                                 <TableColumn fx:id="IdPatient" maxWidth="5000.0" minWidth="10.0" prefWidth="136.0" text="Identificación" />
-                                <TableColumn fx:id="TelPatient" maxWidth="5000.0" minWidth="10.0" prefWidth="107.0" text="Teléfono" />
+                                <TableColumn fx:id="TelPatient" maxWidth="5000.0" minWidth="10.0" prefWidth="109.0" text="Teléfono" />
                               </columns>
                               <GridPane.margin>
                                 <Insets />
                               </GridPane.margin>
                             </TableView>
-                            <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefHeight="316.0" prefWidth="182.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                            <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefHeight="316.0" prefWidth="182.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                               <children>
                                 <Button fx:id="newPacienteButton" alignment="CENTER" contentDisplay="CENTER" minWidth="-Infinity" mnemonicParsing="false" prefWidth="130.0" text="Añadir Paciente" textAlignment="CENTER" wrapText="false" VBox.vgrow="NEVER">
                                   <font>
@@ -86,13 +82,15 @@
                                 </Button>
                               </children>
                             </VBox>
+                              <TextField fx:id="searchPatient" minHeight="35.0" prefColumnCount="0" prefWidth="200.0" promptText="Buscar paciente" text="" />
                           </children>
                           <columnConstraints>
                             <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="498.0" />
                             <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="126.0" />
                           </columnConstraints>
                           <rowConstraints>
-                            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="316.0" valignment="CENTER" vgrow="ALWAYS" />
+                                          <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="33.0" valignment="CENTER" vgrow="NEVER" />
+                            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="338.0" valignment="CENTER" vgrow="ALWAYS" />
                           </rowConstraints>
                         </GridPane>
                       </children>
@@ -107,14 +105,9 @@
                   <children>
                     <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="368.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                       <children>
-                        <TextField fx:id="searchDoctor" minHeight="35.0" promptText="Buscar médico">
-                          <VBox.margin>
-                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                          </VBox.margin>
-                        </TextField>
                         <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                           <children>
-                            <TableView fx:id="TabMedico" prefHeight="300.0" prefWidth="430.0" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+                            <TableView fx:id="TabMedico" prefHeight="300.0" prefWidth="430.0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
                               <columns>
                                 <TableColumn fx:id="NMedico" prefWidth="75.0" text="Nombre" />
                                 <TableColumn fx:id="AMedico" maxWidth="5000.0" minWidth="10.0" prefWidth="193.0" text="Apellidos" />
@@ -122,7 +115,7 @@
                                 <TableColumn fx:id="TelMedico" maxWidth="5000.0" minWidth="10.0" prefWidth="92.0" text="Teléfono" />
                               </columns>
                             </TableView>
-                            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                               <children>
                                 <Button id="newPacienteButton1" fx:id="newMedicoButton" alignment="CENTER" font="$x1" minWidth="-Infinity" mnemonicParsing="false" prefWidth="130.0" text="Añadir médico">
                                   <VBox.margin>
@@ -146,13 +139,15 @@
                                 </Button>
                               </children>
                             </VBox>
+                              <TextField fx:id="searchDoctor" minHeight="35.0" promptText="Buscar médico" />
                           </children>
                           <columnConstraints>
                             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="497.0" />
                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="127.0" />
                           </columnConstraints>
                           <rowConstraints>
-                            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="316.0" valignment="CENTER" vgrow="ALWAYS" />
+                                          <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="33.0" valignment="CENTER" vgrow="NEVER" />
+                            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="338.0" valignment="CENTER" vgrow="ALWAYS" />
                           </rowConstraints>
                         </GridPane>
                       </children>
@@ -167,14 +162,9 @@
                   <children>
                     <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="369.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                       <children>
-                        <TextField fx:id="searchDate" minHeight="35.0" promptText="Buscar cita">
-                          <VBox.margin>
-                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                          </VBox.margin>
-                        </TextField>
                         <GridPane alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="464.0" prefWidth="624.0" VBox.vgrow="ALWAYS">
                           <children>
-                            <TableView fx:id="TabAppointment" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="315.0" prefWidth="466.0" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                            <TableView fx:id="TabAppointment" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="315.0" prefWidth="466.0" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                               <columns>
                                 <TableColumn fx:id="colPatient" maxWidth="5000.0" minWidth="10.0" prefWidth="190.0" text="Paciente" />
                                 <TableColumn fx:id="colMedico" maxWidth="5000.0" minWidth="10.0" prefWidth="162.0" text="Medico" />
@@ -182,7 +172,7 @@
                                                 <TableColumn fx:id="colRoom" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" resizable="false" text="Sala" />
                               </columns>
                             </TableView>
-                            <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="325.0" prefWidth="181.99990000000253" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                            <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="325.0" prefWidth="181.99990000000253" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                               <children>
                                 <Button id="seeDate" fx:id="newDate" alignment="CENTER" contentDisplay="CENTER" font="$x1" minWidth="-Infinity" mnemonicParsing="false" text="Nueva Cita">
                                   <VBox.margin>
@@ -211,13 +201,15 @@
                                 </Button>
                               </children>
                             </VBox>
+                              <TextField fx:id="searchDate" minHeight="35.0" promptText="Buscar cita" />
                           </children>
                           <columnConstraints>
                             <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="497.0" />
                             <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="127.0" />
                           </columnConstraints>
                           <rowConstraints>
-                            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="316.0" vgrow="ALWAYS" />
+                                          <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="37.0" vgrow="NEVER" />
+                            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="334.0" vgrow="ALWAYS" />
                           </rowConstraints>
                           <VBox.margin>
                             <Insets />
@@ -308,7 +300,7 @@
                       <children>
                         <GridPane fx:id="gridAdd" gridLinesVisible="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="302.0" prefWidth="603.0" VBox.vgrow="ALWAYS">
                           <children>
-                                          <VBox alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+                                          <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
                                              <GridPane.margin>
                                                 <Insets left="60.0" top="-10.0" />
                                              </GridPane.margin>
@@ -331,24 +323,33 @@
                             <TextField fx:id="tel" prefHeight="24.9998779296875" prefWidth="302.0" promptText="Teléfono" GridPane.columnIndex="0" GridPane.rowIndex="4" />
                             <ChoiceBox fx:id="ID" prefHeight="26.0" prefWidth="54.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3" />
                             <TextField id="tel" fx:id="examinationRoom" prefHeight="24.9998779296875" prefWidth="302.0" promptText="Sala" text="" GridPane.columnIndex="0" GridPane.rowIndex="5" />
-                            <!--
-                            <Spinner fx:id="iniDay" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="143.0" GridPane.columnIndex="0" GridPane.rowIndex="7" >
-                                <editable>true</editable>
-                            </Spinner>
-                            <Spinner fx:id="fiDay" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="146.0" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="7" >
-                                <editable>true</editable>
-                            </Spinner>
-                            -->
-                            <HBox id="days" fx:id="availableDays" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="6">
-                              <children>
-                                <ToggleButton fx:id="Monday" mnemonicParsing="false" onAction="#getDays" text="Lunes" />
-                                <ToggleButton fx:id="Tuesday" mnemonicParsing="false" onAction="#getDays" text="Martes" />
-                                <ToggleButton fx:id="Wednesday" mnemonicParsing="false" onAction="#getDays" text="Miércoles" />
-                                <ToggleButton fx:id="Thursday" mnemonicParsing="false" onAction="#getDays" text="Jueves" />
-                                <ToggleButton fx:id="Friday" mnemonicParsing="false" onAction="#getDays" text="Viernes" />
-                                <ToggleButton fx:id="Saturday" mnemonicParsing="false" onAction="#getDays" text="Sábado" />
-                              </children>
-                            </HBox>
+                                          <VBox GridPane.rowIndex="6">
+                                             <children>
+                                                <Label fx:id="diasActivos" text="Días en los que trabaja el médico" visible="false">
+                                                   <VBox.margin>
+                                                      <Insets left="20.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                  <!--
+                                  <Spinner fx:id="iniDay" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="143.0" GridPane.columnIndex="0" GridPane.rowIndex="7" >
+                                      <editable>true</editable>
+                                  </Spinner>
+                                  <Spinner fx:id="fiDay" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="146.0" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="7" >
+                                      <editable>true</editable>
+                                  </Spinner>
+                                  -->
+                                  <HBox id="days" fx:id="availableDays" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                    <children>
+                                      <ToggleButton fx:id="Monday" mnemonicParsing="false" onAction="#getDays" text="Lunes" />
+                                      <ToggleButton fx:id="Tuesday" mnemonicParsing="false" onAction="#getDays" text="Martes" />
+                                      <ToggleButton fx:id="Wednesday" mnemonicParsing="false" onAction="#getDays" text="Miércoles" />
+                                      <ToggleButton fx:id="Thursday" mnemonicParsing="false" onAction="#getDays" text="Jueves" />
+                                      <ToggleButton fx:id="Friday" mnemonicParsing="false" onAction="#getDays" text="Viernes" />
+                                      <ToggleButton fx:id="Saturday" mnemonicParsing="false" onAction="#getDays" text="Sábado" />
+                                    </children>
+                                  </HBox>
+                                             </children>
+                                          </VBox>
                             <ComboBox fx:id="iniDay" prefHeight="21.0" prefWidth="133.0" GridPane.columnIndex="0" GridPane.rowIndex="7">
                               <items>
                                 <FXCollections fx:factory="observableArrayList">
@@ -389,19 +390,22 @@
                                           <Insets left="20.0" />
                                        </VBox.margin>
                         </GridPane>
-                        <HBox alignment="CENTER" prefHeight="49.0" prefWidth="603.0">
+                        <HBox alignment="CENTER_RIGHT" prefHeight="49.0" prefWidth="603.0">
                           <children>
-                            <Button id="acceptButton" mnemonicParsing="false" onMouseClicked="#accept" text="Aceptar">
+                            <Button id="clearFields" mnemonicParsing="false" onAction="#newInput" text="Borrar">
                               <HBox.margin>
                                 <Insets right="20.0" />
                               </HBox.margin>
                             </Button>
-                            <Button id="clearFields" mnemonicParsing="false" onAction="#newInput" text="Borrar">
+                            <Button id="acceptButton" mnemonicParsing="false" onMouseClicked="#accept" text="Aceptar">
                               <HBox.margin>
                                 <Insets left="20.0" />
                               </HBox.margin>
                             </Button>
                           </children>
+                                       <padding>
+                                          <Insets right="30.0" />
+                                       </padding>
                         </HBox>
                       </children>
                     </VBox>

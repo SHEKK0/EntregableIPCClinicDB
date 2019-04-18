@@ -34,8 +34,7 @@ public class ClinicDB extends Application {
         stage.setScene(scene);
         stage.setMinHeight(600);
         stage.setMinWidth(900);
-        String css = this.getClass().getResource("/Styles/light_theme.css").toExternalForm();
-        scene.getStylesheets().add(css);
+
         stage.show();
 
     }

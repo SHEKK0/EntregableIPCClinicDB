@@ -749,8 +749,10 @@ public class FXMLclinicDBController implements Initializable {
         } catch (Exception e) {System.out.println("Algo salio mal intentando escribir");}
     }
     private void setSettings() { // Nivel Local
-        if(defaultSettings[0] == 0) {theme.setSelected(false);}
-        else {theme.setSelected(true);}
+        if(defaultSettings[0] == 0) {theme.setSelected(false);
+        setScene();}
+        else {theme.setSelected(true);
+        setScene();}
         idioma.setValue(idioma.getItems().get(defaultSettings[1]));
         font.setValue(font.getItems().get(defaultSettings[2]));
         DoubleProperty fontSize = new SimpleDoubleProperty(defaultSettings[3]);
@@ -774,6 +776,7 @@ public class FXMLclinicDBController implements Initializable {
                 aux[3] = 20;
                 break;
         }
+        setScene();
         return aux;
 
     }
@@ -1239,6 +1242,14 @@ private ArrayList<LocalTime> createListHours(Doctor doc) throws Exception {
          tabPane.getSelectionModel().select(3);
         choice.getSelectionModel().select(2);
     }
-
-    
+    private void setScene(){
+        Scene scene = root.getScene();
+        if(defaultSettings[0] == 0){
+            String css = this.getClass().getResource("/Styles/light_theme.css").toExternalForm();
+            scene.getStylesheets().add(css);
+        }else{
+            String css = this.getClass().getResource("/Styles/dark_theme.css").toExternalForm();
+            scene.getStylesheets().add(css);
+        }
+    }
 }

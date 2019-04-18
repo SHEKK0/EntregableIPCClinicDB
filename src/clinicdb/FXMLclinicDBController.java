@@ -207,6 +207,7 @@ public class FXMLclinicDBController implements Initializable {
     private BorderPane root;
     @FXML
     private Font x1;
+    private Scene scenario;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -723,7 +724,14 @@ public class FXMLclinicDBController implements Initializable {
         font.getItems().addAll("Pequeña","Mediana","Grande");
         //font.setValue(font.getItems().get(1));
         defaultSettings = getDefaultSettings();
-        setSettings(); // a modo local.
+
+        root.sceneProperty().addListener((observableScene, oldScene, newScene) -> {
+            if (oldScene == null && newScene != null) {
+                // scene is set for the first time. Now its the time to listen stage changes.
+                scenario = newScene;
+                setSettings(); // a modo local.
+            }
+        });
     }
 
     private String toFormat(int value) {
@@ -1246,10 +1254,10 @@ private ArrayList<LocalTime> createListHours(Doctor doc) throws Exception {
         Scene scene = font_label.getScene();
         if(defaultSettings[0] == 0){
             String css = this.getClass().getResource("/Styles/light_theme.css").toExternalForm();
-            scene.getStylesheets().add(css);
+            scenario.getStylesheets().add(css);
         }else{
             String css = this.getClass().getResource("/Styles/dark_theme.css").toExternalForm();
-            scene.getStylesheets().add(css);
+            scenario.getStylesheets().add(css);
         }
     }
 }

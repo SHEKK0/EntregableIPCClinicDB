@@ -42,25 +42,20 @@
                   <children>
                     <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="-1.0" prefWidth="-1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                       <children>
-                        <TextField fx:id="searchPatient" minHeight="35.0" prefColumnCount="0" prefWidth="200.0" promptText="Buscar paciente" text="" VBox.vgrow="NEVER">
-                          <VBox.margin>
-                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                          </VBox.margin>
-                        </TextField>
-                        <GridPane alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="500.0" VBox.vgrow="ALWAYS">
+                        <GridPane alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="189.0" prefWidth="579.0" VBox.vgrow="ALWAYS">
                           <children>
-                            <TableView fx:id="TabPaciente" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="400.0" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.valignment="BOTTOM" GridPane.vgrow="ALWAYS">
+                            <TableView fx:id="TabPaciente" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="400.0" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" GridPane.vgrow="ALWAYS">
                               <columns>
                                 <TableColumn fx:id="NPatient" prefWidth="75.0" text="Nombre" />
                                 <TableColumn fx:id="APatient" maxWidth="5000.0" minWidth="10.0" prefWidth="177.0" text="Apellidos" />
                                 <TableColumn fx:id="IdPatient" maxWidth="5000.0" minWidth="10.0" prefWidth="136.0" text="Identificación" />
-                                <TableColumn fx:id="TelPatient" maxWidth="5000.0" minWidth="10.0" prefWidth="107.0" text="Teléfono" />
+                                <TableColumn fx:id="TelPatient" maxWidth="5000.0" minWidth="10.0" prefWidth="109.0" text="Teléfono" />
                               </columns>
                               <GridPane.margin>
                                 <Insets />
                               </GridPane.margin>
                             </TableView>
-                            <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefHeight="316.0" prefWidth="182.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                            <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefHeight="316.0" prefWidth="182.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                               <children>
                                 <Button fx:id="newPacienteButton" alignment="CENTER" contentDisplay="CENTER" minWidth="-Infinity" mnemonicParsing="false" prefWidth="130.0" text="Añadir Paciente" textAlignment="CENTER" wrapText="false" VBox.vgrow="NEVER">
                                   <font>
@@ -87,13 +82,15 @@
                                 </Button>
                               </children>
                             </VBox>
+                              <TextField fx:id="searchPatient" minHeight="35.0" prefColumnCount="0" prefWidth="200.0" promptText="Buscar paciente" text="" />
                           </children>
                           <columnConstraints>
                             <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="498.0" />
                             <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="126.0" />
                           </columnConstraints>
                           <rowConstraints>
-                            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="316.0" valignment="CENTER" vgrow="ALWAYS" />
+                                          <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="33.0" valignment="CENTER" vgrow="NEVER" />
+                            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="338.0" valignment="CENTER" vgrow="ALWAYS" />
                           </rowConstraints>
                         </GridPane>
                       </children>
@@ -108,14 +105,9 @@
                   <children>
                     <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="368.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                       <children>
-                        <TextField fx:id="searchDoctor" minHeight="35.0" promptText="Buscar médico">
-                          <VBox.margin>
-                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                          </VBox.margin>
-                        </TextField>
                         <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                           <children>
-                            <TableView fx:id="TabMedico" prefHeight="300.0" prefWidth="430.0" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+                            <TableView fx:id="TabMedico" prefHeight="300.0" prefWidth="430.0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
                               <columns>
                                 <TableColumn fx:id="NMedico" prefWidth="75.0" text="Nombre" />
                                 <TableColumn fx:id="AMedico" maxWidth="5000.0" minWidth="10.0" prefWidth="193.0" text="Apellidos" />
@@ -123,7 +115,7 @@
                                 <TableColumn fx:id="TelMedico" maxWidth="5000.0" minWidth="10.0" prefWidth="92.0" text="Teléfono" />
                               </columns>
                             </TableView>
-                            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                               <children>
                                 <Button id="newPacienteButton1" fx:id="newMedicoButton" alignment="CENTER" font="$x1" minWidth="-Infinity" mnemonicParsing="false" prefWidth="130.0" text="Añadir médico">
                                   <VBox.margin>
@@ -147,13 +139,15 @@
                                 </Button>
                               </children>
                             </VBox>
+                              <TextField fx:id="searchDoctor" minHeight="35.0" promptText="Buscar médico" />
                           </children>
                           <columnConstraints>
                             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="497.0" />
                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="127.0" />
                           </columnConstraints>
                           <rowConstraints>
-                            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="316.0" valignment="CENTER" vgrow="ALWAYS" />
+                                          <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="33.0" valignment="CENTER" vgrow="NEVER" />
+                            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="338.0" valignment="CENTER" vgrow="ALWAYS" />
                           </rowConstraints>
                         </GridPane>
                       </children>
@@ -168,14 +162,9 @@
                   <children>
                     <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="369.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                       <children>
-                        <TextField fx:id="searchDate" minHeight="35.0" promptText="Buscar cita">
-                          <VBox.margin>
-                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                          </VBox.margin>
-                        </TextField>
                         <GridPane alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="464.0" prefWidth="624.0" VBox.vgrow="ALWAYS">
                           <children>
-                            <TableView fx:id="TabAppointment" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="315.0" prefWidth="466.0" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                            <TableView fx:id="TabAppointment" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="315.0" prefWidth="466.0" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                               <columns>
                                 <TableColumn fx:id="colPatient" maxWidth="5000.0" minWidth="10.0" prefWidth="190.0" text="Paciente" />
                                 <TableColumn fx:id="colMedico" maxWidth="5000.0" minWidth="10.0" prefWidth="162.0" text="Medico" />
@@ -183,7 +172,7 @@
                                                 <TableColumn fx:id="colRoom" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" resizable="false" text="Sala" />
                               </columns>
                             </TableView>
-                            <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="325.0" prefWidth="181.99990000000253" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                            <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="325.0" prefWidth="181.99990000000253" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                               <children>
                                 <Button id="seeDate" fx:id="newDate" alignment="CENTER" contentDisplay="CENTER" font="$x1" minWidth="-Infinity" mnemonicParsing="false" text="Nueva Cita">
                                   <VBox.margin>
@@ -212,13 +201,15 @@
                                 </Button>
                               </children>
                             </VBox>
+                              <TextField fx:id="searchDate" minHeight="35.0" promptText="Buscar cita" />
                           </children>
                           <columnConstraints>
                             <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="497.0" />
                             <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="127.0" />
                           </columnConstraints>
                           <rowConstraints>
-                            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="316.0" vgrow="ALWAYS" />
+                                          <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="37.0" vgrow="NEVER" />
+                            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="334.0" vgrow="ALWAYS" />
                           </rowConstraints>
                           <VBox.margin>
                             <Insets />
@@ -234,7 +225,7 @@
               <content>
                 <AnchorPane id="AnchorPane" fx:id="paneAdd" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="370.0" prefWidth="624.0">
                   <children>
-                    <VBox id="VBox" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="346.0" spacing="5.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="24.0">
+                    <VBox id="VBox" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="346.0" spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="24.0">
                       <children>
                         <VBox fx:id="vBoxAddCita" disable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="351.0" prefWidth="624.0" VBox.vgrow="ALWAYS">
                           <children>
@@ -305,7 +296,7 @@
                         </VBox>
                       </children>
                     </VBox>
-                    <VBox fx:id="vBoxAddPac" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="346.0" prefWidth="624.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="24.0">
+                    <VBox fx:id="vBoxAddPac" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="346.0" prefWidth="624.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="24.0">
                       <children>
                         <GridPane fx:id="gridAdd" gridLinesVisible="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="302.0" prefWidth="603.0" VBox.vgrow="ALWAYS">
                           <children>
@@ -404,7 +395,7 @@
                             </Button>
                             <Button id="acceptButton" mnemonicParsing="false" onMouseClicked="#accept" text="Aceptar">
                               <HBox.margin>
-                                <Insets left="10.0" />
+                                <Insets left="20.0" />
                               </HBox.margin>
                             </Button>
                           </children>

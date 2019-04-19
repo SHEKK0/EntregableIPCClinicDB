@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a0346447-cd85-4a9d-9e4e-63c3541255dd" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/clinicdb/FXMLclinicDBController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clinicdb/FXMLclinicDBController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/First.properties" beforeDir="false" afterPath="$PROJECT_DIR$/First.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Styles/dark_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Styles/dark_theme.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Styles/light_theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Styles/light_theme.css" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,10 +19,19 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/clinicdb/FXMLclinicDBController.java">
+        <entry file="file://$PROJECT_DIR$/src/Styles/light_theme.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="730" column="36" selection-start-line="730" selection-start-column="36" selection-end-line="730" selection-end-column="36" />
+            <state relative-caret-position="226">
+              <caret line="429" column="28" selection-start-line="429" selection-start-column="28" selection-end-line="429" selection-end-column="28" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Styles/dark_theme.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="212">
+              <caret line="441" selection-start-line="441" selection-end-line="449" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -42,6 +53,8 @@
       <find>light_theme</find>
       <find>setSettings</find>
       <find>choi</find>
+      <find>textfield</find>
+      <find>text-field</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -53,10 +66,10 @@
         <option value="$PROJECT_DIR$/src/clinicdb/FXMLWatchDoctorController.java" />
         <option value="$PROJECT_DIR$/src/clinicdb/FXMLWatchPatientController.java" />
         <option value="$PROJECT_DIR$/src/Styles/colors.css" />
-        <option value="$PROJECT_DIR$/src/Styles/dark_theme.css" />
-        <option value="$PROJECT_DIR$/src/Styles/light_theme.css" />
         <option value="$PROJECT_DIR$/src/clinicdb/ClinicDB.java" />
         <option value="$PROJECT_DIR$/src/clinicdb/FXMLclinicDBController.java" />
+        <option value="$PROJECT_DIR$/src/Styles/dark_theme.css" />
+        <option value="$PROJECT_DIR$/src/Styles/light_theme.css" />
       </list>
     </option>
   </component>
@@ -77,6 +90,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -93,14 +108,12 @@
               <item name="EntregableIPCClinicDB" type="b2602c69:ProjectViewProjectNode" />
               <item name="EntregableIPCClinicDB" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="clinicdb" type="462c0819:PsiDirectoryNode" />
+              <item name="Styles" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -153,10 +166,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="8" y="17" width="1350" height="743" extended-state="0" />
+    <frame x="8" y="17" width="674" height="743" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12249615" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12700965" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -165,8 +178,8 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.27608347" />
-      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.39967898" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.27608347" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39967898" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -214,8 +227,8 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/clinicdb/FXMLclinicDB.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor" />
+      <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/clinicdb/FXMLWatchPatientController.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -228,23 +241,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Styles/light_theme.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="77">
-          <caret line="109" column="6" selection-start-line="109" selection-start-column="6" selection-end-line="109" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/out/production/EntregableIPCClinicDB/Styles/dark_theme.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1083" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Styles/dark_theme.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="60" column="25" selection-start-line="60" selection-start-column="25" selection-end-line="60" selection-end-column="25" />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Styles/colors.css">
@@ -270,8 +269,33 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/clinicdb/FXMLclinicDBController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="730" column="36" selection-start-line="730" selection-start-column="36" selection-end-line="730" selection-end-column="36" />
+        <state relative-caret-position="304">
+          <caret line="736" column="36" selection-start-line="736" selection-start-column="36" selection-end-line="736" selection-end-column="36" />
+          <folding>
+            <element signature="e#31529#31535#0" expanded="true" />
+            <element signature="e#31927#33442#0" expanded="true" />
+            <element signature="e#33441#33442#0" expanded="true" />
+            <element signature="e#54899#54900#0" expanded="true" />
+            <element signature="e#54952#54953#0" expanded="true" />
+            <element signature="e#55021#55022#0" expanded="true" />
+            <element signature="e#55074#55075#0" expanded="true" />
+            <element signature="e#55142#55143#0" expanded="true" />
+            <element signature="e#55195#55196#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Styles/dark_theme.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="212">
+          <caret line="441" selection-start-line="441" selection-end-line="449" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Styles/light_theme.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="429" column="28" selection-start-line="429" selection-start-column="28" selection-end-line="429" selection-end-column="28" />
         </state>
       </provider>
     </entry>

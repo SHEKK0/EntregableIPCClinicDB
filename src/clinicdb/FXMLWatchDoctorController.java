@@ -44,7 +44,7 @@ import model.ExaminationRoom;
 /**
  * FXML Controller class
  *
- * @author javiD
+ * @author jadomen,carsengi
  */
 public class FXMLWatchDoctorController implements Initializable {
     @FXML

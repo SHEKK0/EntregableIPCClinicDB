@@ -68,7 +68,7 @@ import model.LocalTimeAdapter;
 
 /**
  *
- * @author javiD
+ * @author jadomen, carsengi
  */
 public class FXMLclinicDBController implements Initializable {
     @FXML
@@ -1047,6 +1047,8 @@ public class FXMLclinicDBController implements Initializable {
         iniCita.setValue(iniCita.getItems().get(0));
         tableCitaPac.getSelectionModel().select(null);
         datePicker.setValue(LocalDate.now());
+        addCitaDoctorSearch.setText("");
+                addCitaPatientSearch.setText("");
     }
     @FXML
     private void cargarImagen(ActionEvent event) throws IOException {

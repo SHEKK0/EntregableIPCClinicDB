@@ -45,7 +45,7 @@ import model.Patient;
 /**
  * FXML Controller class
  *
- * @author javiD
+ * @author jadomen, carsengi
  */
 public class FXMLWatchPatientController implements Initializable {
     @FXML

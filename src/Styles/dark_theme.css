@@ -91,7 +91,7 @@
  }
 .choice-box .menu-item:focused {
   -fx-background-color: -fx-active;
-  
+
   }
   .combo-box-popup .list-view .list-cell:hover {
     -fx-background-color: -fx-button-selected;
@@ -123,11 +123,6 @@
   .date-picker-display-node {
     -fx-padding: 0.3333em 0.583em 0.3333em 0.583em;
   }
-  .date-picker-popup *, .date-picker-popup * >.text {
-    -fx-background-color: -fx-hover;
-    -fx-color: white; /*ESTO NO VA Y EL CALENDARIO SE VE FEO.*/
-  }
-
 .button, .toggle-button{
     -fx-text-fill: -fx-white;
     -fx-background-color: -fx-orange;
@@ -136,7 +131,10 @@
     -fx-background-radius: 0px;
     -fx-cursor: hand;
 }
-
+.check-box {
+    -fx-text-fill: -fx-white-text;
+    -fx-color: -fx-white-text;
+}
 .button:selected {
     -fx-background-color: -fx-button-selected;
     -fx-text-fill: -fx-white-text;

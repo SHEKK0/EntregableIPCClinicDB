@@ -515,7 +515,7 @@ public class FXMLclinicDBController implements Initializable {
 
         choice.getItems().addAll("Paciente", "Médico", "Cita");
         choice.setValue("Paciente");
-        ID.getItems().addAll("DNI", "NIF", "SS");
+        ID.getItems().addAll("DNI", "NIE", "SS");
         ID.setValue("DNI");
         datePicker.setValue(LocalDate.now());
         vBoxAddCita.setVisible(false);
@@ -841,6 +841,7 @@ public class FXMLclinicDBController implements Initializable {
                     errorAlert("Rellena los campos obligatorios!");
                     break;
                 }
+                if(!checkIdentifier()) {errorAlert("Identifiación incorrecta!"); break;}
                 if (tel.getText().length() != 9) {
                     errorAlert("El número de teléfono no es correcto!");
                     break;
@@ -869,6 +870,7 @@ public class FXMLclinicDBController implements Initializable {
                     errorAlert("Rellena los campos obligatorios!");
                     break;
                 }
+                if(!checkIdentifier()) {errorAlert("Identifiación incorrecta!"); break;}
                 if (existeMedico(listDoctors, id.getText().toUpperCase())) {
                     errorAlert("Identifiación duplicada!");
                     break;
@@ -923,6 +925,27 @@ public class FXMLclinicDBController implements Initializable {
                 TabAppointment.setItems(listCitas);
                 break;
         }
+    }
+
+    private boolean checkIdentifier() {
+        boolean bool = false;
+        String aux = id.getText().toUpperCase();
+        switch (ID.getValue().toString()) {
+            case("SS"):
+                if(aux.length()==12) {
+                    bool = aux.matches("\\d+");
+                    break;
+                }
+                default:
+                if(aux.length() == 9) {
+                    bool = aux.substring(0,8).matches("\\d+") && aux.substring(8).matches("[A-Z]");
+                    break;
+                }
+
+
+
+        }
+        return bool;
     }
 
 //-----------------------------------------------------------------//
@@ -1110,26 +1133,19 @@ public class FXMLclinicDBController implements Initializable {
         dialog.getDialogPane().setContent(
                 new VBox(8,
                         theme,
-                        new HBox(idioma_label,idioma),
                         new HBox(font_label,font))
                 );
 
-        dialog.getDialogPane().setHeaderText("text");
+        dialog.getDialogPane().setHeaderText("Ajustes");
         dialog.getDialogPane().getButtonTypes().addAll(ButtonType.CANCEL,ButtonType.OK);
         dialog.setY(300);
-        dialog.setTitle("title");
+        dialog.setTitle(clinic.getClinicName());
         DialogPane dialogPane = dialog.getDialogPane();
         dialogPane.getStylesheets().clear();
         dialogPane.getStylesheets().add(css);
         Optional<ButtonType> result = dialog.showAndWait();
         int sizeLetra = 14;
         if(result.get() == ButtonType.OK) {
-            if(theme.isSelected()){
-                System.out.println("Hola quiero un tema oscuro");
-            } 
-            else{
-                System.out.println("Hola quiero un tema claro");
-            }
             if(idioma.getSelectionModel().getSelectedIndex() == 0) System.out.println("Hola quiero todo en castellano");
             else System.out.println("Well well well how the turntables");
             defaultSettings = getSettings();

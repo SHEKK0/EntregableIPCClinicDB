@@ -66,7 +66,10 @@
   -fx-text-fill: -fx-white;
   -fx-color: -fx-white;
 }
-
+.label {
+    -fx-text-fill: -fx-white;
+    -fx-color: -fx-white;
+}
 
 
 .choice-box, .combo-box-base {
@@ -86,16 +89,19 @@
  .choice-box .menu-item > .label {
     -fx-text-fill: derive(-fx-white,30%);
  }
-.choice-box .menu-item:focused, .combo-box-popup .list-view .list-cell:hover {
-
+.choice-box .menu-item:focused {
   -fx-background-color: -fx-active;
+
+  }
+  .combo-box-popup .list-view .list-cell:hover {
+    -fx-background-color: -fx-button-selected;
   }
   .combo-box-popup .list-view .list-cell {
     -fx-background-color: -fx-hover;
 
   }
   .combo-box-popup .list-view .list-cell:selected,.choice-box .menu-item:selected {
-   -fx-background-color: -fx-button-selected;
+   -fx-background-color: -fx-active;
    -fx-text-fill: derive(-fx-white-text,30%);
    -fx-color: derive(-fx-white-text,30%);
   }
@@ -117,11 +123,6 @@
   .date-picker-display-node {
     -fx-padding: 0.3333em 0.583em 0.3333em 0.583em;
   }
-  .date-picker-popup *, .date-picker-popup * >.text {
-    -fx-background-color: -fx-hover;
-    -fx-color: white; /*ESTO NO VA Y EL CALENDARIO SE VE FEO.*/
-  }
-
 .button, .toggle-button{
     -fx-text-fill: -fx-white;
     -fx-background-color: -fx-orange;
@@ -130,14 +131,24 @@
     -fx-background-radius: 0px;
     -fx-cursor: hand;
 }
-
-.button:selected, .toggle-button:selected{
+.check-box {
+    -fx-text-fill: -fx-white-text;
+    -fx-color: -fx-white-text;
+}
+.button:selected {
     -fx-background-color: -fx-button-selected;
     -fx-text-fill: -fx-white-text;
 }
 .button:disabled, .toggle-button:disabled{
     -fx-background-color: -fx-grey-disabled;
     -fx-opacity: 1;
+}
+.toggle-button {
+    -fx-background-color: -fx-button-selected;
+}
+.toggle-button:selected {
+    -fx-background-color: -fx-orange;
+    -fx-text-fill: -fx-white-text;
 }
 
 .text-field
@@ -170,7 +181,6 @@
 
 .tab-label{
     -fx-text-fill: -fx-secondary;
-    -fx-font-size: 10pt;
 }
 
 .tab-main{
@@ -196,7 +206,6 @@
 }
 /*Menu bar Styling*/
 .menu-bar{
-    -fx-font-size: 14;
     -fx-base : -fx-primary;
     -fx-background-color: -fx-primary;
 }
@@ -240,7 +249,6 @@
 .main-text
 {
     -fx-fill: -fx-secondary;
-    -fx-font-size: 14pt;
     -fx-text-alignment: center;
 }
 
@@ -298,7 +306,6 @@
 /*TableView Default*/
 .table-view{
     -fx-background-color: derive(-fx-primary, 10%);
-    -fx-font-size: 16px;
     -fx-border: 1;
     -fx-border-color: -fx-primary;
 }
@@ -381,7 +388,6 @@
 .jfx-layout-heading .label
 {
     -fx-text-fill: white;
-    -fx-font-size: 12pt;
 }
 .jfx-layout-body, .jfx-layout-actions{
     -fx-background-color: -fx-primary;
@@ -406,7 +412,6 @@
 .checkbox-main{
     -fx-text-fill: -fx-secondary;
     -jfx-checked-color: -fx-primary;
-    -fx-font-size: 10pt;
 }
 
 /*Progrss bar*/
@@ -422,7 +427,6 @@
 .common-label{
     -fx-background-color: transparent;
     -fx-text-fill: -fx-secondary;
-    -fx-font-size: 12pt;
 }
 
 /*Alert Dialog*/
@@ -435,7 +439,6 @@
     -fx-background-color: -fx-primary;
 }
 .custom-alert > *.label.content{
-    -fx-font-size: 14px;
     -fx-font-weight: bold;
     -fx-text-fill: white;
 }

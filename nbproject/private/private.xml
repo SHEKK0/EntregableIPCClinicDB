@@ -5,6 +5,7 @@
         <group>
             <file>file:/D:/Projects/EntregableIPCClinicDB/src/clinicdb/ClinicDB.java</file>
             <file>file:/D:/Projects/EntregableIPCClinicDB/src/clinicdb/FXMLWatchPatientController.java</file>
+            <file>file:/D:/Projects/EntregableIPCClinicDB/src/clinicdb/FXMLWatchDoctorController.java</file>
             <file>file:/D:/Projects/EntregableIPCClinicDB/src/clinicdb/FXMLclinicDBController.java</file>
         </group>
     </open-files>

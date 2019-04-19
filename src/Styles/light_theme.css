@@ -158,8 +158,7 @@
 
 .tab-label{
     -fx-text-fill: -fx-secondary;
-    -fx-font-size: 10pt;
-}
+  }
 
 
 .tab-main{
@@ -185,7 +184,6 @@
 }
 /*Menu bar Styling*/
 .menu-bar{
-    -fx-font-size: 14;
     -fx-base : -fx-primary;
     -fx-background-color: -fx-primary;
 }
@@ -229,7 +227,6 @@
 .main-text
 {
     -fx-fill: -fx-secondary;
-    -fx-font-size: 14pt;
     -fx-text-alignment: center;
 }
 
@@ -287,7 +284,6 @@
 /*TableView Default*/
 .table-view{
     -fx-background-color: derive(-fx-white, 10%);
-    -fx-font-size: 16px;
     -fx-border: 1;
     -fx-border-color: -fx-primary;
 }
@@ -370,7 +366,6 @@
 .jfx-layout-heading .label
 {
     -fx-text-fill: white;
-    -fx-font-size: 12pt;
 }
 .jfx-layout-body, .jfx-layout-actions{
     -fx-background-color: -fx-primary;
@@ -395,7 +390,6 @@
 .checkbox-main{
     -fx-text-fill: -fx-secondary;
     -jfx-checked-color: -fx-primary;
-    -fx-font-size: 10pt;
 }
 
 /*Progrss bar*/
@@ -411,7 +405,6 @@
 .common-label{
     -fx-background-color: transparent;
     -fx-text-fill: -fx-secondary;
-    -fx-font-size: 12pt;
 }
 
 /*Alert Dialog*/

@@ -119,8 +119,8 @@
     -fx-background-color: -fx-orange;
  }
  .date-picker .cell:hover {
--fx-background-color: -fx-orange;
--fx-text-fill: white;
+    -fx-background-color: -fx-orange;
+    -fx-text-fill: white;
 }
 .date-picker:focused > .text-field,
 .date-picker > .text-field:focused {

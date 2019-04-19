@@ -413,54 +413,67 @@
         </TabPane>
       </center>
       <top>
-        <MenuBar>
-          <menus>
-            <Menu mnemonicParsing="false" text="Archivo">
-              <items>
-                <MenuItem mnemonicParsing="false" onAction="#settingsApplication" text="Ajustes" />
-                        <MenuItem mnemonicParsing="false" onAction="#exitApplication" text="Close" />
-              </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Añadir">
-              <items>
-                <MenuItem mnemonicParsing="true" onAction="#ventanaAddPac" text="Pacient_e">
-                  <accelerator>
-                    <KeyCodeCombination alt="UP" code="E" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
-                  </accelerator>
-                </MenuItem>
-                <MenuItem mnemonicParsing="true" onAction="#ventanaAddDoc" text="Médic_o">
-                  <accelerator>
-                    <KeyCodeCombination alt="UP" code="O" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
-                  </accelerator>
-                </MenuItem>
-                <MenuItem mnemonicParsing="true" onAction="#ventanaAddDate" text="Cit_a">
-                  <accelerator>
-                    <KeyCodeCombination alt="UP" code="A" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
-                  </accelerator>
-                </MenuItem>
-              </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Ver ">
-              <items>
-                <MenuItem mnemonicParsing="true" onAction="#cambiarVentanPaciente" text="_Pacientes">
-                  <accelerator>
-                    <KeyCodeCombination alt="UP" code="P" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
-                  </accelerator>
-                </MenuItem>
-                <MenuItem mnemonicParsing="true" onAction="#cambiarVentanDoctor" text="_Médicos">
-                  <accelerator>
-                    <KeyCodeCombination alt="UP" code="M" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
-                  </accelerator>
-                </MenuItem>
-                <MenuItem mnemonicParsing="true" onAction="#cambiarVentanCitas" text="_Citas">
-                  <accelerator>
-                    <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
-                  </accelerator>
-                </MenuItem>
-              </items>
-            </Menu>
-          </menus>
-        </MenuBar>
+            <HBox>
+               <children>
+              <MenuBar HBox.hgrow="ALWAYS">
+                <menus>
+                  <Menu mnemonicParsing="false" text="Archivo">
+                    <items>
+                      <MenuItem mnemonicParsing="false" onAction="#settingsApplication" text="Ajustes" />
+                              <MenuItem mnemonicParsing="false" onAction="#exitApplication" text="Close" />
+                    </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Añadir">
+                    <items>
+                      <MenuItem mnemonicParsing="true" onAction="#ventanaAddPac" text="Pacient_e">
+                        <accelerator>
+                          <KeyCodeCombination alt="UP" code="E" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                        </accelerator>
+                      </MenuItem>
+                      <MenuItem mnemonicParsing="true" onAction="#ventanaAddDoc" text="Médic_o">
+                        <accelerator>
+                          <KeyCodeCombination alt="UP" code="O" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                        </accelerator>
+                      </MenuItem>
+                      <MenuItem mnemonicParsing="true" onAction="#ventanaAddDate" text="Cit_a">
+                        <accelerator>
+                          <KeyCodeCombination alt="UP" code="A" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                        </accelerator>
+                      </MenuItem>
+                    </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Ver ">
+                    <items>
+                      <MenuItem mnemonicParsing="true" onAction="#cambiarVentanPaciente" text="_Pacientes">
+                        <accelerator>
+                          <KeyCodeCombination alt="UP" code="P" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                        </accelerator>
+                      </MenuItem>
+                      <MenuItem mnemonicParsing="true" onAction="#cambiarVentanDoctor" text="_Médicos">
+                        <accelerator>
+                          <KeyCodeCombination alt="UP" code="M" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                        </accelerator>
+                      </MenuItem>
+                      <MenuItem mnemonicParsing="true" onAction="#cambiarVentanCitas" text="_Citas">
+                        <accelerator>
+                          <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                        </accelerator>
+                      </MenuItem>
+                    </items>
+                  </Menu>
+                </menus>
+              </MenuBar>
+                  <Button alignment="CENTER_RIGHT" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#settingsApplication" prefHeight="13.0" prefWidth="10.0">
+                     <graphic>
+                        <ImageView fitHeight="19.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Styles/settings.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </HBox>
       </top>
     </BorderPane>
   </children>

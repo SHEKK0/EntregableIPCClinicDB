@@ -221,7 +221,7 @@
               <content>
                 <AnchorPane id="AnchorPane" fx:id="paneAdd" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="370.0" prefWidth="624.0">
                   <children>
-                    <VBox id="VBox" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="346.0" spacing="5.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="24.0">
+                    <VBox id="VBox" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="346.0" spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="24.0">
                       <children>
                         <VBox fx:id="vBoxAddCita" disable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="351.0" prefWidth="624.0" VBox.vgrow="ALWAYS">
                           <children>
@@ -292,7 +292,7 @@
                         </VBox>
                       </children>
                     </VBox>
-                    <VBox fx:id="vBoxAddPac" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="346.0" prefWidth="624.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="24.0">
+                    <VBox fx:id="vBoxAddPac" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="346.0" prefWidth="624.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="24.0">
                       <children>
                         <GridPane fx:id="gridAdd" gridLinesVisible="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="302.0" prefWidth="603.0" VBox.vgrow="ALWAYS">
                           <children>
@@ -317,7 +317,12 @@
                             <TextField fx:id="surname" prefHeight="26.0" prefWidth="258.0" promptText="Apellidos" GridPane.columnIndex="0" GridPane.rowIndex="2" />
                             <TextField fx:id="id" prefHeight="26.0" prefWidth="153.0" promptText="Identificación" GridPane.columnIndex="0" GridPane.rowIndex="3" />
                             <TextField fx:id="tel" prefHeight="24.9998779296875" prefWidth="302.0" promptText="Teléfono" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-                            <ChoiceBox fx:id="ID" prefHeight="26.0" prefWidth="65.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3" />
+                                          <HBox GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3">
+                                             <children>
+                                  <ChoiceBox fx:id="ID" prefHeight="26.0" prefWidth="65.0" />
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="*" />
+                                             </children>
+                                          </HBox>
                             <TextField id="tel" fx:id="examinationRoom" prefHeight="24.9998779296875" prefWidth="302.0" promptText="Sala" text="" GridPane.columnIndex="0" GridPane.rowIndex="5" />
                                           <VBox GridPane.rowIndex="6">
                                              <children>
@@ -366,7 +371,10 @@
                             </ComboBox>
                                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="*" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="*" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="*" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="*" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                          <Text fx:id="asteriscoText" strokeType="OUTSIDE" strokeWidth="0.0" text="*" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                          <Text fx:id="asterisco" strokeType="OUTSIDE" strokeWidth="0.0" text="*" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                          <Text fx:id="asterisco2" strokeType="OUTSIDE" strokeWidth="0.0" text="*" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                           </children>
                           <columnConstraints>
                             <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="100.0" />

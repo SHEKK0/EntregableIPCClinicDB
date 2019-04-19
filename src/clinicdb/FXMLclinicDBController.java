@@ -58,6 +58,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javax.imageio.ImageIO;
@@ -143,8 +144,6 @@ public class FXMLclinicDBController implements Initializable {
     @FXML
     private Button seeMedicDate;
     @FXML
-    private Button seeDate;
-    @FXML
     private Button deleteDate;
     @FXML
     private ImageView imageAdd;
@@ -217,6 +216,12 @@ public class FXMLclinicDBController implements Initializable {
     
     private Scene scenario;
     private String css;
+    @FXML
+    private Text asteriscoText;
+    @FXML
+    private Text asterisco;
+    @FXML
+    private Text asterisco2;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         TabPaciente.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
@@ -520,6 +525,9 @@ public class FXMLclinicDBController implements Initializable {
         availableDays.setVisible(false);
         iniDay.setVisible(false);
         fiDay.setVisible(false);
+        asterisco.setVisible(false);
+        asterisco2.setVisible(false);
+        asteriscoText.setVisible(false);
 
 /*
  * LAS LISTAS DE LAS HORAS EN ADD MEDICO
@@ -1110,7 +1118,9 @@ public class FXMLclinicDBController implements Initializable {
         dialog.getDialogPane().getButtonTypes().addAll(ButtonType.CANCEL,ButtonType.OK);
         dialog.setY(300);
         dialog.setTitle("title");
-
+        DialogPane dialogPane = dialog.getDialogPane();
+        dialogPane.getStylesheets().clear();
+        dialogPane.getStylesheets().add(css);
         Optional<ButtonType> result = dialog.showAndWait();
         int sizeLetra = 14;
         if(result.get() == ButtonType.OK) {
@@ -1190,6 +1200,9 @@ public class FXMLclinicDBController implements Initializable {
         vBoxAddCita.setVisible(date);
         //vBoxAddCita.setDisable(!date);
         //vBoxAddPac.setDisable(false);
+        asterisco.setVisible(medic);
+        asterisco2.setVisible(medic);
+        asteriscoText.setVisible(medic);
         diasActivos.setVisible(medic);
         examinationRoom.setVisible(medic);
         availableDays.setVisible(medic);

@@ -20,6 +20,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -90,6 +91,7 @@ public class FXMLWatchDoctorController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    private Scene scenario;
     int textSize = 14;
     @Override
     public void initialize(URL url, ResourceBundle rb){
@@ -111,6 +113,12 @@ public class FXMLWatchDoctorController implements Initializable {
 
                     alert.showAndWait();
                 }
+            }
+        });
+        root.sceneProperty().addListener((observableScene, oldScene, newScene) -> {
+            if (oldScene == null && newScene != null) {
+                // scene is set for the first time. Now its the time to listen stage changes.
+                scenario = newScene;
             }
         });
         
@@ -203,5 +211,14 @@ public class FXMLWatchDoctorController implements Initializable {
         Stage stage = (Stage) deleteDate.getScene().getWindow();
         stage.close();
     }
-    
+        public void setScene(boolean theme){
+        scenario.getStylesheets().clear();
+        if(theme){
+            String css = this.getClass().getResource("/Styles/dark_theme.css").toExternalForm();
+            scenario.getStylesheets().add(css);
+        }else if(!theme){
+            String css = this.getClass().getResource("/Styles/light_theme.css").toExternalForm();
+            scenario.getStylesheets().add(css);
+        }
+    }
 }

@@ -207,14 +207,14 @@ public class FXMLclinicDBController implements Initializable {
     private BorderPane root;
     @FXML
     private Font x1;
-    private Scene scenario;
     @FXML
     private AnchorPane paneAdd;
     @FXML
     private GridPane gridAdd;
     @FXML
     private Label diasActivos;
-
+    
+    private Scene scenario;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         TabPaciente.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
@@ -1044,11 +1044,9 @@ public class FXMLclinicDBController implements Initializable {
             controller.setClinic(clinic);
             controller.setId(patient.getIdentifier());
             controller.setTextSize(defaultSettings[3]);
+            controller.setScene(theme.isSelected());
             stage.setMinHeight(500);
             stage.setMinWidth(600);
-            String css = this.getClass().getResource("/Styles/dark_theme.css").toExternalForm();
-            Scene scene = stage.getScene();
-            scene.getStylesheets().add(css);
             stage.show();
             controller.getTable();
             listCitas = FXCollections.observableList(controller.getTable());
@@ -1078,9 +1076,7 @@ public class FXMLclinicDBController implements Initializable {
             controller.setTableDays(doctor.getVisitDays());
              stage.setMinHeight(600);
             stage.setMinWidth(700);
-             String css = this.getClass().getResource("/Styles/dark_theme.css").toExternalForm();
-            Scene scene = stage.getScene();
-            scene.getStylesheets().add(css);
+            controller.setScene(theme.isSelected());
             stage.show();
             controller.getTable();
             controller.setTextSize(defaultSettings[3]);

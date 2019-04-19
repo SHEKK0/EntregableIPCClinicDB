@@ -21,6 +21,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -72,6 +73,7 @@ public class FXMLWatchPatientController implements Initializable {
     
     private ArrayList<Appointment> list;
     private ClinicDBAccess clinic;
+        private Scene scenario;
     @FXML
     private AnchorPane root;
     /**
@@ -97,6 +99,12 @@ public class FXMLWatchPatientController implements Initializable {
 
                     alert.showAndWait();
                 }
+            }
+        });
+        root.sceneProperty().addListener((observableScene, oldScene, newScene) -> {
+            if (oldScene == null && newScene != null) {
+                // scene is set for the first time. Now its the time to listen stage changes.
+                scenario = newScene;
             }
         });
         
@@ -160,6 +168,15 @@ public class FXMLWatchPatientController implements Initializable {
         Stage stage = (Stage) closeButton.getScene().getWindow();
          stage.close();
     }
-
+    public void setScene(boolean theme){
+        scenario.getStylesheets().clear();
+        if(theme){
+            String css = this.getClass().getResource("/Styles/dark_theme.css").toExternalForm();
+            scenario.getStylesheets().add(css);
+        }else if(!theme){
+            String css = this.getClass().getResource("/Styles/light_theme.css").toExternalForm();
+            scenario.getStylesheets().add(css);
+        }
+    }
     
 }

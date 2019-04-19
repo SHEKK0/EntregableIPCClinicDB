@@ -24,6 +24,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -59,8 +60,6 @@ public class FXMLWatchDoctorController implements Initializable {
     @FXML
     private TableView<Appointment> tableCitas;
     @FXML
-    private Button deleteDate;
-    @FXML
     private TableColumn<Appointment,String > colDate;
     @FXML
     private TableColumn<Appointment, String> colPatient;
@@ -92,29 +91,11 @@ public class FXMLWatchDoctorController implements Initializable {
      * Initializes the controller class.
      */
     private Scene scenario;
+    private String css;
     int textSize = 14;
     @Override
     public void initialize(URL url, ResourceBundle rb){
        tableCitas.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-        deleteDate.disableProperty().bind(Bindings.isEmpty(tableCitas.getSelectionModel().getSelectedItems()));
-        deleteDate.setOnAction(e -> {
-            if (confirm("cita?")) {
-                Appointment aEliminar = tableCitas.getSelectionModel().getSelectedItem();
-                if (aEliminar.getAppointmentDateTime().compareTo(LocalDateTime.now()) > 0) { // La cita aun no ha sucedido
-                    list.remove(aEliminar);
-                    //eliminar de la tabla
-                    tableCitas.getItems().remove(aEliminar);
-                    tableCitas.getSelectionModel().setSelectionMode(null);
-                } else {
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle(clinic.getClinicName());
-                    alert.setHeaderText("¡No se puede eliminar!");
-                    alert.setContentText("La cita ya ha sucedido.");
-
-                    alert.showAndWait();
-                }
-            }
-        });
         root.sceneProperty().addListener((observableScene, oldScene, newScene) -> {
             if (oldScene == null && newScene != null) {
                 // scene is set for the first time. Now its the time to listen stage changes.
@@ -123,15 +104,6 @@ public class FXMLWatchDoctorController implements Initializable {
         });
         
     }    
-    
-    private boolean confirm(String string) { // Los delete
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle(clinic.getClinicName());
-        alert.setHeaderText("¿Eliminar " + string);
-        Optional<ButtonType> result = alert.showAndWait();
-        return result.get() == ButtonType.OK;
-
-    }
     public void setName(String name){
         textNombre.setText(name);
         textNombre.setDisable(true);
@@ -171,6 +143,9 @@ public class FXMLWatchDoctorController implements Initializable {
     public ArrayList<Appointment> getTable() {
         return list;
     }
+    public void setCSS(String string){
+        this.css = string;
+    }
     public void setSala(ExaminationRoom ex){
         textSala.setDisable(false);
         textSala.setText(Integer.toString(ex.getIdentNumber()));
@@ -208,7 +183,7 @@ public class FXMLWatchDoctorController implements Initializable {
     }
     @FXML
     private void closeButton(ActionEvent event) {
-        Stage stage = (Stage) deleteDate.getScene().getWindow();
+        Stage stage = (Stage) lunes.getScene().getWindow();
         stage.close();
     }
         public void setScene(boolean theme){

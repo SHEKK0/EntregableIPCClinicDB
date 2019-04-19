@@ -222,6 +222,8 @@ public class FXMLclinicDBController implements Initializable {
     private Label asterisco;
     @FXML
     private Label asterisco2;
+    @FXML
+    private Label horarioText;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         TabPaciente.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
@@ -520,6 +522,7 @@ public class FXMLclinicDBController implements Initializable {
         datePicker.setValue(LocalDate.now());
         vBoxAddCita.setVisible(false);
         vBoxAddPac.setVisible(true);
+        
         vBoxAddPac.setDisable(false);
         examinationRoom.setVisible(false);
         availableDays.setVisible(false);
@@ -1084,6 +1087,7 @@ public class FXMLclinicDBController implements Initializable {
             controller.setId(patient.getIdentifier());
             controller.setTextSize(defaultSettings[3]);
             controller.setScene(theme.isSelected());
+            controller.setCSS(css);
             stage.setMinHeight(500);
             stage.setMinWidth(600);
             stage.initModality(Modality.APPLICATION_MODAL);
@@ -1116,6 +1120,7 @@ public class FXMLclinicDBController implements Initializable {
             controller.setTableDays(doctor.getVisitDays(),theme.isSelected());
              stage.setMinHeight(600);
             stage.setMinWidth(700);
+            controller.setCSS(css);
             controller.setScene(theme.isSelected());
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.showAndWait();
@@ -1216,6 +1221,7 @@ public class FXMLclinicDBController implements Initializable {
         vBoxAddCita.setVisible(date);
         //vBoxAddCita.setDisable(!date);
         //vBoxAddPac.setDisable(false);
+        horarioText.setVisible(medic);
         asterisco.setVisible(medic);
         asterisco2.setVisible(medic);
         asteriscoText.setVisible(medic);

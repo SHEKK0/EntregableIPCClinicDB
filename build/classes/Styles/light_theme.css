@@ -422,3 +422,6 @@
 .dialog-pane:header .header-panel .label{
     -fx-text-fill: -fx-black;
 }
+.date-picker-display-node {
+    -fx-padding: 0.3333em 0.583em 0.3333em 0.583em;
+  }

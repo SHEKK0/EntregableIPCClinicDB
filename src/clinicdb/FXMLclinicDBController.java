@@ -1263,7 +1263,7 @@ private ArrayList<LocalTime> createListHours(Doctor doc) throws Exception {
         choice.getSelectionModel().select(2);
     }
     private void setScene(){
-        
+        scenario.getStylesheets().clear();
         if(theme.isSelected()){
             String css = this.getClass().getResource("/Styles/dark_theme.css").toExternalForm();
             scenario.getStylesheets().add(css);

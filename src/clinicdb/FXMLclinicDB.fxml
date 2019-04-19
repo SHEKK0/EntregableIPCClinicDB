@@ -316,7 +316,7 @@
                             <TextField fx:id="surname" prefHeight="26.0" prefWidth="258.0" promptText="Apellidos" GridPane.columnIndex="0" GridPane.rowIndex="2" />
                             <TextField fx:id="id" prefHeight="26.0" prefWidth="153.0" promptText="Identificación" GridPane.columnIndex="0" GridPane.rowIndex="3" />
                             <TextField fx:id="tel" prefHeight="24.9998779296875" prefWidth="302.0" promptText="Teléfono" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-                            <ChoiceBox fx:id="ID" prefHeight="26.0" prefWidth="54.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3" />
+                            <ChoiceBox fx:id="ID" prefHeight="26.0" prefWidth="65.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3" />
                             <TextField id="tel" fx:id="examinationRoom" prefHeight="24.9998779296875" prefWidth="302.0" promptText="Sala" text="" GridPane.columnIndex="0" GridPane.rowIndex="5" />
                                           <VBox GridPane.rowIndex="6">
                                              <children>

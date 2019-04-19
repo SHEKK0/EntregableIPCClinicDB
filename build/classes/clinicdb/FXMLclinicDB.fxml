@@ -29,6 +29,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <StackPane id="stackRootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="425.0" prefWidth="624.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clinicdb.FXMLclinicDBController">
   <children>
@@ -62,22 +63,22 @@
                                     <Font size="12.0" fx:id="x1" />
                                   </font>
                                   <VBox.margin>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" />
+                                    <Insets bottom="20.0" left="20.0" right="20.0" />
                                   </VBox.margin>
                                 </Button>
                                 <Button fx:id="datePatient" contentDisplay="CENTER" font="$x1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" text="Nueva Cita" VBox.vgrow="ALWAYS">
                                   <VBox.margin>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" />
+                                    <Insets bottom="20.0" left="20.0" right="20.0" />
                                   </VBox.margin>
                                 </Button>
                                 <Button fx:id="verPatient" alignment="CENTER" contentDisplay="CENTER" font="$x1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" mnemonicParsing="false" text="Ver Paciente" VBox.vgrow="ALWAYS">
                                   <VBox.margin>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" />
+                                    <Insets bottom="20.0" left="20.0" right="20.0" />
                                   </VBox.margin>
                                 </Button>
                                 <Button fx:id="deletePatient" alignment="CENTER" font="$x1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" mnemonicParsing="false" text="Eliminar Paciente" VBox.vgrow="ALWAYS">
                                   <VBox.margin>
-                                    <Insets left="10.0" right="10.0" />
+                                    <Insets bottom="20.0" left="20.0" right="20.0" />
                                   </VBox.margin>
                                 </Button>
                               </children>
@@ -220,7 +221,7 @@
               <content>
                 <AnchorPane id="AnchorPane" fx:id="paneAdd" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="370.0" prefWidth="624.0">
                   <children>
-                    <VBox id="VBox" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="346.0" spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="24.0">
+                    <VBox id="VBox" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="346.0" spacing="5.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="24.0">
                       <children>
                         <VBox fx:id="vBoxAddCita" disable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="351.0" prefWidth="624.0" VBox.vgrow="ALWAYS">
                           <children>
@@ -291,7 +292,7 @@
                         </VBox>
                       </children>
                     </VBox>
-                    <VBox fx:id="vBoxAddPac" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="346.0" prefWidth="624.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="24.0">
+                    <VBox fx:id="vBoxAddPac" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="346.0" prefWidth="624.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="24.0">
                       <children>
                         <GridPane fx:id="gridAdd" gridLinesVisible="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="302.0" prefWidth="603.0" VBox.vgrow="ALWAYS">
                           <children>
@@ -363,6 +364,9 @@
                                 </FXCollections>
                               </items>
                             </ComboBox>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="*" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="*" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="*" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                           </children>
                           <columnConstraints>
                             <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="100.0" />

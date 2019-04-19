@@ -59,6 +59,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javax.imageio.ImageIO;
 import model.Days;
 import model.ExaminationRoom;
@@ -1054,7 +1055,8 @@ public class FXMLclinicDBController implements Initializable {
             controller.setScene(theme.isSelected());
             stage.setMinHeight(500);
             stage.setMinWidth(600);
-            stage.show();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.showAndWait();
             controller.getTable();
             listCitas = FXCollections.observableList(controller.getTable());
         } catch (IOException er) {
@@ -1084,7 +1086,8 @@ public class FXMLclinicDBController implements Initializable {
              stage.setMinHeight(600);
             stage.setMinWidth(700);
             controller.setScene(theme.isSelected());
-            stage.show();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.showAndWait();
             controller.getTable();
             controller.setTextSize(defaultSettings[3]);
             listCitas = FXCollections.observableList(controller.getTable());

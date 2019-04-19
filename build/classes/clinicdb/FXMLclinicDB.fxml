@@ -220,7 +220,7 @@
               <content>
                 <AnchorPane id="AnchorPane" fx:id="paneAdd" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="370.0" prefWidth="624.0">
                   <children>
-                    <VBox id="VBox" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="346.0" spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="24.0">
+                    <VBox id="VBox" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="346.0" spacing="5.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="24.0">
                       <children>
                         <VBox fx:id="vBoxAddCita" disable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="351.0" prefWidth="624.0" VBox.vgrow="ALWAYS">
                           <children>
@@ -291,7 +291,7 @@
                         </VBox>
                       </children>
                     </VBox>
-                    <VBox fx:id="vBoxAddPac" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="346.0" prefWidth="624.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="24.0">
+                    <VBox fx:id="vBoxAddPac" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="346.0" prefWidth="624.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="24.0">
                       <children>
                         <GridPane fx:id="gridAdd" gridLinesVisible="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="302.0" prefWidth="603.0" VBox.vgrow="ALWAYS">
                           <children>
@@ -318,8 +318,12 @@
                             <TextField fx:id="tel" prefHeight="24.9998779296875" prefWidth="302.0" promptText="Teléfono" GridPane.columnIndex="0" GridPane.rowIndex="4" />
                                           <HBox GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3">
                                              <children>
-                                  <ChoiceBox fx:id="ID" prefHeight="26.0" prefWidth="65.0" />
-                                                <Label text="*" />
+                                                <HBox alignment="CENTER_LEFT" HBox.hgrow="NEVER">
+                                                   <children>
+                                        <ChoiceBox fx:id="ID" prefHeight="26.0" prefWidth="65.0" />
+                                                      <Label text="*" />
+                                                   </children>
+                                                </HBox>
                                              </children>
                                           </HBox>
                             <TextField id="tel" fx:id="examinationRoom" prefHeight="24.9998779296875" prefWidth="302.0" promptText="Sala" text="" GridPane.columnIndex="0" GridPane.rowIndex="5" />

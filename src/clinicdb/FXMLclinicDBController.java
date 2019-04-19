@@ -215,6 +215,7 @@ public class FXMLclinicDBController implements Initializable {
     private Label diasActivos;
     
     private Scene scenario;
+    private String css;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         TabPaciente.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
@@ -310,7 +311,9 @@ public class FXMLclinicDBController implements Initializable {
                     alert.setTitle(clinic.getClinicName());
                     alert.setHeaderText("¡No se puede eliminar!");
                     alert.setContentText("El paciente tiene citas pendientes.");
-
+                    DialogPane dialogPane = alert.getDialogPane();
+                     dialogPane.getStylesheets().clear();
+                     dialogPane.getStylesheets().add(css);
                     alert.showAndWait();
                 }
             }
@@ -384,7 +387,9 @@ public class FXMLclinicDBController implements Initializable {
                     alert.setTitle(clinic.getClinicName());
                     alert.setHeaderText("¡No se puede eliminar!");
                     alert.setContentText("El médico tiene citas pendientes.");
-
+                    DialogPane dialogPane = alert.getDialogPane();
+                    dialogPane.getStylesheets().clear();
+                    dialogPane.getStylesheets().add(css);
                     alert.showAndWait();
                 }
             }
@@ -486,7 +491,9 @@ public class FXMLclinicDBController implements Initializable {
                     alert.setTitle(clinic.getClinicName());
                     alert.setHeaderText("¡No se puede eliminar!");
                     alert.setContentText("La cita ya ha sucedido.");
-
+                    DialogPane dialogPane = alert.getDialogPane();
+                     dialogPane.getStylesheets().clear();
+                     dialogPane.getStylesheets().add(css);
                     alert.showAndWait();
                 }
             }
@@ -1129,6 +1136,9 @@ public class FXMLclinicDBController implements Initializable {
             alert.setTitle(clinic.getClinicName());
             alert.setHeaderText("Saving data in DB");
             alert.setContentText("The application is saving the changes in the data into the database. This action can expend some minutes.");
+            DialogPane dialogPane = alert.getDialogPane();
+            dialogPane.getStylesheets().clear();
+            dialogPane.getStylesheets().add(css);
             alert.show();
             clinic.saveDB();
             Platform.exit();
@@ -1140,7 +1150,9 @@ public class FXMLclinicDBController implements Initializable {
         Alert alert = new Alert(AlertType.ERROR);
         alert.setTitle(clinic.getClinicName());
         alert.setHeaderText(s);
-
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.getStylesheets().clear();
+        dialogPane.getStylesheets().add(css);
         alert.showAndWait();
     }
 
@@ -1148,6 +1160,9 @@ public class FXMLclinicDBController implements Initializable {
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle(clinic.getClinicName());
         alert.setHeaderText("¿Eliminar " + string);
+        DialogPane dialogPane = alert.getDialogPane();
+            dialogPane.getStylesheets().clear();
+            dialogPane.getStylesheets().add(css);
         Optional<ButtonType> result = alert.showAndWait();
         return result.get() == ButtonType.OK;
 
@@ -1157,7 +1172,9 @@ public class FXMLclinicDBController implements Initializable {
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle(clinic.getClinicName());
         alert.setHeaderText("¡" + string + " añadido!");
-
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.getStylesheets().clear();
+        dialogPane.getStylesheets().add(css);
         alert.showAndWait();
     }
 
@@ -1261,10 +1278,10 @@ private ArrayList<LocalTime> createListHours(Doctor doc) throws Exception {
     private void setScene(){
         scenario.getStylesheets().clear();
         if(theme.isSelected()){
-            String css = this.getClass().getResource("/Styles/dark_theme.css").toExternalForm();
+           css = this.getClass().getResource("/Styles/dark_theme.css").toExternalForm();
             scenario.getStylesheets().add(css);
         }else if(!theme.isSelected()){
-            String css = this.getClass().getResource("/Styles/light_theme.css").toExternalForm();
+            css = this.getClass().getResource("/Styles/light_theme.css").toExternalForm();
             scenario.getStylesheets().add(css);
         }
     }

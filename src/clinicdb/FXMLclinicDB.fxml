@@ -320,7 +320,7 @@
                                           <HBox GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3">
                                              <children>
                                   <ChoiceBox fx:id="ID" prefHeight="26.0" prefWidth="65.0" />
-                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="*" />
+                                                <Label text="*" />
                                              </children>
                                           </HBox>
                             <TextField id="tel" fx:id="examinationRoom" prefHeight="24.9998779296875" prefWidth="302.0" promptText="Sala" text="" GridPane.columnIndex="0" GridPane.rowIndex="5" />
@@ -369,12 +369,12 @@
                                 </FXCollections>
                               </items>
                             </ComboBox>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="*" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="*" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="*" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                          <Text fx:id="asteriscoText" strokeType="OUTSIDE" strokeWidth="0.0" text="*" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                                          <Text fx:id="asterisco" strokeType="OUTSIDE" strokeWidth="0.0" text="*" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                                          <Text fx:id="asterisco2" strokeType="OUTSIDE" strokeWidth="0.0" text="*" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                                          <Label text="*" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <Label text="*" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                          <Label text="*" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                          <Label fx:id="asteriscoText" text="*" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                          <Label fx:id="asterisco" text="*" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                          <Label fx:id="asterisco2" text="*" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                           </children>
                           <columnConstraints>
                             <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="100.0" />

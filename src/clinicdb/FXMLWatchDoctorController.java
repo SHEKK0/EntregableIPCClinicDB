@@ -180,9 +180,10 @@ public class FXMLWatchDoctorController implements Initializable {
         DoubleProperty fontSize = new SimpleDoubleProperty(i);
         root.styleProperty().bind(Bindings.concat("-fx-font-size: ",fontSize.asString(), ";"));
     }
-    public void setTableDays(ArrayList<Days> list){
+    public void setTableDays(ArrayList<Days> list, boolean theme){
         this.listDays = list;
-        
+        Color color = Color.BLACK;
+        if(theme) color = Color.WHITE;
         lunes.setFill(Color.GRAY);
         martes.setFill(Color.GRAY);
         miercoles.setFill(Color.GRAY);
@@ -194,14 +195,13 @@ public class FXMLWatchDoctorController implements Initializable {
         for(int i = 0; i < list.size(); i++){
             Days day = list.get(i);
             String dia = day.toString();
-            
-            if(dia.compareTo("Monday")== 0) lunes.setFill(Color.BLACK);
-            if(dia.compareTo("Tuesday")== 0) martes.setFill(Color.BLACK);
-            if(dia.compareTo("Wednesday")== 0) miercoles.setFill(Color.BLACK);
-            if(dia.compareTo("Thursday")== 0) jueves.setFill(Color.BLACK);
-            if(dia.compareTo("Friday")== 0) viernes.setFill(Color.BLACK);
-            if(dia.compareTo("Saturday")== 0) sabado.setFill(Color.BLACK);
-            if(dia.compareTo("Sunday")== 0) domingo.setFill(Color.BLACK);
+            if(dia.compareTo("Monday")== 0) lunes.setFill(color);
+            if(dia.compareTo("Tuesday")== 0) martes.setFill(color);
+            if(dia.compareTo("Wednesday")== 0) miercoles.setFill(color);
+            if(dia.compareTo("Thursday")== 0) jueves.setFill(color);
+            if(dia.compareTo("Friday")== 0) viernes.setFill(color);
+            if(dia.compareTo("Saturday")== 0) sabado.setFill(color);
+            if(dia.compareTo("Sunday")== 0) domingo.setFill(color);
             
         }
         

@@ -217,11 +217,11 @@ public class FXMLclinicDBController implements Initializable {
     private Scene scenario;
     private String css;
     @FXML
-    private Text asteriscoText;
+    private Label asteriscoText;
     @FXML
-    private Text asterisco;
+    private Label asterisco;
     @FXML
-    private Text asterisco2;
+    private Label asterisco2;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         TabPaciente.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
@@ -1090,7 +1090,7 @@ public class FXMLclinicDBController implements Initializable {
             controller.setClinic(clinic);
             controller.setSala(doctor.getExaminationRoom());
             controller.setId(doctor.getIdentifier());
-            controller.setTableDays(doctor.getVisitDays());
+            controller.setTableDays(doctor.getVisitDays(),theme.isSelected());
              stage.setMinHeight(600);
             stage.setMinWidth(700);
             controller.setScene(theme.isSelected());

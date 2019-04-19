@@ -66,7 +66,10 @@
   -fx-text-fill: -fx-white;
   -fx-color: -fx-white;
 }
-
+.label {
+    -fx-text-fill: -fx-white;
+    -fx-color: -fx-white;
+}
 
 
 .choice-box, .combo-box-base {
@@ -86,16 +89,18 @@
  .choice-box .menu-item > .label {
     -fx-text-fill: derive(-fx-white,30%);
  }
-.choice-box .menu-item:focused, .combo-box-popup .list-view .list-cell:hover {
-
+.choice-box .menu-item:focused {
   -fx-background-color: -fx-active;
+  }
+  .combo-box-popup .list-view .list-cell:hover {
+    -fx-background-color: -fx-button-selected;
   }
   .combo-box-popup .list-view .list-cell {
     -fx-background-color: -fx-hover;
 
   }
   .combo-box-popup .list-view .list-cell:selected,.choice-box .menu-item:selected {
-   -fx-background-color: -fx-button-selected;
+   -fx-background-color: -fx-active;
    -fx-text-fill: derive(-fx-white-text,30%);
    -fx-color: derive(-fx-white-text,30%);
   }
@@ -131,13 +136,20 @@
     -fx-cursor: hand;
 }
 
-.button:selected, .toggle-button:selected{
+.button:selected {
     -fx-background-color: -fx-button-selected;
     -fx-text-fill: -fx-white-text;
 }
 .button:disabled, .toggle-button:disabled{
     -fx-background-color: -fx-grey-disabled;
     -fx-opacity: 1;
+}
+.toggle-button {
+    -fx-background-color: -fx-button-selected;
+}
+.toggle-button:selected {
+    -fx-background-color: -fx-orange;
+    -fx-text-fill: -fx-white-text;
 }
 
 .text-field

@@ -62,7 +62,9 @@
 }
 .text-field:disabled{
   -fx-background-color: -fx-primary;
-  -fx-text-fill: -fx-text;
+  -fx-border-color: derive(-fx-white,15%);
+  -fx-text-fill: -fx-white;
+  -fx-color: -fx-white;
 }
 
 
@@ -437,15 +439,12 @@
     -fx-font-weight: bold;
     -fx-text-fill: white;
 }
-.custom-alert:header *.header-panel{
-    -fx-background-color: -fx-blue;
+.dialog-pane:header .header-panel {
+  -fx-background-color: -fx-primary;
+  -fx-border-width: 0 0 .1 0;
+  -fx-border-color: -fx-white;
 }
-.custom-alert:header  .header-panel .label {
-    -fx-font-style: normal;
-    -fx-text-fill: white;
-}
-.custom-alert:header *.header-panel *.label{
-    -fx-font-size: 18px;
-    -fx-font-style: italic;
-    -fx-fill: -fx-primary;
+
+.dialog-pane:header .header-panel .label{
+    -fx-text-fill: -fx-white-text;
 }
